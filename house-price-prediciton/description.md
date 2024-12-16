@@ -31,7 +31,7 @@ The goals of this challenge are:
 
 ## Dataset
 
-- **Training Dataset** is a preprocessed subset of [California Housing Prices](https://www.kaggle.com/datasets/camnugent/california-housing-prices), consisting of X_train & y_train. Features are described as follows:
+- **Training Dataset** is a preprocessed subset of [California Housing Prices](https://github.com/fairmath/fherma-challenges/tree/main/house-price-prediciton/data), consisting of X_train & y_train can be found [here](https://github.com/fairmath/fherma-challenges/tree/main/house-price-prediciton/data). Features are described as follows:
     - **longitude**: A measure of how far west a house is located; higher values indicate farther west.
     - **latitude**: A measure of how far north a house is located; higher values indicate farther north.
     - **housing_median_age**: The median age of houses within a block.
@@ -45,7 +45,7 @@ The goals of this challenge are:
 - **Usage:** Feel free to split the provided dataset into training and validation sets.
 - **Submissions** will be validated on a non-provided testing dataset.
 
-**During model training, only the processed dataset provided above is allowed to be used.**
+**During model training, only the [processed dataset](https://github.com/fairmath/fherma-challenges/tree/main/house-price-prediciton/data) provided above is allowed to be used.**
 
 ## Encoding technique
 
