@@ -144,3 +144,21 @@ Recall@10 will be used as the primary metric to evaluate the solutions. However,
 ## Scoring & awards
 
 The prize fund of $3000 will be awarded to the most accurate and fastest solution
+
+## Useful links
+
+- [FHERMA participation guide](https://fherma.io/how_it_works) — more about FHERMA challenges.
+- [OpenFHE](https://github.com/openfheorg/openfhe-development) repository, README, and installation guide.
+- [OpenFHE Python](https://github.com/openfheorg/openfhe-python) repository, README, and installation guide.
+- [OpenFHE-rs](https://crates.io/crates/openfhe) Rust wrapper, a [walk-through tutorial](https://fherma.io/content/660174e7fce06722c1149a95) and [documentation](https://openfhe-rust-wrapper.readthedocs.io/en/latest/).
+- A vast collection of resources [FHE Resources](https://fhe.org/resources), including tutorials and walk-throughs, use-cases and demos.
+- [Polycircuit:](https://github.com/fairmath/polycircuit) FHE Components Library
+
+## Help
+
+If you have any questions, you can:
+- Contact us by email [support@fherma.io](mailto:support@fherma.io)
+* Join our [Discord](https://discord.gg/NfhXwyr9M5) server and ask your questions in the [#fherma channel](https://discord.com/channels/1163764915803279360/1167875954392187030). You can also find a team in the [teams channel](https://discord.com/channels/1163764915803279360/1246085439480401930)!
+- Use [OpenFHE discourse group](https://openfhe.discourse.group/) for OpenFHE-related questions.
+
+Best of luck to all participants!
