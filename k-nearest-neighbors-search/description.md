@@ -139,6 +139,12 @@ Recall@10 will be used as the primary metric to evaluate the solutions. However,
 
 The prize fund of $4000 will be awarded to the most accurate and fastest solution
 
+## Challenge Committee
+
+-   [Sergey Gomenyuk](https://www.linkedin.com/in/sergey-gomenyuk-7a355a42/), Fair Math
+-   [Daria Pianykh](https://www.linkedin.com/in/dariapianykh/), Fair Math
+-   [Valentina Kononova](https://www.linkedin.com/in/valentina-kononova-a9a23b180/), Fair Math
+
 ## Useful links
 
 - [FHERMA participation guide](https://fherma.io/how_it_works) — more about FHERMA challenges.
