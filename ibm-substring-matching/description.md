@@ -255,4 +255,3 @@ If you have any questions, you can:
 -   Use  [OpenFHE Discourse](https://openfhe.discourse.group/)  for OpenFHE related issues.
 
 
-> Written with [StackEdit](https://stackedit.io/).
