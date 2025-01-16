@@ -137,7 +137,7 @@ Recall@10 will be used as the primary metric to evaluate the solutions. However,
 
 ## Scoring & awards
 
-The prize fund of $3000 will be awarded to the most accurate and fastest solution
+The prize fund of $4000 will be awarded to the most accurate and fastest solution
 
 ## Useful links
 
