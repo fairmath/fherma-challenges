@@ -25,9 +25,9 @@ The goals of this challenge are:
 
 ## Timeline
 
-- **January 16, 2025** — start date;
-- **March 16, 2025, at 23:59 UTC** — submission deadline;
-- **April 7, 2025** — prize awarded.
+- **January 17, 2025** — start date;
+- **March 17, 2025, at 23:59 UTC** — submission deadline;
+- **April 1, 2025** — prize awarded.
 
 ## Dataset
 
@@ -45,7 +45,7 @@ By default, we pack the input vector X in ciphertext as follows:
 
 The first and second slots correspond to two dimensions of the input vector.
 
-The found nearest neighbors are defined by the initial ten slots in the resultant ciphertext. The i-th slot corresponds to the index of the i-th most closest point. Example:
+In the resultant ciphertext, the first ten slots represent the indices of the retrieved nearest neighbors. Example:
 |29 | 4 | 167 | 835 | 23 | 54 | 67 | 12 | 590 | … |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
