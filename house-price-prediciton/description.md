@@ -79,10 +79,8 @@ The following libraries/packages will be used for generating test case data and 
 ## Submission
 ### General requirements
 
-1. **Full FHE implementation.** The SVM decision function and any other functions, e.g. non-linear kernel function, must be executed entirely under FHE.
-2. **No post-processing.** The owner of the encrypted data should receive an encrypted classification result ready for decryption, with no additional computations required.
-3. **Strictly SVM**. Participants who will submit non-SVM model for this challenge might be disqualified from it.
-4. **Code**. Include the code used to train the SVM model.
+1. **Full FHE implementation.** The inference functions must be executed entirely under FHE.
+2. **No post-processing.** The owner of the encrypted data should receive an encrypted result ready for decryption, with no additional computations required.
 
 ### Application requirements
 
