@@ -106,13 +106,14 @@ You can use a config file to set parameters for generating a context on the serv
     "level_budget": [4,4]
 }
 ```
+For openfhe-python based solution you can use a template provided [here](https://github.com/fairmath/fherma-challenges/tree/main/k-nearest-neighbors-search/app).
 
 There are more info on possible config file parameters and their default values in our [Participation guide](https://fherma.io/how_it_works).
 
 ### Command-line interface (CLI)
 
 The application must support the following CLI:
-- **--sample** [path]: the path to the file where the input ciphertext is located.
+- **--input** [path]: the path to the file where the input ciphertext is located.
 - **--output** [path]: the path to the file where the classification result should be written.
 - **--cc** [path]: the path to the serialized crypto context file in **BINARY** form.
 - **--key_public** [path]: the path to the public key file.
@@ -123,8 +124,27 @@ The application must support the following CLI:
 The executable will be run as follows:
 
 ```bash
-./app --sample data.bin --cc cc.bin --key_public pub.bin --key_mult mult.bin --output result.bin
+./app --input data.bin --cc cc.bin --key_public pub.bin --key_mult mult.bin --output result.bin
 ```
+## Validating locally
+
+You can validate your solution locally using the [fherma-validator](https://hub.docker.com/r/yashalabinc/fherma-validator) docker image for white box challenges validation. To pull the image run the following comand:
+
+```bash
+docker pull yashalabinc/fherma-validator
+```
+### Example Setup
+If your local folder containing the solution is located at `~/user/tmp/k-nearest-neighbors-search/app`, use the following command to run the validator:
+
+```bash
+docker run -ti \
+  -v ~/user/tmp/k-nearest-neighbors-search:/knn \
+  yashalabinc/fherma-validator \
+  --project-folder=/knn/app \
+  --testcase=/knn/tests/test_case.json
+```
+After validation, a `result.json` file will be generated in your project folder. 
+
 
 ## Evaluation criteria
 
