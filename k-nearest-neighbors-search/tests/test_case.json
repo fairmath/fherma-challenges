@@ -1,11 +1,11 @@
-{
+[{
     "scheme": "CKKS",
     "significant_slots_number": 10,
     "runs": [
         {
             "input": [
                 {
-                    "name": "sample",
+                    "name": "input",
                     "value": [
                         -1.1807103760729483,
                         1.1354866103809285
@@ -26,4 +26,4 @@
             ]
         }
     ]
-}
+}]
