@@ -25,7 +25,7 @@ The goals of this challenge are:
 ## Timeline
 
 - **Jan 24, 2025** — start date.
-- **April 1, 2025, at 23:59 UTC** — submission deadline.
+- **April 24, 2025, at 23:59 UTC** — submission deadline.
 - **April 15, 2025** — prize awarded.
 
 ## Test input
@@ -146,10 +146,10 @@ Accuracy is the primary evaluation metric; execution time will be considered in 
 
 ## Scoring & Awards
 
-The prize fund of **\$5000** will be awarded to the most accurate and fastest solution.
+The prize fund of **\$4000** will be awarded to the most accurate and fastest solution.
 
 ## Challenge Committee
-
+- **Gurgen Arakelov**, Fair Math
 - **Sergey Gomenyuk**, Fair Math
 - **Daria Pianykh**, Fair Math
 - **Valentina Kononova**, Fair Math
