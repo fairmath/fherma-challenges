@@ -15,7 +15,7 @@ class CKKSParser:
         self.init_public_key(args.key_pub)
         self.init_eval_mult_key(args.key_mult)
         self.init_rotation_key(args.key_rot)
-        self.init_ciphertext(args.input)
+        self.init_ciphertext(args.sample)
 
 
     def init_context(self, context_path):
@@ -58,7 +58,7 @@ if __name__ == '__main__':
         parser.add_argument('--key_mult')
         parser.add_argument('--key_rot')
         parser.add_argument('--cc')
-        parser.add_argument('--input')
+        parser.add_argument('--sample')
         parser.add_argument('--output')
         args = parser.parse_args()
 
