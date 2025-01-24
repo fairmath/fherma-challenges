@@ -26,7 +26,7 @@ The goals of this challenge are:
 
 - **Jan 24, 2025** — start date.
 - **April 24, 2025, at 23:59 UTC** — submission deadline.
-- **April 15, 2025** — prize awarded.
+- **May 10, 2025** — prize awarded.
 
 ## Test input
 
