@@ -113,7 +113,7 @@ There are more info on possible config file parameters and their default values 
 ### Command-line interface (CLI)
 
 The application must support the following CLI:
-- **--input** [path]: the path to the file where the input ciphertext is located.
+- **--sample** [path]: the path to the file where the input ciphertext is located.
 - **--output** [path]: the path to the file where the classification result should be written.
 - **--cc** [path]: the path to the serialized crypto context file in **BINARY** form.
 - **--key_public** [path]: the path to the public key file.
@@ -124,7 +124,7 @@ The application must support the following CLI:
 The executable will be run as follows:
 
 ```bash
-./app --input data.bin --cc cc.bin --key_public pub.bin --key_mult mult.bin --output result.bin
+./app --sample ./sample --key_pub ./pub_key.bin --key_mult ./mult_key.bin --cc ./cc.bin --key_rot ./rot_key.bin --output ./result.bin   
 ```
 ## Validating locally
 
