@@ -129,7 +129,7 @@ You can use a config file to set parameters for generating keys on the server fo
 - **indexes_for_rotation_key** - indexes to generate rortation keys.
 - **poly_degree** - Polynomial modulus degree *N*.
 - **plaintext_modulus** - Plaintext modulus. Must be prime and less than all moduli coefficients.
-- **coefficient_moduli** - List of coefficient moduli *q = q$_0$ * ... * q$_{L-1}$* - moduli coefficients
+- **coefficient_moduli** - List of coefficient moduli *q = q<sub>0</sub> * ... * q<sub>L-1</sub>* - moduli coefficients
 See [the link](https://github.com/apple/swift-homomorphic-encryption/blob/main/Sources/HomomorphicEncryption/EncryptionParameters.swift) for better understanding parameters in Apple swift homomorphic encryption library. Also you can find preset parameters there.
 
 Parameters should satisfy 128 bit post quantum security
