@@ -2,15 +2,15 @@
 
 This challenge was developed by  [IBM Research](https://research.ibm.com/).
 
-The objective of the challenge substring matching, i.e., to find a small string or pattern in a large text, under CKKS.
+The objective of the challenge is substring matching, i.e., to find small strings in a large text, under CKKS.
 
 
 
-This challenge is motivated by searching for a substring in a large public database where the querier wants to keep their search hidden. For example, This can be a public database of patents and the querier is a company that wants to check whether an invention they work on appears in the database without leaking details about their invention.
+This challenge is motivated by searching for a substring in a large public database where the querier wants to keep their search hidden. For example, This can be a public database of patents and the querier is a company that wants to check whether an invention they work on already appears in the database without leaking details about their invention.
 
 In what follows we use the following notation: $T$ is the large public text we search in, $n$ is its size, $s$ is the string we search for and $k$ is its size.
 
-In cleartext there are many ways to search for a substring in a text:
+In cleartext there are several ways to search for a substring in a text:
 
 1. The trivial way is to check (by comparing each letter of $s$ with the respective letter of $T$) whether $s$ appears in $T$ at position $i=1,2,\ldots, n-k$, which leads to an overall runtime of $O(nk)$.
 2. A more efficient algorithm named after its authors Knuth-Morris-Pratt (KMP) achieves the much better runtime of $O(n+k)$. This is optimal since every algorithm needs to at least read $T$ and $s$ (assuming no preprocessing).
@@ -21,10 +21,9 @@ In cleartext there are many ways to search for a substring in a text:
 These methods were already studied under FHE (see for example, [1,2]).
 
 
-For this challenge you will need to develop `strstr(s, k, T, n)` - a function that gets encrypted strings `s`, their sizes `k`, another string `T` and its size `n` (`k`, `T`, and `n` are given in cleartext). 
-Note that unlike the C version this function gets a *batch* of strings (possibly of different sizes) to look for in `T`.
+For this challenge you will need to develop `strstr(words, wordSize, T, n)` - a function that gets several encrypted strings `words`, their sizes `wordSize`, and a text  `T`  (`wordSize`, `T`, and its size are given in cleartext). 
+Note that unlike the C version this function gets a **batch** of strings (possibly of different sizes) to look for in `T`.
 The function should return for each string in the batch the first positions where it appears in `T` (or -1 if it doesn't).
-(Please see below for the exact definition of `strstr`)
 
 
 [1] Genise, N., Gentry, C., Halevi, S., Li, B., Micciancio, D. (2019). Homomorphic Encryption for Finite Automata. In: Galbraith, S., Moriai, S. (eds) Advances in Cryptology – ASIACRYPT 2019. ASIACRYPT 2019. Lecture Notes in Computer Science(), vol 11922. Springer, Cham. https://doi.org/10.1007/978-3-030-34621-8_17
@@ -38,9 +37,7 @@ The function should return for each string in the batch the first positions wher
 
 1.  **Challenge type**: This challenge is a White Box challenge. Participants are required to submit the project with their source code. You can learn more about this type of challenges in our  [Participation guide](https://fherma.io/how_it_works).
 2.  **Encryption scheme**: CKKS.
-3.  **Supported libraries**:  [OpenFHE](https://github.com/openfheorg/openfhe-development)
-4.  **Input**: Encrypted vector  $A=[x_1, \ldots, x_n]$, where  $x_i∈[0,255]$ are real numbers.
-5.  **Output**: The outcome should be an encrypted vector of the sorted values of $A$.
+3.  **Supported libraries**:  [OpenFHE](https://github.com/openfheorg/openfhe-development),  [Lattigo](https://github.com/tuneinsight/lattigo), [HElayers](https://ibm.github.io/helayers/).
 
 ## Parameters of the key
 
@@ -52,57 +49,67 @@ The function should return for each string in the batch the first positions wher
 
 ## Parameters of the input
 
-You are asked to implement one of these 4 versions:
-1. `strstr_row(vector<ctxt>, s_row, vector<int> k, vector<char> T)` - here `s_row` is a vector of ctxts packed such that the j-th slot in `s_row[i]` holds the j-th letter of the i-th string (or 0 if the i-th string is shorter than i).
-2. `strstr_col(vector<ctxt>, s_col, vector<int> k, vector<char> T)` - here `s_col` is a vector of ctxts packed such that the j-th slot in `s_col[i]` holds the i-th letter of the j-th string (or 0 if the j-th string is shorter than i).
-3. `strstr_hybrid(CTileTensor<ctxt>, s_hybrid, vector<int> k, vector<char> T)` - here `s_hybrid` is a IBM's TileTensor. See below for details on TileTensor.
+At the heart of the challenge, you are asked to implement this function:
+ `strstr(ENCRYPTED_TYPE_SEE_BELOW words, vector<int> wordSize, vector<char> T)`
 
-In all cases:
-1. `k` is a vector of ints where `k[i]` is the length of the i-th word.
-2. The size of `T` is given by the size of the vector.
+where:
+1. `T` is the text (in the clear) that is needed to be searched in. The size of the text is given by size of the vector.
+2. `wordSize` is a vector of ints indicating the sizes of the words that are searched for in `T`. The value `wordSize[i]` is the length of the $i$-th word. The size of this vector indicates the number of words that need to be searched for.
+3. `words` is the words that need to be searched for. You have the choice of getting it as a vector of ciphertexts or as a TileTensor structure (see below about TileTensors).
 
+If you choose to get `ctxts` as a vector of ciphertexts then you can choose one of two packings:
 
-In this challenge you can assume:
-1. **string size** - The size of any string to search (i.e., `k[i]`) is at most 1024.
-2. **number of strings** - The number of strings will be between at most 1024.
-2. **text size** - The size of the text (i.e., `T`) is at most 4096.
-3. **alphabet size** - All the letters of `T` (and of the strings in `s`) are lower-cap english letters encoded as: a=1, b=2, \ldots .
+**row-based packing**
+Here `words` is a vector of ciphertexts packed such that the $j$-th slot in `words[i]` holds the $j$-th letter of the $i$-th string (or 0 if the $i$-th string is shorter than $i$).
 
-The sizes of the vectors in the input is set accordingly.
+For example, if the strings to search are "Hello" and "foo" then `words` is going to be packed as:
 
-For example, if the strings to search are "hello" and "foo" the packing is going to be as follows:
-
-`s_row` is going to be packed as
 |   | Slot 0 | Slot 1 | Slot 2 | Slot 3| Slot 4| Slot 5| Slot 6| Slot 7| Slot 8|
 |----------|----------|----------|----------|----------|----------|----------|----------|----------|-----------|
-| s_row[0]    |     8     |      5    |       12   |     12     |    15      |    0      |    0      |    0      |     0      |
-| s_row[1]   |       6   |   15       |    15      |    0      |     0     |    0      |     0     |      0    |     0      |
+| words[0]    |     72     |      101    |       108   |     108     |    111      |    0      |    0      |    0      |     0      |
+| words[1]   |       102   |   111       |    111      |    0      |     0     |    0      |     0     |      0    |     0      |
 
 
-`s_col` is going to be packed as
+
+**column-based packing**
+Here `words` is a vector of ctxts packed such that the $j$-th slot in `words[i]` holds the $i$-th letter of the $j$-th string (or 0 if the $j$-th string is shorter than $i$).
+
+For example, if the strings to search are "Hello" and "foo" then `words` is going to be packed as:
+
 |   | Slot 0 | Slot 1 |
 |----------|----------|----------|
-| s_row[0]    |     8     |      6    |
-| s_row[1]   |       5   |   15       |
-| s_row[2]   |       12   |   15       |
-| s_row[3]   |       12   |   0       |
-| s_row[4]   |       15   |   0       |
+| words[0]    |     72     |      102    |
+| words[1]   |       101   |   111       |
+| words[2]   |       108   |   111       |
+| words[3]   |       108   |   0       |
+| words[4]   |       111   |   0       |
 
 
-- for the hybrid version we will generate some input TileTensors with various shapes. Additionally, we will generate more TileTensors with shapes by demand.
+**hybrid packing**
+Here `words` is IBM's CTileTensor (see below for details on TileTensors). You can ask for the input to be encoded with different tile shapes. For example, if you ask for a tile shape of $[5/8, 2, 1/a]$ (where $8\cdot t = slotNum$) you get the input in column-based packing.
+If you you ask for a tile shape of $[5, 2/2, 1/a]$ (where $2\cdot t = slotNum$) you get the input in row-based packing.
+If you ask for a tile shape of $[5/8, 2/2, 1/a]$ (where $8\cdot 2\cdot t = slotNum$) you get the input in a hybrid shape:
+
+|   | Slot 0 | Slot 1 | Slot 2 | Slot 3| Slot 4| Slot 5| Slot 6| Slot 7| Slot 8| slot 9| Slot 10 | Slot 11 | Slot 12 | Slot 13| Slot 14| Slot 15| Slot 16|
+|------|----|---|-------|----|------|-------|---|-----|-----|------|----|----|------|-----|-----|----|----|--|----|-------|
+| $1^{st}$ ctxt    |     72|102     |      101|111    |       108|111   |     108|0     |    111|0      |    0|0      |    0|0      |    0|0      |     0|0      |
+
+
+
+
 
 
 ## TileTensors
 TileTensor is a data structure that allows for FHE code to be written in a packing-oblivious manner. That means that the same code works with different packing decisions and the packing decisions are made separately from the code, possibly at runtime. This means that you can write your code once and at runtime (for example, depending on the number of strings and their sizes) decide whether the packing be row-wise, column-wise or something hybrid such as packing multiple strings in a single row to utilize SIMD in a better way.
 
-The intuition behind using TileTensors is to express your code as operating on tensors. Then, the mapping to ciphertexts is done independently to the codo. thinking of a ciphertext as a block (or "tile"), we cover the tensor with ciphertexts. The shape we give a single tile determines the packing. For example, a tile that has a single row (i.e., maps the slots of a ciphertext to a single row) will impose a row-wise packing; a tile that has a single column (i.e., maps the slots of a ciphertext to a single column) imposes a column-wise packing; and a tile that has 2 rows (i.e. maps the first half of the slots to one row and the second half of the slots a second row) imposes a packing with 2 strings in each ciphertext.
+The intuition behind using TileTensors is to express your code as operating on tensors. Then, the mapping to ciphertexts is done independently to the code. thinking of a ciphertext as a block (or "tile"), we cover the tensor with ciphertexts. The shape we give a single tile determines the packing. For example, a tile that has a single row (i.e., maps the slots of a ciphertext to a single row) will impose a row-wise packing; a tile that has a single column (i.e., maps the slots of a ciphertext to a single column) imposes a column-wise packing; and a tile that has 2 rows (i.e. maps the first half of the slots to one row and the second half of the slots a second row) imposes a packing with 2 strings in each ciphertext.
 
 TileTensors are implemented in HElayers [download here: https://ibm.github.io/helayers/].
 HElayers is a library developed by IBM Research that simplifies the use of FHE, making coding privacy preserving algorithms and specifically privacy preserving machine learning algorithms easier.
 
 You can read more about TileTensors in [this tutorial from 2022 https://research.ibm.com/haifa/dept/vst/tutorial_ccs2022.html] and [this tutorial from 2023 https://research.ibm.com/haifa/dept/vst/tutorial_ccs2023.html].
 
-Specifically for this challenge, you may be interseted in interleaved dimensions.
+Specifically for this challenge, you may be interested in interleaved dimensions.
 
 
 
@@ -113,12 +120,11 @@ Specifically for this challenge, you may be interseted in interleaved dimensions
 2. **Accuracy**: These values will be rounded to the nearest integer so they can incur an error of up to $0.49$.
 
 
-
 ## Timeline
 
--   **December 24, 2024**  - Start Date.
--   **March 30, 2025**  - Submission deadline.
--   **April 10, 2025**  - Prize awarded.
+-   **June 15, 2024**  - Start Date.
+-   **September 15, 2024**  - Submission deadline.
+-   **September 30, 2024**  - Prize awarded.
 
 ## Test environment
 
@@ -132,12 +138,14 @@ The following libraries/packages will be used for generating test case data and 
 
 -   **OpenFHE:**  v1.1.4
 -   **OpenFHE-Python:**  v0.8.6
+-   **Lattigo:**  v5.0.2
+-   **HElayers:**
 
 ## Submission
 
-To address this challenge, participants can utilize one of the two libraries, OpenFHE or Lattigo.
+To address this challenge, participants can utilize one of the two FHE libraries, OpenFHE or Lattigo and in addition you can utilize the HElayers library.
 
-The executable should be named  `sort`  .
+The executable should be named  `strstr`.
 
 ### OpenFHE
 
@@ -191,7 +199,15 @@ You can use a config file to set parameters for generating a context on the serv
 -   **levels_available_after_bootstrap**: this parameter allows setting up levels available after the bootstrapping if it's used. Note that the actual number of levels available after bootstrapping before next bootstrapping will be  `levels_available_after_bootstrap - 1`, because an additional level is used for scaling the ciphertext before next bootstrapping (in 64-bit CKKS bootstrapping).
     
 -   **level_budget**: the bootstrapping procedure needs to consume a few levels to run. This parameter is used to call  `EvalBootstrapSetup`. Default value is [4,4].
+    
 
+### Lattigo
+
+If the project is built using the Lattigo library, a Makefile is expected in the root directory of the project. Check out the project's template  [on GitHub](https://github.com/Fherma-challenges/parity/tree/main/lattigo/app).
+
+## Command-line interface for application testing
+
+The application must support the Command Line Interface (CLI) specified below.
 
 ### OpenFHE
 
@@ -203,33 +219,104 @@ You can use a config file to set parameters for generating a context on the serv
 -   **--key_mult**  [path]: specifies the path to the Evaluation (Multiplication) Key file.
 -   **--key_rot**  [path]: specifies the path to the Rotation Key file.
 
+### Lattigo
 
-## Example
+-   **--input**  [path]: specifies the path to the file containing the encrypted vector.
+- **--n** [size]: specifies the size of the array. The array will be written in slots $0,\ldots,(n-1)$ of the ciphertext.
+-   **--output**  [path]: specifies the path to the file where the result should be written.
+-   **--cc**  [path]: indicates the path to the crypto context file serialized in  **BINARY**  form.
+-   **--key_eval**  [path]: defines the path to the file where  `MemEvaluationKeySet`  object is serialized.  `MemEvaluationKeySet`  contains evaluation key and Galois keys.
+
+## Examples
+Below we give a few examples for the different packing options. You can plan for different packings for the different testcases you will be evaluated on but you must submit a single code.
+
+The input is integer numbers in the range $[0,255]$. The clear text we search in is given encoded in ascii. For convenience, in the examples below include values whose ascii codes are visible ascii but you should expect non-visible ascii as well. For example, the input text may be given as:
+`--text=Hello`
+which is equivalent to 
+`--text=$'\x48\x65\x6c\x6c\x6f'`
+and it may also be given as the non visible text:
+`--text=$'\x01\x02\x03\x04\x05'`
+
+### Row-based packing
+In this example we want to find the words "hello", "world" in the text "hello world"
 
 The executable will be run as follows:
-
 ```
-./app --cc cc.bin --key_public pub.bin --key_mult mult.bin --input in.bin --output out.bin
+./app --cc cc.bin --key_public pub.bin --key_mult mult.bin --input in_row.bin --word_size 5,5 --output out.bin --text "hello world"
 ```
 
+The file  `in_row.bin` will include 2 ciphertexts:
+`Ctxt1 = ['h', 'e', 'l', 'l', 'o', 0, ...]` 
+`Ctxt2 = ['w', 'o', 'r', 'l', 'd', 0, ...]` 
+(this does not include the noise added by CKKS during encryption.
 
-An example for the message encrypted in  `in.bin`:  `Input = [203.23, 102.83, 3.68, 77.46]` (this does not include the noise added by CKKS during encryption.
+An example output for this input will include 2 ciphertexts: 
+`Ctxt1 = [0, X, X, ...]`
+`Ctxt2 = [6, X, X, ...]`
+where `X` indicates a don't-care value.
 
-An example output for this input:  `Output = [203.23, 102.83, 77.46, 3.68]`
+### Col-based packing
+In this example we want to find the words "he", "ll", "wo", "rd", "no" in the text "hello world"
+
+The executable will be run as follows:
+```
+./app --cc cc.bin --key_public pub.bin --key_mult mult.bin --input in_col.bin --word_size 2,2,2 --output out.bin --text "hello world"
+```
+
+The file  `in_col.bin` will include 2 ciphertexts:
+`Ctxt1 = ['h', 'l', 'w', 'r', 'n', 0, ...]` 
+`Ctxt2 = ['e', 'l', 'o', 'd', 'o', 0, ...]` 
+(this does not include the noise added by CKKS during encryption.
+
+An example output for this input will include 1 ciphertext: 
+`Ctxt1 = [0, 2, 6, 8, -1, X, X, ...]`
+where `X` indicates a don't-care value.
+
+
+### Hybrid-based packing
+In this example we want to find the words "he", "ll", "wo", "rd", "no" in the text "hello world"
+
+The executable will be run as follows:
+```
+./app --cc cc.bin --key_public pub.bin --key_mult mult.bin --input in_hyb.bin --word_size 5,5 --output out.bin --text "hello world"
+```
+
+The file  `in_hyb.bin` will include a TileTensor with 1 ciphertext (see HElayers documentation about TileTensors and their shapes) with shape [5/8, 2/2] (this example assumes a ciphertext size of 16 slots. For 32K slots the shape will be different).
+
+`ctxt1 = ['h', 'l', 'w', 'r', 'n', 0, 0, 0, 'e', 'l', 'o', 'd', 'o', 0, 0, 0]` 
+(this does not include the noise added by CKKS during encryption.
+
+An example output for this input will be a TileTensor with 1 ciphertext: 
+`Ctxt1 = [0, 2, 6, 8, -1, X, X, ...]`
+where `X` indicates a don't-care value.
+
+Note that in hybrid packing you can ask for the input TileTensor to have a different shape as well.
 
 ## Evaluation Criteria
+Submissions will be evaluated on these testcases:
 
-Submissions will be evaluated using an array of size $n=2048$ and scored with these criteria:
+|text size | number of strings | max. string size | 
+|----------|-----------------|---------------| 
+|65,500    | 1               | 65,450
+|100       | 500             | 90
+|1,000,000 | 80              | 999,000
+|1,000,000 | 800             | 999,900
+|1,000,000 | 1               |  4
 
-1.  **Correctness and accuracy:**  The output of the program for valid input (i.e., numbers in the range  $[0,255]$)  **must**  be correct (in descending order) with an error of no more than $0.0001$ for each element.
-2.  **Execution time:**  The running time of the application on the provided input data.
+
+
+1.  **Correctness and accuracy:**  The output of the program for valid input (i.e., numbers in the range  $[0,255]$)  **must**  be correctly the indexes of the input words in the text. The output may have an error of no more than $0.4$ for each element.
+2.  **Execution time:**  The cumulative running time of the application on the provided input data.
 
 That is, the winner will be the fastest application whose output is correct and accurate.
 
 ## Scoring & Awards
 
-The winner will be awarded  **$4000**.
+Solutions implemented with OpenFHE and Lattigo libraries will be scored separately.
 
+The winner in each group and category will be awarded  **$2500**.
+
+One participant can be the winner in two groups. Total prize fund  **$5000**.
 
 ## Challenge Committee
 
@@ -242,6 +329,7 @@ The winner will be awarded  **$4000**.
 -   [FHERMA participation guide](https://fherma.io/how_it_works)—more about FHERMA challenges.
 -   [OpenFHE](https://github.com/openfheorg/openfhe-development)  repository, README, and installation guide.
 -   [OpenFHE Python](https://github.com/openfheorg/openfhe-python)  repository, README, and installation guide.
+-   [Lattigo](https://github.com/tuneinsight/lattigo)
 -   A vast collection of resources collected by  [FHE.org](http://fhe.org/)  [https://fhe.org/resources](https://fhe.org/resources), including tutorials and walk-throughs, use-cases and demos.
 -   [OpenFHE AAAI 2024 Tutorial](https://openfheorg.github.io/aaai-2024-lab-materials/)—Fully Homomorphic Encryption for Privacy-Preserving Machine Learning Using the OpenFHE Library.
 
@@ -255,3 +343,5 @@ If you have any questions, you can:
 -   Use  [OpenFHE Discourse](https://openfhe.discourse.group/)  for OpenFHE related issues.
 
 
+
+> Written with [StackEdit](https://stackedit.io/).
