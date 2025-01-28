@@ -137,13 +137,14 @@ docker pull yashalabinc/fherma-validator
 If your local folder containing the solution is located at `~/user/tmp/k-nearest-neighbors-search/app`, use the following command to run the validator:
 
 ```bash
-docker run -ti \
-  -v ~/user/tmp/k-nearest-neighbors-search:/knn \
-  yashalabinc/fherma-validator \
-  --project-folder=/knn/app \
-  --testcase=/knn/tests/test_case.json
+docker run -ti -v ~/user/tmp/k-nearest-neighbors-search:/fherma yashalabinc/fherma-validator --project-folder=/fherma/app --testcase=/fherma/tests/test_case.json
 ```
-After validation, a `result.json` file will be generated in your project folder. 
+Here is a breakdown of the command:
+- `-v ~/user/tmp/k-nearest-neighbors-search:/fherma`: maps your local directory to the `/fherma` directory in the Docker container.
+- `--project-folder=/fherma/app`: specifies the folder where your solution is located.
+- `--testcase=/fherma/tests/test_case.json`: points to the JSON file containing the test case for validation. Ensure the path to `test_case.json` is correct and matches your directory structure. You can find the test case in [our GitHub repository](https://github.com/fairmath/fherma-challenges/tree/main/house-price-prediciton/tests/test_case.json)
+
+After validation, a `result.json` file will be generated in your project folder.
 
 
 ## Evaluation criteria
