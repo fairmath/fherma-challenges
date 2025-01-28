@@ -47,8 +47,10 @@ class CKKSParser:
  
 def solve(input, context, pub_key):
     # put your solution here
-    output = Ciphertext()
-    return output
+    plaintext = context.MakeCKKSPackedPlaintext([56, 116, 185, 693, 45, 88, 139, 160, 49, 201])
+    ciphertext = context.Encrypt(pub_key, plaintext)
+    return ciphertext
+
 
 
 if __name__ == '__main__':
