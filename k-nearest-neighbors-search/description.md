@@ -142,7 +142,7 @@ docker run -ti -v ~/user/tmp/k-nearest-neighbors-search:/fherma yashalabinc/fher
 Here is a breakdown of the command:
 - `-v ~/user/tmp/k-nearest-neighbors-search:/fherma`: maps your local directory to the `/fherma` directory in the Docker container.
 - `--project-folder=/fherma/app`: specifies the folder where your solution is located.
-- `--testcase=/fherma/tests/test_case.json`: points to the JSON file containing the test case for validation. Ensure the path to `test_case.json` is correct and matches your directory structure. You can find the test case in [our GitHub repository](https://github.com/fairmath/fherma-challenges/tree/main/house-price-prediciton/tests/test_case.json)
+- `--testcase=/fherma/tests/test_case.json`: points to the JSON file containing the test case for validation. Ensure the path to `test_case.json` is correct and matches your directory structure. You can find the test case in [our GitHub repository](https://github.com/fairmath/fherma-challenges/tree/main/k-nearest-neighbors-search/tests/test_case.json)
 
 After validation, a `result.json` file will be generated in your project folder.
 
