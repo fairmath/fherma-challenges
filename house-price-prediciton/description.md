@@ -123,6 +123,7 @@ You can use a config file to set parameters for generating a context on the serv
     "level_budget": [4,4]
 }
 ```
+For openfhe-python based solution you can use a template provided [here](https://github.com/fairmath/fherma-challenges/tree/main/house-price-prediciton/app).
 
 There are more info on possible config file parameters and their default values in our [Participation guide](https://fherma.io/how_it_works).
 
@@ -142,6 +143,26 @@ The executable will be run as follows:
 ```bash
 ./app --sample data.bin --cc cc.bin --key_public pub.bin --key_mult mult.bin --output result.bin
 ```
+
+## Validating locally
+
+You can validate your solution locally using the [fherma-validator](https://hub.docker.com/r/yashalabinc/fherma-validator) docker image for white box challenges validation. To pull the image run the following comand:
+
+```bash
+docker pull yashalabinc/fherma-validator
+```
+### Example Setup
+If your local folder containing the solution is located at `~/user/tmp/house-price-prediction/app`, use the following command to run the validator:
+
+```bash
+docker run -ti -v ~/user/tmp/house-price-prediction:/fherma yashalabinc/fherma-validator --project-folder=/fherma/app --testcase=/fherma/tests/test_case.json
+```
+Here is a breakdown of the command:
+- `-v ~/user/tmp/house-price-prediction:/fherma`: maps your local directory to the /fherma directory in the Docker container.
+- `--project-folder=/fherma/app`: specifies the folder where your solution is located.
+- `--testcase=/fherma/tests/test_case.json`: points to the JSON file containing the test case for validation. Ensure the path to `test_case.json` is correct and matches your directory structure. You can find the test case in [our GitHub repository](https://github.com/fairmath/fherma-challenges/tree/main/house-price-prediciton/tests/test_case.json)
+
+After validation, a `result.json` file will be generated in your project folder. 
 
 ## Evaluation criteria
 
