@@ -312,11 +312,8 @@ That is, the winner will be the fastest application whose output is correct and 
 
 ## Scoring & Awards
 
-Solutions implemented with OpenFHE and Lattigo libraries will be scored separately.
+The winner will be awarded  **$4000**.
 
-The winner in each group and category will be awarded  **$2500**.
-
-One participant can be the winner in two groups. Total prize fund  **$5000**.
 
 ## Challenge Committee
 
