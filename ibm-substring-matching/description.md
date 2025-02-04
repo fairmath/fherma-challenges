@@ -122,9 +122,9 @@ Specifically for this challenge, you may be interested in interleaved dimensions
 
 ## Timeline
 
--   **February 4, 2025**  - Start Date.
--   **May 4, 2025**  - Submission deadline.
--   **May 15, 2025**  - Prize awarded.
+-   **June 15, 2024**  - Start Date.
+-   **September 15, 2024**  - Submission deadline.
+-   **September 30, 2024**  - Prize awarded.
 
 ## Test environment
 
@@ -138,6 +138,7 @@ The following libraries/packages will be used for generating test case data and 
 
 -   **OpenFHE:**  v1.1.4
 -   **OpenFHE-Python:**  v0.8.6
+-   **Lattigo:**  v5.0.2
 -   **HElayers:**
 
 ## Submission
@@ -317,7 +318,8 @@ The winner will be awarded  **$4000**.
 ## Challenge Committee
 
 -   [Gurgen Arakelov](https://www.linkedin.com/in/gurgen-arakelov-943172b9/), Fair Math
--   [Yuriy Polyakov](https://www.linkedin.com/in/yuriy-polyakov-796b84a/), Duality
+-   [Sergey Gomenyuk](https://www.linkedin.com/in/sergey-gomenyuk-7a355a42/), Fair Math 
+-   [Yuriy Polyakov](https://www.linkedin.com/in/yuriy-polyakov-796b84a/), Duality 
 -   [Hayim Shaul](https://www.linkedin.com/in/hayim-shaul-b2658/), IBM Research
 
 ## Useful Links
