@@ -37,7 +37,7 @@ The function should return for each string in the batch the first positions wher
 
 1.  **Challenge type**: This challenge is a White Box challenge. Participants are required to submit the project with their source code. You can learn more about this type of challenges in our  [Participation guide](https://fherma.io/how_it_works).
 2.  **Encryption scheme**: CKKS.
-3.  **Supported libraries**:  [OpenFHE](https://github.com/openfheorg/openfhe-development),  [Lattigo](https://github.com/tuneinsight/lattigo), [HElayers](https://ibm.github.io/helayers/).
+3.  **Supported libraries**:  [OpenFHE](https://github.com/openfheorg/openfhe-development),  [HElayers](https://ibm.github.io/helayers/).
 
 ## Parameters of the key
 
