@@ -91,7 +91,7 @@ If you you ask for a tile shape of $[5, 2/2, 1/a]$ (where $2\cdot t = slotNum$) 
 If you ask for a tile shape of $[5/8, 2/2, 1/a]$ (where $8\cdot 2\cdot t = slotNum$) you get the input in a hybrid shape:
 
 |   | Slot 0 | Slot 1 | Slot 2 | Slot 3| Slot 4| Slot 5| Slot 6| Slot 7| Slot 8| slot 9| Slot 10 | Slot 11 | Slot 12 | Slot 13| Slot 14| Slot 15| Slot 16|
-|------|----|---|-------|----|------|-------|---|-----|-----|------|----|----|------|-----|-----|----|----|--|----|-------|
+|------|----|---|-------|----|------|-------|---|-----|-----|------|----|----|------|-----|-----|----|----|
 | $1^{st}$ ctxt    |     72|102     |      101|111    |       108|111   |     108|0     |    111|0      |    0|0      |    0|0      |    0|0      |     0|0      |
 
 
