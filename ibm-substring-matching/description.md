@@ -122,9 +122,9 @@ Specifically for this challenge, you may be interested in interleaved dimensions
 
 ## Timeline
 
--   **June 15, 2024**  - Start Date.
--   **September 15, 2024**  - Submission deadline.
--   **September 30, 2024**  - Prize awarded.
+-   **Feb 04, 2025**  - Start Date.
+-   **May 04, 2025**  - Submission deadline.
+-   **May 15, 2025**  - Prize awarded.
 
 ## Test environment
 
@@ -138,7 +138,6 @@ The following libraries/packages will be used for generating test case data and 
 
 -   **OpenFHE:**  v1.1.4
 -   **OpenFHE-Python:**  v0.8.6
--   **Lattigo:**  v5.0.2
 -   **HElayers:**
 
 ## Submission
