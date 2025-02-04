@@ -142,7 +142,7 @@ The following libraries/packages will be used for generating test case data and 
 
 ## Submission
 
-To address this challenge, participants can utilize one of the two FHE libraries, OpenFHE or Lattigo and in addition you can utilize the HElayers library.
+To address this challenge, participants can utilize OpenFHE and in addition you can utilize the HElayers library.
 
 The executable should be named  `strstr`.
 
@@ -199,10 +199,6 @@ You can use a config file to set parameters for generating a context on the serv
     
 -   **level_budget**: the bootstrapping procedure needs to consume a few levels to run. This parameter is used to call  `EvalBootstrapSetup`. Default value is [4,4].
     
-
-### Lattigo
-
-If the project is built using the Lattigo library, a Makefile is expected in the root directory of the project. Check out the project's template  [on GitHub](https://github.com/Fherma-challenges/parity/tree/main/lattigo/app).
 
 ## Command-line interface for application testing
 
@@ -318,7 +314,6 @@ The winner will be awarded  **$4000**.
 -   [FHERMA participation guide](https://fherma.io/how_it_works)—more about FHERMA challenges.
 -   [OpenFHE](https://github.com/openfheorg/openfhe-development)  repository, README, and installation guide.
 -   [OpenFHE Python](https://github.com/openfheorg/openfhe-python)  repository, README, and installation guide.
--   [Lattigo](https://github.com/tuneinsight/lattigo)
 -   A vast collection of resources collected by  [FHE.org](http://fhe.org/)  [https://fhe.org/resources](https://fhe.org/resources), including tutorials and walk-throughs, use-cases and demos.
 -   [OpenFHE AAAI 2024 Tutorial](https://openfheorg.github.io/aaai-2024-lab-materials/)—Fully Homomorphic Encryption for Privacy-Preserving Machine Learning Using the OpenFHE Library.
 
