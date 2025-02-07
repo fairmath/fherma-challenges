@@ -45,10 +45,9 @@ where:
 2. `wordSize` is a vector of ints indicating the sizes of the words that are searched for in `T`. The value `wordSize[i]` is the length of the $i$-th word. The size of this vector indicates the number of words that need to be searched for.
 3. `words` is the words that need to be searched for. You have the choice of getting it as a vector of ciphertexts or as a TileTensor structure (see below about TileTensors).
 
-If you choose to get `ctxts` as a vector of ciphertexts then you can choose one of two packings:
+If you choose to get `ctxts` as a vector of ciphertexts then you can choose one of two packings: row-based and column-based.
 
-**row-based packing**
-Here `words` is a vector of ciphertexts packed such that the $j$-th slot in `words[i]` holds the $j$-th letter of the $i$-th string (or 0 if the $i$-th string is shorter than $i$).
+For **row-based packing**, `words` is a vector of ciphertexts packed such that the $j$-th slot in `words[i]` holds the $j$-th letter of the $i$-th string (or 0 if the $i$-th string is shorter than $i$).
 
 For example, if the strings to search are "Hello" and "foo" then `words` is going to be packed as:
 
@@ -58,8 +57,7 @@ For example, if the strings to search are "Hello" and "foo" then `words` is goin
 | words[1]   |       102   |   111       |    111      |    0      |     0     |    0      |     0     |      0    |     0      |
 
 
-**column-based packing**
-Here `words` is a vector of ctxts packed such that the $j$-th slot in `words[i]` holds the $i$-th letter of the $j$-th string (or 0 if the $j$-th string is shorter than $i$).
+For **column-based packing**, `words` is a vector of ctxts packed such that the $j$-th slot in `words[i]` holds the $i$-th letter of the $j$-th string (or 0 if the $j$-th string is shorter than $i$).
 
 For example, if the strings to search are "Hello" and "foo" then `words` is going to be packed as:
 
@@ -72,8 +70,7 @@ For example, if the strings to search are "Hello" and "foo" then `words` is goin
 | words[4]   |       111   |   0       |
 
 
-**hybrid packing**
-Here `words` is IBM's CTileTensor (see below for details on TileTensors). You can ask for the input to be encoded with different tile shapes. For example, if you ask for a tile shape of $[5/8, 2, 1/a]$ (where $8\cdot t = slotNum$) you get the input in column-based packing.
+For **hybrid packing**, `words` is IBM's CTileTensor (see below for details on TileTensors). You can ask for the input to be encoded with different tile shapes. For example, if you ask for a tile shape of $[5/8, 2, 1/a]$ (where $8\cdot t = slotNum$) you get the input in column-based packing.
 If you you ask for a tile shape of $[5, 2/2, 1/a]$ (where $2\cdot t = slotNum$) you get the input in row-based packing.
 If you ask for a tile shape of $[5/8, 2/2, 1/a]$ (where $8\cdot 2\cdot t = slotNum$) you get the input in a hybrid shape:
 
