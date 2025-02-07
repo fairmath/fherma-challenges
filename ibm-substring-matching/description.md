@@ -13,20 +13,13 @@ In cleartext there are several ways to search for a substring in a text:
 1. The trivial way is to check (by comparing each letter of $s$ with the respective letter of $T$) whether $s$ appears in $T$ at position $i=1,2,\ldots, n-k$, which leads to an overall runtime of $O(nk)$.
 2. A more efficient algorithm named after its authors Knuth-Morris-Pratt (KMP) achieves the much better runtime of $O(n+k)$. This is optimal since every algorithm needs to at least read $T$ and $s$ (assuming no preprocessing).
 3. If we allow probabilistic algorithms we can compute a hash value $H(s)$ and compare it to the hashes computed on a sliding window $H(T[i:i+k])$, for $i=1,2,\ldots, n-k$. If $H(T[i+1:i+k+1])$ can be computed from $H(T[i:i+k])$ in $O(1)$ (for example, a CRC) this leads to a running time of $O(n+k)$.
-4. Another approach for substring matching is to use a non-deterministic finite automaton (NDFA). A NDFA can be thought of a state-machine with states and rules defining how the NDFA translates from one state to another based on the input it sees. Here there are $k$ states corresponding to the $k$ prefixes of $s$, and when in state $i$ and depending on the next letter $T[c]$ read from $T$ the automaton moves to the states that correspond to states that correspond to prefixes of $s$ that end at $T[c]$. NDFAs can in fact match more than just strings, they can match a subset of regular expression, for example the '*','+' operators.
+4. Another approach for substring matching is to use a non-deterministic finite automaton (NDFA). A NDFA can be thought of a state-machine with states and rules defining how the NDFA translates from one state to another based on the input it sees. Here there are $k$ states corresponding to the $k$ prefixes of $s$, and when in state $i$ and depending on the next letter $T[c]$ read from $T$ the automaton moves to the states that correspond to states that correspond to prefixes of $s$ that end at $T[c]$. NDFAs can in fact match more than just strings, they can match a subset of regular expression, for example the '*','+' operators. 
+
+These NDFA methods have already been studied under FHE (see the Useful Links section for more details)
+
+For this challenge, you need to implement `strstr(words, wordSize, T)`, a function that takes multiple encrypted strings (`words`), their corresponding sizes (`wordSize`), and a text (`T`), where `wordSize` and `T` are provided in cleartext. Unlike the C version, this function processes a batch of strings, which may vary in length. For each string in the batch, the function should return the position of its first occurrence in `T`, or `-1` if it is not found.
 
 
-These methods were already studied under FHE (see for example, [1,2]).
-
-
-For this challenge you will need to develop `strstr(words, wordSize, T, n)` - a function that gets several encrypted strings `words`, their sizes `wordSize`, and a text  `T`  (`wordSize`, `T`, and its size are given in cleartext). 
-Note that unlike the C version this function gets a **batch** of strings (possibly of different sizes) to look for in `T`.
-The function should return for each string in the batch the first positions where it appears in `T` (or -1 if it doesn't).
-
-
-[1] Genise, N., Gentry, C., Halevi, S., Li, B., Micciancio, D. (2019). Homomorphic Encryption for Finite Automata. In: Galbraith, S., Moriai, S. (eds) Advances in Cryptology – ASIACRYPT 2019. ASIACRYPT 2019. Lecture Notes in Computer Science(), vol 11922. Springer, Cham. https://doi.org/10.1007/978-3-030-34621-8_17
-
-[2] Charlotte Bonte and Ilia Iliashenko. 2020. Homomorphic String Search with Constant Multiplicative Depth. In Proceedings of the 2020 ACM SIGSAC Conference on Cloud Computing Security Workshop (CCSW'20). Association for Computing Machinery, New York, NY, USA, 105–117. https://doi.org/10.1145/3411495.3421361
 
 ## Challenge info
 
@@ -94,19 +87,17 @@ TileTensor is a data structure that allows for FHE code to be written in a packi
 
 The intuition behind using TileTensors is to express your code as operating on tensors. Then, the mapping to ciphertexts is done independently to the code. thinking of a ciphertext as a block (or "tile"), we cover the tensor with ciphertexts. The shape we give a single tile determines the packing. For example, a tile that has a single row (i.e., maps the slots of a ciphertext to a single row) will impose a row-wise packing; a tile that has a single column (i.e., maps the slots of a ciphertext to a single column) imposes a column-wise packing; and a tile that has 2 rows (i.e. maps the first half of the slots to one row and the second half of the slots a second row) imposes a packing with 2 strings in each ciphertext.
 
-TileTensors are implemented in HElayers [download here: https://ibm.github.io/helayers/].
+TileTensors are implemented in [HElayers](https://ibm.github.io/helayers/).
 HElayers is a library developed by IBM Research that simplifies the use of FHE, making coding privacy preserving algorithms and specifically privacy preserving machine learning algorithms easier.
 
-You can read more about TileTensors in [this tutorial from 2022 https://research.ibm.com/haifa/dept/vst/tutorial_ccs2022.html] and [this tutorial from 2023 https://research.ibm.com/haifa/dept/vst/tutorial_ccs2023.html].
+You can read more about TileTensors in [this tutorial from 2022](https://research.ibm.com/haifa/dept/vst/tutorial_ccs2022.html) and [this tutorial from 2023](https://research.ibm.com/haifa/dept/vst/tutorial_ccs2023.html).
 
 Specifically for this challenge, you may be interested in interleaved dimensions.
-
 
 ## Requirements of the output
 
 1. **Packing**: The output should be a ciphertext $o$ where the $i$-th slot of $o$ holds the first position where $s[i]$ (the $i$-th input string) appears in $T$.
 2. **Accuracy**: These values will be rounded to the nearest integer so they can incur an error of up to $0.49$.
-
 
 ## Timeline
 
@@ -118,7 +109,8 @@ Specifically for this challenge, you may be interested in interleaved dimensions
 
 ### Hardware
 
-**CPU**:  12 core  **RAM**:  54 GB
+- **CPU:** 12 cores
+- **RAM:** 54 GB
 
 ### Software
 
@@ -132,7 +124,7 @@ The following libraries/packages will be used for generating test case data and 
 
 To address this challenge, participants can utilize OpenFHE and in addition you can utilize the HElayers library.
 
-The executable should be named  `strstr`.
+The executable should be named `strstr`.
 
 ### OpenFHE
 
@@ -144,33 +136,38 @@ If the solution is developed using the OpenFHE library, we expect it to have a C
     -   Inside the ZIP archive, ensure there is a directory titled  `app`.
     -   Within the  `app`  directory, include your main  `CMakeLists.txt`  file and other necessary source files.
 
+```mermaid
+graph TD;
+    app_zip[app.zip] --> app_folder[app]
+    app_folder --> CMakeLists[CMakeLists.txt]
+    app_folder --> main.cpp[main.cpp]
+    app_folder --> config.json[config.json]
+    app_folder --> ...[...]
+```
 
 #### Config file
 
 You can use a config file to set parameters for generating a context on the server for testing the solution. An example of such a config and detailed description of each parameter is given below.
 
-```none
+```json
 {
     "indexes_for_rotation_key": [
         1
     ],
     "mult_depth": 29,
     "ring_dimension": 131072,
-    "scale_mod_size": 59,
+    "scale_mod_size": 51,
     "first_mod_size": 60,
     "batch_size": 65536,
-    "enable_bootstrapping": false,
+    "enable_bootstrapping": true,
     "levels_available_after_bootstrap": 10,
     "level_budget": [4,4]
 }
-
 ```
 
-
-##### Parameters
+**Parameters:**
 
 - **indexes_for_rotation_key**: if an application requires the use of a rotation key, this option allows specifying indexes for the rotation key. If the rotation key is not used, it should be an empty array: `indexes_for_rotation_key=[]`.
-    
 - **mult_depth**: the user can set the ring dimension. However, if a minimum ring dimension is set for the challenge, then the user can only increase this value; decreasing it is not possible. 
 - **scale_mod_size**: this parameter is used to configure `ScaleModSize`, default value is `51`. 
 - **first_mod_size**: this parameter allows setting up `FirstModSize`, default value is `60`. 
@@ -197,7 +194,9 @@ The application must support the Command Line Interface (CLI) specified below.
 Below we give a few examples for the different packing options. You can plan for different packings for the different testcases you will be evaluated on but you must submit a single code.
 
 The input is integer numbers in the range $[0,255]$. The clear text we search in is given encoded in ascii. For convenience, in the examples below include values whose ascii codes are visible ascii but you should expect non-visible ascii as well. For example, the input text may be given as:
-`--text=Hello` which is equivalent to `--text=$'\x48\x65\x6c\x6c\x6f'` and it may also be given as the non visible text: `--text=$'\x01\x02\x03\x04\x05'`
+`--text=Hello` which is equivalent to 
+`--text=$'\x48\x65\x6c\x6c\x6f'` and it may also be given as the non visible text:
+`--text=$'\x01\x02\x03\x04\x05'`
 
 ### Row-based packing
 In this example we want to find the words "hello", "world" in the text "hello world"
@@ -227,7 +226,8 @@ The file `in_col.bin` will include 2 ciphertexts (the noise added by CKKS during
 - `Ctxt1 = ['h', 'l', 'w', 'r', 'n', 0, ...]`
 - `Ctxt2 = ['e', 'l', 'o', 'd', 'o', 0, ...]` 
 
-The file `out_row.bin` will include 1 ciphertext: `Ctxt1 = [0, 2, 6, 8, -1, X, X, ...]`, where `X` indicates a don't-care value.
+The file `out_row.bin` will include 1 ciphertext: 
+`Ctxt1 = [0, 2, 6, 8, -1, X, X, ...]`, where `X` indicates a don't-care value.
 
 ### Hybrid-based packing
 In this example we want to find the words "he", "ll", "wo", "rd", "no" in the text "hello world"
@@ -243,7 +243,8 @@ The file `in_hyb.bin` will include a TileTensor with 1 ciphertext (see HElayers 
 (the noise added by CKKS during encryption is not shown).
 
 An example output for this input will be a TileTensor with 1 ciphertext: 
-`Ctxt1 = [0, 2, 6, 8, -1, X, X, ...]`, where `X` indicates a don't-care value.
+`Ctxt1 = [0, 2, 6, 8, -1, X, X, ...]`, 
+where `X` indicates a don't-care value.
 
 Note that in hybrid packing you can ask for the input TileTensor to have a different shape as well.
 
@@ -277,11 +278,18 @@ The winner will be awarded  **$4000**.
 
 ## Useful Links
 
+### FHE
+
 -   [FHERMA participation guide](https://fherma.io/how_it_works)—more about FHERMA challenges.
 -   [OpenFHE](https://github.com/openfheorg/openfhe-development)  repository, README, and installation guide.
 -   [OpenFHE Python](https://github.com/openfheorg/openfhe-python)  repository, README, and installation guide.
 -   A vast collection of resources collected by  [FHE.org](http://fhe.org/)  [https://fhe.org/resources](https://fhe.org/resources), including tutorials and walk-throughs, use-cases and demos.
 -   [OpenFHE AAAI 2024 Tutorial](https://openfheorg.github.io/aaai-2024-lab-materials/)—Fully Homomorphic Encryption for Privacy-Preserving Machine Learning Using the OpenFHE Library.
+
+### NDFA Methods Studied Under FHE
+- Genise, N., Gentry, C., Halevi, S., Li, B., Micciancio, D. (2019). Homomorphic Encryption for Finite Automata. In: Galbraith, S., Moriai, S. (eds) Advances in Cryptology – ASIACRYPT 2019. ASIACRYPT 2019. Lecture Notes in Computer Science(), vol 11922. Springer, Cham. https://doi.org/10.1007/978-3-030-34621-8_17
+
+- Charlotte Bonte and Ilia Iliashenko. 2020. Homomorphic String Search with Constant Multiplicative Depth. In Proceedings of the 2020 ACM SIGSAC Conference on Cloud Computing Security Workshop (CCSW'20). Association for Computing Machinery, New York, NY, USA, 105–117. https://doi.org/10.1145/3411495.3421361
 
 ## Help
 
