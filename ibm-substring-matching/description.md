@@ -115,7 +115,7 @@ The following libraries/packages will be used for generating test case data and 
 
 -   **OpenFHE:**  v1.1.4
 -   **OpenFHE-Python:**  v0.8.6
--   **HElayers**
+-   **HElayers:** v1.5.4
 
 ## Submission
 
