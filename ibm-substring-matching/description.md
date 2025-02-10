@@ -227,7 +227,7 @@ The file `out_row.bin` will include 1 ciphertext:
 `Ctxt1 = [0, 2, 6, 8, -1, X, X, ...]`, where `X` indicates a don't-care value.
 
 ### Hybrid-based packing
-In this example we want to find the words "he", "ll", "wo", "rd", "no" in the text "hello world"
+In this example we want to find the words "he", "ll", "wo", "rl", "no" in the text "hello world"
 
 The executable will be run as follows:
 ```
