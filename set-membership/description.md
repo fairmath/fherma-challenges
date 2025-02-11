@@ -111,7 +111,7 @@ The application must support the following CLI:
 Example execution:
 
 ```bash
-$ ./app --input1 data1 --input2 data2 --configc config.json --key_eval eval_keys.json --output result
+$ ./app --input1 data1 --input2 data2 --config config.json --key_eval eval_keys.json --output result
 ```
 
 ### Config file
