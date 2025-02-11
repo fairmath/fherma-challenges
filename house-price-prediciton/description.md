@@ -141,7 +141,7 @@ The application must support the following CLI:
 The executable will be run as follows:
 
 ```bash
-./app --sample data.bin --cc cc.bin --key_public pub.bin --key_mult mult.bin --output result.bin
+./app --sample data.bin --cc cc.bin --key_pub pub.bin --key_mult mult.bin --output result.bin
 ```
 
 ## Validating locally
