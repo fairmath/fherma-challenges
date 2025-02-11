@@ -133,7 +133,7 @@ The application must support the following CLI:
 - **--sample** [path]: the path to the file where the input ciphertext is located.
 - **--output** [path]: the path to the file where the classification result should be written.
 - **--cc** [path]: the path to the serialized crypto context file in **BINARY** form.
-- **--key_public** [path]: the path to the public key file.
+- **--key_pub** [path]: the path to the public key file.
 - **--key_mult** [path]: the path to the evaluation (multiplication) key file.
 - **--key_rot** [path]: the path to the rotation key file.
 
