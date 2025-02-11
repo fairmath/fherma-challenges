@@ -183,7 +183,7 @@ The application must support the Command Line Interface (CLI) specified below.
 - **--n** [size]: specifies the size of the array. The array will be written in slots $0,\ldots,(n-1)$ of the ciphertext.
 -   **--output** [path]: specifies the path to the file where the result should be written.
 -   **--cc** [path]: indicates the path to the crypto context file serialized in  **BINARY**  form.
--   **--key_public** [path]: specifies the path to the Public Key file.
+-   **--key_pub** [path]: specifies the path to the Public Key file.
 -   **--key_mult** [path]: specifies the path to the Evaluation (Multiplication) Key file.
 -   **--key_rot** [path]: specifies the path to the Rotation Key file.
 
