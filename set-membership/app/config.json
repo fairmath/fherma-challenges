@@ -1,0 +1,7 @@
+{
+    "scheme": "BFV",
+    "indexes_for_rotation_key": [1,2,3,4,5],
+    "poly_degree": 8192,
+    "plaintext_modulus": 557057, 
+    "coefficient_moduli": [268369921, 1152921504606830593, 1152921504606748673]    
+}
