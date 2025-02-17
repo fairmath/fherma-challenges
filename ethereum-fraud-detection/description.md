@@ -33,7 +33,7 @@ The goals of this challenge are:
 
 ## Datasets
 
-- **Training Dataset** is a preprocessed subset of [Ethereum Fraud Detection Dataset](https://www.kaggle.com/datasets/vagifa/ethereum-frauddetection-dataset/data), consisting of [X_train.csv](https://github.com/Fherma-challenges/fraud-detection/blob/master/X_train.csv) and [y_train.csv](https://github.com/Fherma-challenges/fraud-detection/blob/master/y_train.csv)
+- **Training Dataset** is a preprocessed subset of [Ethereum Fraud Detection Dataset](https://www.kaggle.com/datasets/vagifa/ethereum-frauddetection-dataset/data), consisting of [X_train.csv](https://github.com/fairmath/fherma-challenges/blob/main/ethereum-fraud-detection/data/X_train.csv) and [y_train.csv](https://github.com/fairmath/fherma-challenges/blob/main/ethereum-fraud-detection/data/y_train.csv)
 - **Usage:** Feel free to split the provided dataset into training and validation sets.
 - **Submissions** will be validated on a non-provided testing dataset.
 
