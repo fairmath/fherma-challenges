@@ -21,6 +21,8 @@ Available templates:
 - `openfhe-python`: template for an OpenFHE-Python-based solution.
 
 # How to Validate Solution Locally
+FHERMA offers two types of challenges: white box and black box. You can learn more by following [FHERMA participation guide](https://fherma.io/how_it_works)
+
 ## White Box Challenges
 
 You can validate your solution locally using the [fherma-validator](https://hub.docker.com/r/yashalabinc/fherma-validator) docker image for white box challenges validation. To pull the image, run the following comand:
@@ -40,3 +42,7 @@ Here is a breakdown of the command:
 - `--testcase=/fherma/tests/test_case.json`: points to the JSON file containing the test case for validation. Ensure `test_case.json` is added to your directory and the correct path is used in the command. Test cases can be found in the corresponding challenge folders.
 
 After validation, a `result.json` file will be generated in your project folder.
+
+## Black Box Challenges
+
+For black box challenges, you can find test cases on the Play tab and validate the results yourself before submission. The evaluation metric may vary by challenge, but usually, the primary metric for black box challenges is accuracy.
