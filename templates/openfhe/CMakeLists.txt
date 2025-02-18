@@ -27,4 +27,6 @@ else ()
 endif ()
 
 
-add_executable(...)
+add_executable(app main.cpp
+        yourSolution.cpp
+)

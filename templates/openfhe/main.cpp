@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "yourSolution"
+#include "yourSolution.h"
 
 using namespace lbcrypto;
 
@@ -43,9 +43,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    yourSolution yourSolution(ccLocation, pubKeyLocation, multKeyLocation, rotKeyLocation, inputLocation, 
+    CKKSTaskSolver CKKSTaskSolver(ccLocation, pubKeyLocation, multKeyLocation, rotKeyLocation, inputLocation, 
                                   outputLocation);
-    yourSolution.eval();
-    yourSolution.serializeOutput();
+    CKKSTaskSolver.eval();
+    CKKSTaskSolver.serializeOutput();
     return 0;
-}   
+}
