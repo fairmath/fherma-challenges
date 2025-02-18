@@ -1,4 +1,8 @@
 # Private Fraud Detection via Homomorphic Support Vector Machines
+The challenge deadline is extended by two weeks to give participants more time to refine and improve their solutions.
+
+📅 New deadline: March 4, 2025 
+
 ## Introduction
 Fraud detection is a vital component of financial security, yet it typically requires investigations on sensitive data that cannot always be openly exposed. This challenge focuses on utilizing Fully Homomorphic Encryption (FHE) to ensure privacy while detecting fraudulent transactions. Participants will train a Support Vector Machine (SVM) model to accurately classify transactions as legitimate or fraudulent, leveraging FHE for privacy-preserving inference. This might not just enhance fraud protection, but also set a new standard for safeguarding sensitive financial information.
 
