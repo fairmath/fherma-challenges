@@ -25,7 +25,7 @@ For this challenge, you need to implement `strstr(words, wordSize, T)`, a functi
 
 1.  **Challenge type**: This challenge is a White Box challenge. Participants are required to submit the project with their source code. You can learn more about this type of challenges in our  [Participation guide](https://fherma.io/how_it_works).
 2.  **Encryption scheme**: CKKS.
-3.  **Supported libraries**:  [OpenFHE](https://github.com/openfheorg/openfhe-development),  [HElayers](https://ibm.github.io/helayers/).
+3.  **Supported libraries**: [HElayers](https://ibm.github.io/helayers/).
 
 ## Parameters of the key
 
@@ -113,34 +113,13 @@ Specifically for this challenge, you may be interested in interleaved dimensions
 
 The following libraries/packages will be used for generating test case data and for testing solutions:
 
--   **OpenFHE:**  v1.1.4
--   **OpenFHE-Python:**  v0.8.6
 -   **HElayers:** v1.5.4
 
 ## Submission
 
-To address this challenge, participants can utilize OpenFHE and in addition you can utilize the HElayers library.
+To address this challenge, participants can utilize the HElayers library.
 
 The executable should be named `strstr`.
-
-### OpenFHE
-
-If the solution is developed using the OpenFHE library, we expect it to have a CMake project. The CMakeLists.txt file should be placed in the project's root directory. Please adhere to the following format when submitting your solution:
-
-1.  **File format:**
-    -   Your submission should be packed into a ZIP archive.
-2.  **Structure of the archive:**
-    -   Inside the ZIP archive, ensure there is a directory titled  `app`.
-    -   Within the  `app`  directory, include your main  `CMakeLists.txt`  file and other necessary source files.
-
-```mermaid
-graph TD;
-    app_zip[app.zip] --> app_folder[app]
-    app_folder --> CMakeLists[CMakeLists.txt]
-    app_folder --> main.cpp[main.cpp]
-    app_folder --> config.json[config.json]
-    app_folder --> ...[...]
-```
 
 #### Config file
 
@@ -177,10 +156,10 @@ You can use a config file to set parameters for generating a context on the serv
 
 The application must support the Command Line Interface (CLI) specified below.
 
-### OpenFHE
+### Helayers
 
 -   **--input** [path]: specifies the path to the file containing the encrypted vector.
-- **--n** [size]: specifies the size of the array. The array will be written in slots $0,\ldots,(n-1)$ of the ciphertext.
+- **--word_size** [size]: specifies the size of the array. The array will be written in slots $0,\ldots,(n-1)$ of the ciphertext.
 -   **--output** [path]: specifies the path to the file where the result should be written.
 -   **--cc** [path]: indicates the path to the crypto context file serialized in  **BINARY**  form.
 -   **--key_pub** [path]: specifies the path to the Public Key file.
@@ -278,8 +257,6 @@ The winner will be awarded  **$4000**.
 ### FHE
 
 -   [FHERMA participation guide](https://fherma.io/how_it_works)—more about FHERMA challenges.
--   [OpenFHE](https://github.com/openfheorg/openfhe-development)  repository, README, and installation guide.
--   [OpenFHE Python](https://github.com/openfheorg/openfhe-python)  repository, README, and installation guide.
 -   A vast collection of resources collected by  [FHE.org](http://fhe.org/)  [https://fhe.org/resources](https://fhe.org/resources), including tutorials and walk-throughs, use-cases and demos.
 -   [OpenFHE AAAI 2024 Tutorial](https://openfheorg.github.io/aaai-2024-lab-materials/)—Fully Homomorphic Encryption for Privacy-Preserving Machine Learning Using the OpenFHE Library.
 
