@@ -123,25 +123,6 @@ To address this challenge, participants can utilize OpenFHE and in addition you 
 
 The executable should be named `strstr`.
 
-### OpenFHE
-
-If the solution is developed using the OpenFHE library, we expect it to have a CMake project. The CMakeLists.txt file should be placed in the project's root directory. Please adhere to the following format when submitting your solution:
-
-1.  **File format:**
-    -   Your submission should be packed into a ZIP archive.
-2.  **Structure of the archive:**
-    -   Inside the ZIP archive, ensure there is a directory titled  `app`.
-    -   Within the  `app`  directory, include your main  `CMakeLists.txt`  file and other necessary source files.
-
-```mermaid
-graph TD;
-    app_zip[app.zip] --> app_folder[app]
-    app_folder --> CMakeLists[CMakeLists.txt]
-    app_folder --> main.cpp[main.cpp]
-    app_folder --> config.json[config.json]
-    app_folder --> ...[...]
-```
-
 #### Config file
 
 You can use a config file to set parameters for generating a context on the server for testing the solution. An example of such a config and detailed description of each parameter is given below.
@@ -158,7 +139,8 @@ You can use a config file to set parameters for generating a context on the serv
     "batch_size": 65536,
     "enable_bootstrapping": true,
     "levels_available_after_bootstrap": 10,
-    "level_budget": [4,4]
+    "level_budget": [4,4],
+    "packing_type" : rows
 }
 ```
 
@@ -177,7 +159,7 @@ You can use a config file to set parameters for generating a context on the serv
 
 The application must support the Command Line Interface (CLI) specified below.
 
-### OpenFHE
+### Helayers
 
 -   **--input** [path]: specifies the path to the file containing the encrypted vector.
 - **--n** [size]: specifies the size of the array. The array will be written in slots $0,\ldots,(n-1)$ of the ciphertext.
