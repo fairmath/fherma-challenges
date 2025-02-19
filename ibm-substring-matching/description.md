@@ -154,7 +154,7 @@ You can use a config file to set parameters for generating a context on the serv
     "scale_mod_size": 51,
     "first_mod_size": 60,
     "batch_size": 65536,
-    "scheme": HELAYERS
+    "scheme": "HELAYERS"
 }
 ```
 
@@ -165,9 +165,7 @@ You can use a config file to set parameters for generating a context on the serv
 - **scale_mod_size**: this parameter is used to configure `ScaleModSize`, default value is `51`. 
 - **first_mod_size**: this parameter allows setting up `FirstModSize`, default value is `60`. 
 - **batch_size**: if the bootstrapping is not used, this parameter allows to set the batch size. Default value is `ring_dimension/2`. 
-- **enable_bootstrapping**: if you need bootstrapping, set this option to `true`.  
-- **levels_available_after_bootstrap**: this parameter allows setting up levels available after the bootstrapping if it's used. Note that the actual number of levels available after bootstrapping before next bootstrapping will be `levels_available_after_bootstrap - 1`, because an additional level is used for scaling the ciphertext before next bootstrapping (in 64-bit CKKS bootstrapping).
-- **level_budget**: the bootstrapping procedure needs to consume a few levels to run. This parameter is used to call `EvalBootstrapSetup`. Default value is [4,4]. 
+- **scheme**: keep "HELAYERS" here
 
 ## Command-line interface for application testing
 
