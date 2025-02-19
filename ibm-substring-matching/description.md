@@ -119,7 +119,26 @@ The following libraries/packages will be used for generating test case data and 
 
 To address this challenge, participants can utilize the HElayers library.
 
-The executable should be named `strstr`.
+The executable should be named `app.py`.
+
+### Helayers
+
+If the solution is developed using the PyHelayers library, we expect it to have an app.py as executable and config.json. Please adhere to the following format when submitting your solution:
+
+1.  **File format:**
+    -   Your submission should be packed into a ZIP archive.
+2.  **Structure of the archive:**
+    -   Inside the ZIP archive, ensure there is a directory titled  `app`.
+    -   Within the  `app`  directory, include your `app.py`  file and `config.json`  file.
+
+```mermaid
+graph TD;
+    app_zip[app.zip] --> app_folder[app]
+    app_folder --> app.py[app.py]
+    app_folder --> config.json[config.json]
+    app_folder --> ...[...]
+```
+
 
 #### Config file
 
@@ -135,9 +154,7 @@ You can use a config file to set parameters for generating a context on the serv
     "scale_mod_size": 51,
     "first_mod_size": 60,
     "batch_size": 65536,
-    "enable_bootstrapping": true,
-    "levels_available_after_bootstrap": 10,
-    "level_budget": [4,4]
+    "scheme": HELAYERS
 }
 ```
 
