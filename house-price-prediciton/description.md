@@ -1,4 +1,7 @@
 # House Price Prediction
+The challenge deadline is extended by two weeks to give participants more time to refine and improve their solutions.
+
+📅 New deadline: April 2, 2025
 ## Introduction
 
 Accurately predicting housing prices is essential in real estate, benefiting everyone from individual buyers to large-scale investors. However, real-world datasets often include sensitive information, raising privacy concerns.
