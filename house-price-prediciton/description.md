@@ -29,8 +29,8 @@ The goals of this challenge are:
 ## Timeline
 
 - **December 18, 2024** — start date;
-- **March 18, 2025, at 23:59 UTC** — submission deadline;
-- **April 1, 2025** — prize awarded.
+- **April 2, 2025, at 23:59 UTC** — submission deadline;
+- **April 16, 2025** — prize awarded.
 
 ## Dataset
 
