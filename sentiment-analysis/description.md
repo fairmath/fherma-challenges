@@ -1,4 +1,4 @@
-# Private Fraud Detection via Homomorphic Support Vector Machines
+# Private Sentiment Analysis
 ## Introduction
 
 **Sentiment analysis** is a common task in natural language processing (NLP) that focuses on capturing the polarity of text, typically categorized as positive, negative, or neutral. 
