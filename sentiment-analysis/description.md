@@ -182,7 +182,7 @@ One participant can be the winner in both categories. Total prize fund is **$40
 - [OpenFHE-rs](https://crates.io/crates/openfhe) Rust wrapper, a [walk-through tutorial](https://fherma.io/content/660174e7fce06722c1149a95) and [documentation](https://openfhe-rust-wrapper.readthedocs.io/en/latest/).
 - A vast collection of resources [FHE Resources](https://fhe.org/resources), including tutorials and walk-throughs, use-cases and demos.
 - [Polycircuit](https://github.com/fairmath/polycircuit) repository with FHE Components Library
-- [FHERMA Content](https://fherma.io/content) containing descriptions of winning and significant solutions.
+- [FHERMA Content](https://fherma.io/content) page containing descriptions of winning and significant solutions.
 
 ## Help
 
