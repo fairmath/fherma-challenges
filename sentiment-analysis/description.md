@@ -5,7 +5,7 @@
 
 Today companies generate large amounts of unstructured text from emails, chats, social media, and reviews. Sentiment analysis helps automatically understand people’s opinions in this data, which supports better customer service, brand reputation, and business decisions. To protect customer privacy, fully homomorphic encryption (FHE) can be used to run sentiment analysis on encrypted data without ever seeing the original text.
 
-In this challenge, participants are tasked with a **privacy-preserving multiclass classification problem**, labeling encrypted tweets as **positive**, **negative**, or **neutral**.
+In this challenge, participants are tasked with a **privacy-preserving multiclass classification problem**, labeling encrypted tweet embeddings as **positive**, **negative**, or **neutral**.
 
 ### Goals
 
@@ -22,7 +22,7 @@ The goals of this challenge are:
     - **Testing data** — a dataset of FHE-encrypted samples for classification.
     - **Cryptocontext** provided for FHE operations.
     - **Keys** — public key, multiplication key, Galois keys.
-5. **Output**: the output should be an encrypted vector with sentiment labels: `0` = negative, `1` = neutral, `2` = positive.
+5. **Output**: encrypted classification result.
 
 ## Timeline
 
@@ -32,7 +32,8 @@ The goals of this challenge are:
 
 
 ## Datasets
-- **Training dataset** consists of embedded tweets from the Tweet Sentiment Extraction dataset used by the MTEB leaderboard, along with the corresponding sentiment labels: [dataset.parquet](https://github.com/fairmath/fherma-challenges/blob/main/sentiment-analysis/data/dataset.parquet)
+- **Training dataset** consists of embedded tweets from the Tweet Sentiment Extraction dataset used by the MTEB leaderboard, along with the corresponding sentiment labels: [dataset.parquet](https://github.com/fairmath/fherma-challenges/blob/main/sentiment-analysis/data/dataset.parquet).
+The labels are assigned as follows: 0 for negative, 1 for neutral, and 2 for positive.
 - **Usage:** Feel free to split the provided dataset into training and validation sets.
 - **Submissions** will be validated on a non-provided **testing dataset**.
 
@@ -44,7 +45,7 @@ During testing, the application receives an encrypted embedding as input. By def
 | x0 | x1 | ... | x766 | x767 | ... | 
 |--------|--------|--------|--------|--------|--------|
 
-The outcome of the computation is determined by the first three slots of the resulting ciphertext. If the input image belongs to class j, then the maximum value among these three slots must appear in slot j. If the input tweet embedding is classified as negative (class 2), the correct result may appear as follows:
+The outcome of the computation is determined by the first three slots of the resulting ciphertext. If the input tweet embedding belongs to class `j`, then the maximum value among these three slots must appear in slot `j`. For example, if the input is classified as negative (class 2), the correct result may appear as follows:
 
 | 0.28 | 0.34 | 0.76 | ... |
 | -------- |--------|--------|--------|
@@ -68,7 +69,7 @@ The following libraries/packages will be used for generating test case data and 
 
 1. **Full FHE implementation.** The decision function and any other functions, e.g. activation functions, must be executed entirely under FHE.
 2. **No post-processing.** The owner of the encrypted data should receive an encrypted classification result ready for decryption, with no additional computations required.
-3. **Code**. Include the code used to train the model.
+3. **Code**. Both the training code and the inference code must be included.
 
 ### Application requirements
 
@@ -161,12 +162,12 @@ Submissions will be evaluated on the non-provided dataset and scored with the fo
 
 Two winners will be chosen in this challenge:
 
-1. **Fastest solution**: the solution with minimum execution time and f1 score of at least 85%.
-2. **Most reliable solution**: the solution with the highest overall quality, primarily assessed by f1 score. Precision and recall will also be considered for the final decision.
+1. **Fastest solution**: the solution with minimum execution time with more than 70% **accuracy**.
+2. **Most accurate solution**: the solution with the highest weighted f1 score.
 
-The winner in each category will be awarded **$2000**.
+The winner in each category will be awarded **$2000**.
 
-One participant can be the winner in all categories. Total prize fund is **$4000**.
+One participant can be the winner in both categories. Total prize fund is **$4000**.
 
 ## Challenge committee
 - [Gurgen Arakelov](https://www.linkedin.com/in/gurgen-arakelov-943172b9/), Fair Math
@@ -174,7 +175,6 @@ One participant can be the winner in all categories. Total prize fund is **$4000
 - [Valentina Kononova](https://www.linkedin.com/in/valentina-kononova-a9a23b180/), Fair Math
 
 ## Useful links
-### FHE
 
 - [FHERMA participation guide](https://fherma.io/how_it_works)—more about FHERMA challenges.
 - [OpenFHE](https://github.com/openfheorg/openfhe-development) repository, README, and installation guide.
@@ -188,7 +188,7 @@ One participant can be the winner in all categories. Total prize fund is **$4000
 
 If you have any questions, you can:
 - Contact us by email [support@fherma.io](mailto:support@fherma.io)
-* Join our [Discord](https://discord.gg/NfhXwyr9M5) server and ask your questions in the [#fherma channel](https://discord.com/channels/1163764915803279360/1167875954392187030). You can also find a team in the [teams channel](https://discord.com/channels/1163764915803279360/1246085439480401930)!
+- Join our [Discord](https://discord.gg/NfhXwyr9M5) server and ask your questions in the [#fherma channel](https://discord.com/channels/1163764915803279360/1167875954392187030). You can also find a team in the [teams channel](https://discord.com/channels/1163764915803279360/1246085439480401930)
 - Use [OpenFHE discourse group](https://openfhe.discourse.group/) for OpenFHE-related questions.
 
 Best of luck to all participants!
