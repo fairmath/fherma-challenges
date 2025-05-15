@@ -99,8 +99,8 @@ Specifically for this challenge, you may be interested in interleaved dimensions
 ## Timeline
 
 -   **Feb 04, 2025**  - Start Date.
--   **May 04, 2025**  - Submission deadline.
--   **May 15, 2025**  - Prize awarded.
+-   **May 31, 2025**  - Submission deadline.
+-   **June 15, 2025**  - Prize awarded.
 
 ## Test environment
 
