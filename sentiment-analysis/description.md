@@ -61,8 +61,8 @@ If you need the data to be packaged in a different format, please open an issue 
 ### Software
 
 The following libraries/packages will be used for generating test case data and for testing solutions:
-- **OpenFHE:** v1.2.0 
-- **OpenFHE-Python:** v0.8.8
+- **OpenFHE:** v1.2.4 
+- **OpenFHE-Python:** v0.8.10
 
 ## Submission
 ### General requirements
@@ -80,6 +80,7 @@ Please adhere to the following format when submitting your solution:
 - **Directory structure**
     - Inside the ZIP archive, ensure there is a directory titled `app`.
     - Within the `app` directory, include your main `CMakeLists.txt` file (or Python- and Rust-related build files) and other source files. Please exclude all unnecessary files related to testing and/or other challenges.
+Please note that the compiled binary will run separately from the source code, which means the application won’t have access to any files in the source-code directory.
 
 ```mermaid
 graph TD;
@@ -121,7 +122,7 @@ The application must support the following CLI:
 - **--tx** [path]: the path to the file where the input ciphertext is located.
 - **--output** [path]: the path to the file where the classification result should be written.
 - **--cc** [path]: the path to the serialized crypto context file in **BINARY** form.
-- **--key_pub** [path]: the path to the public key file.
+- **--key_public** [path]: the path to the public key file.
 - **--key_mult** [path]: the path to the evaluation (multiplication) key file.
 - **--key_rot** [path]: the path to the rotation key file.
 
@@ -129,7 +130,7 @@ The application must support the following CLI:
 The executable will be run as follows:
 
 ```bash
-./app --tx data.bin --cc cc.bin --key_pub pub.bin --key_mult mult.bin --output result.bin
+./app --tx data.bin --cc cc.bin --key_public pub.bin --key_mult mult.bin --output result.bin
 ```
 ## Validating locally
 
