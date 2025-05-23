@@ -13,7 +13,7 @@ This challenge invites participants to build a regression model for estimating h
 The goals of this challenge are:
 
 1. **Train a regression model** using conventional machine learning techniques on the provided unencrypted dataset.
-2. **Implement FHE-based inference** — use the trained model to classify encrypted data under FHE, ensuring that the entire inference occurs under encryption.
+2. **Implement FHE-based inference** — use the trained model to process encrypted data, ensuring that the entire inference occurs under encryption.
 
 ## Challenge info
 
@@ -21,7 +21,7 @@ The goals of this challenge are:
 2. **Encryption scheme:** CKKS.
 3. **Supported libraries:** [OpenFHE](https://github.com/openfheorg/openfhe-development) — C++, Python, or Rust.
 4. **Input**:
-    - **Testing data** — a dataset of FHE-encrypted samples for classification.
+    - **Testing data** — a dataset of FHE-encrypted samples.
     - **Cryptocontext** provided for FHE operations.
     - **Keys** — public key, multiplication key, Galois keys.
 5. **Output**: the output should be an encrypted vector containing the predicted price
@@ -61,7 +61,7 @@ By default, we pack the input vector X in ciphertext as follows:
 
 The (i)-th slot corresponds to the value of the parameter specified in column (i) of the given dataset.
 
-The first slot of the resulting vector should contain the classification result:
+The first slot of the resulting vector should contain the prediction result:
 
 | 50000 | … |
 | --- | --- |
@@ -134,7 +134,7 @@ There are more info on possible config file parameters and their default values 
 
 The application must support the following CLI:
 - **--sample** [path]: the path to the file where the input ciphertext is located.
-- **--output** [path]: the path to the file where the classification result should be written.
+- **--output** [path]: the path to the file where the presiction result should be written.
 - **--cc** [path]: the path to the serialized crypto context file in **BINARY** form.
 - **--key_pub** [path]: the path to the public key file.
 - **--key_mult** [path]: the path to the evaluation (multiplication) key file.
@@ -174,7 +174,7 @@ Submissions will be evaluated on the non-provided dataset and scored with the fo
 1. **Mean Absolute Error (MAE):** calculates the average difference between the calculated values and actual values. It shows how far the model’s prediction from the true house price.
 2. **Mean Squared Error (MSE):** the average squared difference between the estimated values and true value. The MSE incorporates both the variance of the estimator and its bias.
 3. **R-squared (Coefficient of Determination):** the proportion of variation in the dependent variable (y) that is accounted for by the regression line, compared to the variation explained by the mean of y. Essentially, it measures how much more accurately the regression line predicts each point’s value compared to simply using the average value of y.
-4. **Execution time:** the average time taken to classify each sample.
+4. **Execution time:** the average time taken to process each sample.
 
 ## Scoring & awards
 
