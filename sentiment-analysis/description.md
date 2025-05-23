@@ -119,7 +119,7 @@ There are more info on possible config file parameters and their default values 
 ### Command-line interface (CLI)
 
 The application must support the following CLI:
-- **--tx** [path]: the path to the file where the input ciphertext is located.
+- **--sample** [path]: the path to the file where the input ciphertext is located.
 - **--output** [path]: the path to the file where the classification result should be written.
 - **--cc** [path]: the path to the serialized crypto context file in **BINARY** form.
 - **--key_public** [path]: the path to the public key file.
