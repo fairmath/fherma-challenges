@@ -154,7 +154,8 @@ You can use a config file to set parameters for generating a context on the serv
     "scale_mod_size": 51,
     "first_mod_size": 60,
     "batch_size": 65536,
-    "scheme": "HELAYERS"
+    "scheme": "HELAYERS",
+    "packing_type": "rows"
 }
 ```
 
@@ -166,6 +167,7 @@ You can use a config file to set parameters for generating a context on the serv
 - **first_mod_size**: this parameter allows setting up `FirstModSize`, default value is `60`. 
 - **batch_size**: if the bootstrapping is not used, this parameter allows to set the batch size. Default value is `ring_dimension/2`. 
 - **scheme**: keep "HELAYERS" here
+- **packing_type**: packing type(`rows`, `cols` or `hybrid`), if not specified then `rows` will be used.
 
 ## Command-line interface for application testing
 
@@ -173,13 +175,14 @@ The application must support the Command Line Interface (CLI) specified below.
 
 ### Helayers
 
--   **--input** [path]: specifies the path to the file containing the encrypted vector.
-- **--word_size** [size]: specifies the size of the array. The array will be written in slots $0,\ldots,(n-1)$ of the ciphertext.
+-   **--input_col** [path]: specifies the path to the file containing the encrypted vector using column packing.
+-   **--input_row** [path]: specifies the path to the file containing the encrypted vector using row packing.
+-   **--input_hybrid** [path]: specifies the path to the file containing the encrypted vector using hybrid packing.
+-   **--word_size** [path]: specifies the size of the array. The array will be written in slots $0,\ldots,(n-1)$ of the ciphertext.
+-   **--text** [path]: specifies the text for searching substring. 
 -   **--output** [path]: specifies the path to the file where the result should be written.
--   **--cc** [path]: indicates the path to the crypto context file serialized in  **BINARY**  form.
--   **--key_pub** [path]: specifies the path to the Public Key file.
--   **--key_mult** [path]: specifies the path to the Evaluation (Multiplication) Key file.
--   **--key_rot** [path]: specifies the path to the Rotation Key file.
+-   **--cc** [path]: indicates the path to the crypto context file.
+Your application always will receive three options: input_col, input_row, and input_hybrid. Use the one that matches the packing type specified in the configuration. Plaintext options(`word_size` and `text`) represent as an array in json file.  
 
 ## Examples
 Below we give a few examples for the different packing options. You can plan for different packings for the different testcases you will be evaluated on but you must submit a single code.
@@ -194,7 +197,7 @@ In this example we want to find the words "hello", "world" in the text "hello wo
 
 The executable will be run as follows:
 ```
-./app --cc cc.bin --key_public pub.bin --key_mult mult.bin --input in_row.bin --word_size 5,5 --output out.bin --text "hello world"
+./app --cc cc.bin --input_row in_row.bin --input_col in_col.bin --input_hybrid in_hyb.bin --word_size size.json --test text.json --output out_row.bin
 ```
 
 The file `in_row.bin` will include 2 ciphertexts (the noise added by CKKS during encryption is not shown): 
@@ -210,7 +213,7 @@ In this example we want to find the words "he", "ll", "wo", "rd", "no" in the te
 
 The executable will be run as follows:
 ```
-./app --cc cc.bin --key_public pub.bin --key_mult mult.bin --input in_col.bin --word_size 2,2,2 --output out.bin --text "hello world"
+./app --cc cc.bin --input_row in_row.bin --input_col in_col.bin --input_hybrid in_hyb.bin --word_size size.json --test text.json --output out_col.bin
 ```
 
 The file `in_col.bin` will include 2 ciphertexts (the noise added by CKKS during encryption is not shown):
@@ -225,7 +228,7 @@ In this example we want to find the words "he", "ll", "wo", "rd", "no" in the te
 
 The executable will be run as follows:
 ```
-./app --cc cc.bin --key_public pub.bin --key_mult mult.bin --input in_hyb.bin --word_size 5,5 --output out.bin --text "hello world"
+./app --cc cc.bin --input_row in_row.bin --input_col in_col.bin --input_hybrid in_hyb.bin --word_size size.json --test text.json --output out_hyb.bin
 ```
 
 The file `in_hyb.bin` will include a TileTensor with 1 ciphertext (see HElayers documentation about TileTensors and their shapes) with shape [5/8, 2/2] (this example assumes a ciphertext size of 16 slots. For 32K slots the shape will be different).
