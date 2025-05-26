@@ -182,6 +182,7 @@ The application must support the Command Line Interface (CLI) specified below.
 -   **--text** [path]: specifies the text for searching substring. 
 -   **--output** [path]: specifies the path to the file where the result should be written.
 -   **--cc** [path]: indicates the path to the crypto context file.
+
 Your application always will receive three options: input_col, input_row, and input_hybrid. Use the one that matches the packing type specified in the configuration. Plaintext options(`word_size` and `text`) represent as an array in json file.  
 
 ## Examples
