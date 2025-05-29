@@ -80,6 +80,7 @@ Please adhere to the following format when submitting your solution:
 - **Directory structure**
     - Inside the ZIP archive, ensure there is a directory titled `app`.
     - Within the `app` directory, include your main `CMakeLists.txt` file (or Python- and Rust-related build files) and other source files. Please exclude all unnecessary files related to testing and/or other challenges.
+
 Please note that the compiled binary will run separately from the source code, which means the application won’t have access to any files in the source-code directory.
 
 ```mermaid
