@@ -14,7 +14,7 @@ $$
 0.5x\left(1+\tanh\left[\sqrt{2/\pi}\left(x + 0.044715x^{3}\right)\right]\right)
 $$
 
-The goal of this challenge is to design an algorithm that evaluates the tanh-based GELU approximation on an encrypted vector.
+The goal of this challenge is to design an algorithm that evaluates this tanh-based GELU approximation on an encrypted vector.
 
 ## Challenge info
 
