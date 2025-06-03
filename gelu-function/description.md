@@ -8,7 +8,7 @@ To recap, activation functions introduce non-linearity into neural networks, ena
 
 This particular challenge focuses on the GELU function, which is widely used in transformer models such as BERT and GPT.
 
-GELU, introduced by Dan Hendrycks and Kevin Gimpel in their 2016 [paper](https://arxiv.org/abs/1606.08415) *"Gaussian Error Linear Units (GELUs),"* is defined using the cumulative distribution function (CDF) of the standard normal distribution. However, in practice, an efficient approximation is often used in neural networks:
+GELU, introduced by Dan Hendrycks and Kevin Gimpel in their 2016 [paper](https://arxiv.org/abs/1606.08415) *"Gaussian Error Linear Units (GELUs),"* is defined using the cumulative distribution function (CDF) of the standard normal distribution. In practice, however, an approximation is often used, such as:
 
 $$
 0.5x\left(1+\tanh\left[\sqrt{2/\pi}\left(x + 0.044715x^{3}\right)\right]\right)
