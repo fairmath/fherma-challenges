@@ -36,7 +36,7 @@ The goal of this challenge is to design an algorithm that evaluates this tanh-ba
 
 ## Dataset
 
-- **Input data** is a 4096-dimensional vector, randomly generated within the range [-7, 7] and normally distributed.
+- **Input data** is a 4096-dimensional vector, randomly generated within the range [-7, 7] and normally distributed. You can find an example [here](https://github.com/fairmath/fherma-challenges/blob/main/gelu-function/data/data.csv)
 - **Submissions** will be validated on a non-provided testing dataset.
 
 ## Encoding technique
