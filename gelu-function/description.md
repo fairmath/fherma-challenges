@@ -1,0 +1,170 @@
+# GELU Function
+
+## Introduction
+
+This challenge is part of a series focusing on activation functions used in various neural network architectures: [ReLU function](https://fherma.io/challenges/6542c282100761da3b545c3e/overview), [Logistic (sigmoid) function](https://fherma.io/challenges/652bf648485c878710fd0208/overview).
+
+To recap, activation functions introduce non-linearity into neural networks, enabling them to learn complex patterns in data. In addition to ReLU and sigmoid, other commonly used activation functions include tanh, GELU, SiLU, Swish, Softmax, and more.
+
+This particular challenge focuses on the GELU function, which is widely used in transformer models such as BERT and GPT.
+
+GELU, introduced by Dan Hendrycks and Kevin Gimpel in their 2016 [paper](https://arxiv.org/abs/1606.08415) *"Gaussian Error Linear Units (GELUs),"* is defined using the cumulative distribution function (CDF) of the standard normal distribution. However, in practice, an efficient approximation is often used in neural networks:
+
+$$
+0.5x\left(1+\tanh\left[\sqrt{2/\pi}\left(x + 0.044715x^{3}\right)\right]\right)
+$$
+
+The goal of this challenge is to design an algorithm that evaluates the tanh-based GELU approximation on an encrypted vector.
+
+## Challenge info
+
+1. **Challenge type:** this challenge is a White Box challenge. Participants are required to submit the project with their source code, including the training script. You can learn more about this and other types of challenges in our [Participation guide](https://fherma.io/how_it_works).
+2. **Encryption scheme:** CKKS.
+3. **Supported libraries:** [OpenFHE](https://github.com/openfheorg/openfhe-development) — C++, Python, or Rust.
+4. **Input**:
+    - **Testing data:** a dataset of FHE-encrypted samples
+    - **Cryptocontext** provided for FHE operations.
+    - **Keys:** public key, multiplication key, Galois keys.
+5. **Output**: encrypted vector `GELU(X)`
+
+
+## Timeline
+
+- Start date: **June 9, 2025**
+- Submission deadline: **August 10, 2025, at 23:59 UTC**
+- Winner announcement: **August 20, 2025**
+
+## Dataset
+
+- **Input data** is a 4096-dimensional vector, randomly generated within the range [-7, 7] and normally distributed.
+- **Submissions** will be validated on a non-provided testing dataset.
+
+## Encoding technique
+
+During testing, the application will receive an encrypted vector packed within a ciphertext structured as follows:
+
+| $x_0$ | $x_1$ | $x_2$ | $x_3$ | … | $x_4096$ |
+| --- | --- | --- | --- | --- | --- |
+
+The resulting vector should have the same structure, representing `GELU(X)` evaluated on the input vector.
+
+If you need the data to be packaged in a different format, please open an issue on GitHub and we will prepare a new cipher.
+
+## Test environment
+### Hardware
+
+- **CPU:** 12 cores
+- **RAM:** 54 GB
+
+### Software
+
+The following libraries/packages will be used for generating test case data and for testing solutions:
+- **OpenFHE:** v1.2.0 
+- **OpenFHE-Python:** v0.8.8
+
+## Submission
+### General requirements
+
+1. **Full FHE implementation.** The function must be evaluated entirely under FHE.
+2. **No post-processing.** The owner of the encrypted data should receive an encrypted result ready for decryption, with no additional computations required.
+
+### Application requirements
+
+To address this challenge, participants can utilize the [OpenFHE library](https://openfhe.org/) with any of the supported languages: **Rust**, **C++**, or **Python**. For solutions developed in **C++** we expect to see a `CMake` project, with the `CMakeLists.txt` file placed in the project's root directory.
+
+Please adhere to the following format when submitting your solution:
+- **File format** — submission should be a ZIP archive.
+- **Directory structure**
+    - Inside the ZIP archive, ensure there is a directory titled `app`.
+    - Within the `app` directory, include your main `CMakeLists.txt` file (or Python- and Rust-related build files) and other source files. Please exclude all unnecessary files related to testing and/or other challenges.
+
+```mermaid
+graph TD;
+    app_zip[app.zip] --> app_folder[app]
+    app_folder --> CMakeLists[CMakeLists.txt]
+    app_folder --> main.cpp[main.cpp]
+    app_folder --> config.json[config.json]
+    app_folder --> ...[...]
+```
+
+- **Config file** `config.json` to specify execution parameters like `indexes_for_rotation_key`, `mult_depth`, `plaintext_modulus`, `ring_dimension`, etc.
+
+#### Config file
+
+You can use a config file to set parameters for generating a context on the server for testing the solution. An example of such a config is given below.
+
+
+```json
+{
+    "indexes_for_rotation_key": [
+        1
+    ],
+    "mult_depth": 29,
+    "ring_dimension": 131072,
+    "scale_mod_size": 59,
+    "first_mod_size": 60,
+    "batch_size": 65536,
+    "enable_bootstrapping": false,
+    "levels_available_after_bootstrap": 10,
+    "level_budget": [4,4]
+}
+```
+For openfhe-python based solution you can use a template provided [here](https://github.com/fairmath/fherma-challenges/tree/main/gelu-function/app).
+
+There are more info on possible config file parameters and their default values in our [Participation guide](https://fherma.io/how_it_works).
+
+### Command-line interface (CLI)
+
+The application must support the following CLI:
+- **--sample** [path]: the path to the file where the input ciphertext is located.
+- **--output** [path]: the path to the file where the presiction result should be written.
+- **--cc** [path]: the path to the serialized crypto context file in **BINARY** form.
+- **--key_pub** [path]: the path to the public key file.
+- **--key_mult** [path]: the path to the evaluation (multiplication) key file.
+- **--key_rot** [path]: the path to the rotation key file.
+
+
+The executable will be run as follows:
+
+```bash
+./app --sample data.bin --cc cc.bin --key_pub pub.bin --key_mult mult.bin --output result.bin
+```
+
+## Validating locally
+
+You can validate your solution locally using the [fherma-validator](https://hub.docker.com/r/yashalabinc/fherma-validator) docker image for white box challenges validation. 
+
+After validation, a `result.json` file will be generated in your project folder. 
+
+## Evaluation criteria
+
+The primary metric for this challenge is accuracy, defined as the percentage of slots computed correctly. A slot is considered correct if the error is less than the threshold of 0.001. The error for each slot is calculated as:
+
+$$
+error = \hat y - y
+$$
+
+where $\hat y$ is your result and $y$ is the expected value.
+
+## Awards
+
+In this challenge, the solution with the highest accuracy will be awarded **$2000**.
+
+## Useful links
+
+- [FHERMA participation guide](https://fherma.io/how_it_works) for more information about FHERMA challenges.
+- [OpenFHE](https://github.com/openfheorg/openfhe-development) repository, README, and installation guide.
+- [OpenFHE Python](https://github.com/openfheorg/openfhe-python) repository, README, and installation guide.
+- [OpenFHE-rs](https://crates.io/crates/openfhe) Rust wrapper, a [walk-through tutorial](https://fherma.io/content/660174e7fce06722c1149a95) and [documentation](https://openfhe-rust-wrapper.readthedocs.io/en/latest/).
+- A vast collection of resources [FHE Resources](https://fhe.org/resources), including tutorials and walk-throughs, use-cases and demos.
+- [Polycircuit:](https://github.com/fairmath/polycircuit) FHE Components Library
+- [FHERMA Content](https://fherma.io/content) page containing descriptions of winning and significant solutions.
+
+## Help
+
+If you have any questions, you can:
+- Contact us by email [support@fherma.io](mailto:support@fherma.io)
+* Join our [Discord](https://discord.gg/NfhXwyr9M5) server and ask your questions in the [#fherma channel](https://discord.com/channels/1163764915803279360/1167875954392187030). You can also find a team in the [teams channel](https://discord.com/channels/1163764915803279360/1246085439480401930)!
+- Use [OpenFHE discourse group](https://openfhe.discourse.group/) for OpenFHE-related questions.
+
+Best of luck to all participants!
