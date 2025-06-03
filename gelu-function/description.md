@@ -25,7 +25,7 @@ The goal of this challenge is to design an algorithm that evaluates the tanh-bas
     - **Testing data:** a dataset of FHE-encrypted samples
     - **Cryptocontext** provided for FHE operations.
     - **Keys:** public key, multiplication key, Galois keys.
-5. **Output**: encrypted vector `GELU(X)`
+5. **Output**: encrypted vector representing `GELU(X)`
 
 
 ## Timeline
@@ -43,7 +43,7 @@ The goal of this challenge is to design an algorithm that evaluates the tanh-bas
 
 During testing, the application will receive an encrypted vector packed within a ciphertext structured as follows:
 
-| $x_0$ | $x_1$ | $x_2$ | $x_3$ | … | $x_4096$ |
+| $x_0$ | $x_1$ | $x_2$ | $x_3$ | … | $x_{4095}$ |
 | --- | --- | --- | --- | --- | --- |
 
 The resulting vector should have the same structure, representing `GELU(X)` evaluated on the input vector.
