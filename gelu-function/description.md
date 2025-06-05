@@ -130,11 +130,7 @@ The executable will be run as follows:
 ./app --sample data.bin --cc cc.bin --key_public pub.bin --key_mult mult.bin --output result.bin
 ```
 
-## Validating locally
-
 You can validate your solution locally using the [fherma-validator](https://hub.docker.com/r/yashalabinc/fherma-validator) docker image for white box challenges validation. 
-
-After validation, a `result.json` file will be generated in your project folder. 
 
 ## Evaluation criteria
 
