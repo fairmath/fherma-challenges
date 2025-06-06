@@ -25,23 +25,7 @@ FHERMA offers two types of challenges: white box and black box. You can learn mo
 
 ## White Box Challenges
 
-You can validate your solution locally using the [fherma-validator](https://hub.docker.com/r/yashalabinc/fherma-validator) docker image for white box challenges validation. To pull the image, run the following comand:
-
-```bash
-docker pull yashalabinc/fherma-validator
-```
-### Example Setup
-If your local folder containing the solution is located at `~/user/tmp/fherma-challenge/app`, use the following command to run the validator:
-
-```bash
-docker run -ti -v ~/user/tmp/fherma-challenge:/fherma yashalabinc/fherma-validator --project-folder=/fherma/app --testcase=/fherma/tests/test_case.json
-```
-Here is a breakdown of the command:
-- `-v ~/user/tmp/fherma-challenge:/fherma`: maps your local directory to the /fherma directory in the Docker container.
-- `--project-folder=/fherma/app`: specifies the folder where your solution is located.
-- `--testcase=/fherma/tests/test_case.json`: points to the JSON file containing the test case for validation. Ensure `test_case.json` is added to your directory and the correct path is used in the command. Test cases can be found in the corresponding challenge folders.
-
-After validation, a `result.json` file will be generated in your project folder.
+You can validate your solution locally using the [fherma-validator](https://hub.docker.com/r/yashalabinc/fherma-validator) docker image for white box challenges validation. 
 
 ## Black Box Challenges
 
