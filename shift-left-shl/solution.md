@@ -1,6 +1,6 @@
-# SHL Challenge
+# SHL Challenge Solution
 
-*The article details the solution provided by the winner of the     [SHL challenge](https://fherma.io/challenges/661643316a54e9817d3706f6).*
+*The article details the solution provided by the winner of the [SHL challenge](https://fherma.io/challenges/661643316a54e9817d3706f6).*
 
 **Author:** [Chi-Hieu Nguyen](https://www.linkedin.com/in/hieu-nguyen-ba6548316), University of Technology Sydney, Australia.
 
@@ -56,17 +56,10 @@ However, the above approach requires 16 executions of the Paterson-Stockmeyer al
 
 ### Extra Level Reduction
 
-After evaluating $\text{EQ}\left(\text{Duplicate}(c_x),p^\text{in}\right) = 1 - c_\text{diff}^{3\times2^{18}}$ and the summation of inner comparisons 
+After evaluating $\text{EQ}\left(\text{Duplicate}(c_x),p^\text{in}\right) = 1 - c_\text{diff}^{3\times2^{18}}$ and the summation of inner comparisons
 
-$$
-\sum_{k=0}^{16} \text{EQ}(\text{Duplicate}(c_n), k) \cdot p^{\text{out}}_k = c_\text{sum}\right)
-$$
-
+$ \sum_{k=0}^{16} \text{EQ}(\text{Duplicate}(c_n), k) \cdot p^{\text{out}}_k = c_{\text{sum}} $
 , these results must be multiplied together, which incurs an additional level of computation. To avoid this, the multiplication order can be rearranged as
-
-
-These results must be multiplied together, which incurs an additional level of computation. To avoid this, the multiplication order can be rearranged as
-
 
 $ c_\text{sum} - c_\text{diff}^{2^{19}} \times\left(c_\text{diff}^{2^{18}} \times c_\text{sum}\right) $
 , thus maintaining the total computation depth at 20.
