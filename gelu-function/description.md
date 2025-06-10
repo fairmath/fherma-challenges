@@ -119,7 +119,7 @@ The application must support the following CLI:
 - **--sample** [path]: the path to the file where the input ciphertext is located.
 - **--output** [path]: the path to the file where the presiction result should be written.
 - **--cc** [path]: the path to the serialized crypto context file in **BINARY** form.
-- **--key_pub** [path]: the path to the public key file.
+- **--key_public** [path]: the path to the public key file.
 - **--key_mult** [path]: the path to the evaluation (multiplication) key file.
 - **--key_rot** [path]: the path to the rotation key file.
 
@@ -127,7 +127,7 @@ The application must support the following CLI:
 The executable will be run as follows:
 
 ```bash
-./app --sample data.bin --cc cc.bin --key_pub pub.bin --key_mult mult.bin --output result.bin
+./app --sample data.bin --cc cc.bin --key_public pub.bin --key_mult mult.bin --output result.bin
 ```
 
 You can validate your solution locally using the [fherma-validator](https://hub.docker.com/r/yashalabinc/fherma-validator) docker image for white box challenges validation. 
