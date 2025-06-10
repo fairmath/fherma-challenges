@@ -30,7 +30,7 @@ The goal of this challenge is to design an algorithm that evaluates this tanh-ba
 
 ## Timeline
 
-- Start date: **June 9, 2025**
+- Start date: **June 10, 2025**
 - Submission deadline: **August 10, 2025, at 23:59 UTC**
 - Winner announcement: **August 20, 2025**
 
