@@ -138,14 +138,16 @@ You can validate your solution locally using the [fherma-validator](https://hub.
 
 ## Evaluation criteria
 
-Submissions will be evaluated on the non-provided dataset and scored with the following criteria:
+Submissions will be evaluated on the non-provided dataset and scored based on the following criteria:
 
 1. **Weighted F1**: the average of per-class F1 scores, where each score is weighted according to the number of true instances of that class in the dataset.
 2. **Execution time:** the average time taken to classify each sample.
 
+The score prioritizes accuracy (measured by the weighted F1 score) but rewards faster solutions when accuracy levels are similar.
+
 ## Scorring & awards
 
-The prize fund of **$3000** will be awarded to the solution with the highest combined score. This score prioritizes accuracy (measured by the weighted F1 score) but rewards faster solutions when accuracy levels are similar.
+The prize fund of **$3000** will be awarded to the solution with the highest score.
 
 ## Challenge committee
 - [Gurgen Arakelov](https://www.linkedin.com/in/gurgen-arakelov-943172b9/), Fair Math
