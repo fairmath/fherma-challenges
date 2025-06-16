@@ -145,14 +145,7 @@ Submissions will be evaluated on the non-provided dataset and scored with the fo
 
 ## Scorring & awards
 
-Two winners will be chosen in this challenge:
-
-1. **Fastest solution**: the solution with minimum execution time with more than 70% **accuracy**.
-2. **Most accurate solution**: the solution with the highest weighted f1 score.
-
-The winner in each category will be awarded **$1500**.
-
-One participant can be the winner in both categories. Total prize fund is **$3000**.
+The prize fund of **$3000** will be awarded to the solution with the highest combined score. This score prioritizes accuracy (measured by the weighted F1 score) but rewards faster solutions when accuracy levels are similar.
 
 ## Challenge committee
 - [Gurgen Arakelov](https://www.linkedin.com/in/gurgen-arakelov-943172b9/), Fair Math
