@@ -142,6 +142,8 @@ $$
 
 where $\hat y$ is your result and $y$ is the expected value.
 
+Execution time will also be considered, and faster solutions will be favored when accuracy levels are similar.
+
 ## Awards
 
 In this challenge, the solution with the highest accuracy will be awarded **$2000**.
