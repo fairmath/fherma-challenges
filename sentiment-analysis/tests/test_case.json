@@ -1,4 +1,5 @@
-{
+[
+    {
     "scheme": "CKKS",
     "significant_slots_number": 3,
     "runs": [
@@ -783,4 +784,5 @@
             ]
         }
     ]
-}
+    }
+]
