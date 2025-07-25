@@ -152,7 +152,7 @@ Submissions will be evaluated on the non-provided dataset and scored with the fo
 Two winners will be chosen in this challenge:
 
 1. **Fastest solution**: the solution with minimum execution time and f1 score of at least 85%.
-2. **Most reliable solution**: the solution with the highest overall quality, primarily assessed by f1 score. Precision and recall will also be considered for the final decision.
+2. **Most accurate solution**: the solution with the highest overall quality, primarily assessed by f1 score. Precision and recall will also be considered for the final decision.
 
 The winner in each category will be awarded **$2000**.
 
