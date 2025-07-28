@@ -116,7 +116,7 @@ The application must support the following CLI:
 - **--sample** [path]: the path to the file where the input ciphertext is located.
 - **--output** [path]: the path to the file where the classification result should be written.
 - **--cc** [path]: the path to the serialized crypto context file in **BINARY** form.
-- **--key_pub** [path]: the path to the public key file.
+- **--key_public** [path]: the path to the public key file.
 - **--key_mult** [path]: the path to the evaluation (multiplication) key file.
 - **--key_rot** [path]: the path to the rotation key file.
 
@@ -124,7 +124,7 @@ The application must support the following CLI:
 The executable will be run as follows:
 
 ```bash
-./app --sample ./sample --key_pub ./pub_key.bin --key_mult ./mult_key.bin --cc ./cc.bin --key_rot ./rot_key.bin --output ./result.bin   
+./app --sample ./sample --key_public ./pub_key.bin --key_mult ./mult_key.bin --cc ./cc.bin --key_rot ./rot_key.bin --output ./result.bin   
 ```
 ## Validating locally
 
