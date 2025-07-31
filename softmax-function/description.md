@@ -1,4 +1,4 @@
-# GELU Function
+# Softmax Function
 
 ## Introduction
 
