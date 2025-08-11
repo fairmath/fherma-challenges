@@ -36,9 +36,9 @@ The goal of this challenge is to implement an algorithm that evaluates the Softm
 
 ## Timeline
 
-- Start date: **August 4, 2025**
-- Submission deadline: **October 6, 2025, at 23:59 UTC**
-- Winner announcement: **August 17, 2025**
+- Start date: **August 11, 2025**
+- Submission deadline: **October 12, 2025, at 23:59 UTC**
+- Winner announcement: **October 21, 2025**
 
 ## Dataset
 
