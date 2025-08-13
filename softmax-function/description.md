@@ -2,9 +2,8 @@
 
 ## Introduction
 
-This challenge is part of a series focusing on activation functions used in various neural network architectures: [ReLU](https://fherma.io/challenges/6542c282100761da3b545c3e/overview), [Logistic (sigmoid)](https://fherma.io/challenges/652bf648485c878710fd0208/overview), [GELU](https://fherma.io/challenges/683eaf48eed44a699f640a92/overview).
-
-To recap, activation functions introduce non-linearity into neural networks, enabling them to learn complex patterns in data. In addition to ReLU and sigmoid, other commonly used activation functions include tanh, GELU, SiLU, Swish, Softmax, and more.
+> This challenge is part of a series focusing on activation functions used in various neural network architectures: [ReLU](https://fherma.io/challenges/6542c282100761da3b545c3e/overview), [Logistic (sigmoid)](https://fherma.io/challenges/652bf648485c878710fd0208/overview), [GELU](https://fherma.io/challenges/683eaf48eed44a699f640a92/overview).
+> To recap, activation functions introduce non-linearity into neural networks, enabling them to learn complex patterns in data. In addition to ReLU and sigmoid, other commonly used activation functions include tanh, GELU, SiLU, Swish, Softmax, and more.
 
 This challenge focuses on the Softmax function, which is often used as the last activation function of a neural network to normalize its output to a probability distribution over predicted output classes. It is also used in the attention mechanism of [transformers](https://arxiv.org/pdf/1706.03762) to convert attention scores into probabilities, guiding how much focus the model places on each input token.
 
@@ -42,7 +41,7 @@ The goal of this challenge is to implement an algorithm that evaluates the Softm
 
 ## Dataset
 
-- **Input data** is a 4096-dimensional vector, randomly generated within the range [-7, 7] and normally distributed. You can find an example [here](https://github.com/fairmath/fherma-challenges/blob/main/softmax-function/tests/test_case.json)
+- **Input data** is a 4096-dimensional vector, randomly generated within the range [-20, 30]; however outliers may occur. You can find an example [here](https://github.com/fairmath/fherma-challenges/blob/main/softmax-function/tests/test_case.json)
 - **Submissions** will be validated on a non-provided testing dataset.
 
 ## Encoding technique
