@@ -1,6 +1,6 @@
 # Sentiment Analysis using Multinomial Logistic Regression
 
-*The article details the solution provided by the winner of the [FHERMA](https://fherma.io) [Sentiment Analysis challenge](https://fherma.io/challenges/681b3ff2da06abf28988891d).*
+*The article details the solution provided by the winner of the [Sentiment Analysis challenge](https://fherma.io/challenges/681b3ff2da06abf28988891d).*
 
 **Author:** [Strahinja Praška](https://www.linkedin.com/in/strahinja-pra%C5%A1ka-5a7409286/), MSc Student in Computer Science at Aarhus University
 
@@ -9,8 +9,10 @@ Sentiment Analysis is a process of capturing the sentiment of a text, in our cas
 
 We receive encrypted embeddings, and we need to capture one of the three sentiments, i.e., this is a **secure multiclass classification problem**. The one solution that will be explained here is to train a Logistic Classifier with a multinomial option and then use weights and bias from this training in order to run encrypted inference.  
 
-Usually, for a Logistic Multinomial Classifier, inference would look like the following: 
-$y = \text{softmax(Wx+b)}$, $z = \text{arg max}(y)$
+Usually, for a Logistic Multinomial Classifier, inference would look like the following:
+
+$$y = \text{softmax(Wx+b)}$, $z = \text{arg max}(y)$$
+
 Where:
 - $W \in \mathbb{R}^{3 \times 768}$ - weights 
 - $b \in R^3$ - bias 
@@ -67,7 +69,7 @@ for(int i = 0; i < W_len; ++i){
 ## Summation
 Now, in order to get $W \cdot x+ b$, we need to put the values of $W_1 \cdot x$ and $W_2 \cdot x$ into the second and third slot and add them up with $b$. We do this by (right)rotating the $W_1 \cdot x$ by `1` and rotating $W_2 \cdot x$ by $2$ and adding them up with $W_0 \cdot x$. Visually, 
 
-![sum2.drawio.png]()
+![sum2.drawio.png](https://d2lkyury6zu01n.cloudfront.net/images/sentiment_sum.png)
 
 In code: 
 ```c++

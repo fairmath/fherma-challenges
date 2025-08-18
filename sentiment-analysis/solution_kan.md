@@ -1,6 +1,6 @@
-# Sentiment Analysis
+# Sentiment Analysis using KAN
 
-*The article details the solution provided by the winner of the [FHERMA](https://fherma.io) [Sentiment Analysis challenge](https://fherma.io/challenges/681b3ff2da06abf28988891d).*
+*The article details the solution provided by the winner of the [Sentiment Analysis challenge](https://fherma.io/challenges/681b3ff2da06abf28988891d).*
 
 **Author:** [Chi-Hieu Nguyen](https://www.linkedin.com/in/hieu-nguyen-ba6548316), University of Technology Sydney, Australia.
 
