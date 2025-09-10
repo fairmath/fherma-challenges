@@ -29,9 +29,9 @@ p_even = [0.00044269650031170116, 0.39574328076312115, -0.0629733653564327, 0.00
 ```
 
 In this form, the target polynomial is evaluated as $p(x) = p_{even}(x^2) + c_1x$. Let $c_{11}$ denote the leading coefficient of $p_{even}$, i.e., the coefficient of $x^{11}$ in $p_{even}(x)$ (equivalently, the coefficient of $x^{22}$ in $p(x)$). We normalize this coefficient to unity by rewriting
-$p_{even}(x^2) = \tilde{p}_{even}((\frac{x}{c_{11}^{1/22}})^2)$,
-where the coefficients of the normalized polynomial $\tilde{p}_{even}$ are given by
-$\tilde{c}_i = \frac{c_i}{c_{11}^{i/11}}, \quad i=0,1,\dots,11$.
+$p_{even}(x^2) = \tilde{p_{even}}((\frac{x}{c_{11}^{1/22}})^2)$,
+where the coefficients of the normalized polynomial $\tilde{p_{even}}$ are given by
+$\tilde{c_i} = \frac{c_i}{c_{11}^{i/11}}, \quad i=0,1,\dots,11$.
 
 The resulting coefficients are:
 ```
