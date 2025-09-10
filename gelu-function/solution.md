@@ -1,4 +1,4 @@
-# GELU Function
+# GELU Approximation under Fully Homomorphic Encryption
 
 *The article details the solution provided by the winner of the [GELU Function challenge](https://fherma.io/challenges/683eaf48eed44a699f640a92).*
 
@@ -21,30 +21,26 @@ p = [2.205108264359930015e+00, 3.499999999999999556e+00, 1.528721347815146681e+0
 
 ## Polynomial Evaluation
 
-An important observation is that $,\text{GELU}(x) - \tfrac{x}{2},$ is an even function. Consequently, all odd coefficients of the approximated polynomial $p(x)$ are negligibly small, except for the coefficient of $x$, as reflected in the coefficients above. Leveraging this property, we can accelerate evaluation under HE by computing the second Chebyshev polynomial $T_2(x) = 2x^2 - 1$ and then expressing the polynomial as $p_{\text{even}}(T_2(x))+c_1x = p(x)$, where $p_{\text{even}}$ is a degree-11 polynomial obtained from the even coefficients of $p$. This reduces the effective polynomial degree from 22 to 11, thereby significantly lowering evaluation time.
+An important observation is that $,\text{GELU}(x) - \tfrac{x}{2},$ is an even function. Consequently, all odd coefficients of the approximated polynomial $p(x)$ are negligibly small, except for the coefficient of $x$, as reflected in the coefficients above. Leveraging this property, we can accelerate evaluation under HE by computing the second Chebyshev polynomial $T_2(x) = 2x^2 - 1$ and then expressing the polynomial as $p_{even}(T_2(x))+c_1x = p(x)$, where $p_{even}$ is a degree-11 polynomial obtained from the even coefficients of $p$. This reduces the effective polynomial degree from 22 to 11, thereby significantly lowering evaluation time.
 
-To evaluate $p_{\text{even}}$, one can use the default Paterson–Stockmeyer (PS) algorithm in OpenFHE. Instead, we introduce a binary-tree product decomposition strategy that preserves the ciphertext–ciphertext (CC) multiplication complexity while providing substantially greater parallelism. In this method, we first convert $p_{\text{even}}$ to the monomial basis, obtained as follows
+To evaluate $p_{even}$, one can use the default Paterson–Stockmeyer (PS) algorithm in OpenFHE. Instead, we introduce a binary-tree product decomposition strategy that preserves the ciphertext–ciphertext (CC) multiplication complexity while providing substantially greater parallelism. In this method, we first convert $p_{even}$ to the monomial basis, obtained as follows
 ```
 p_even = [0.00044269650031170116, 0.39574328076312115, -0.0629733653564327, 0.008364135635608984, -0.0007825494992434453, 5.1058610337019434e-05, -2.315976838992098e-06, 7.235122296125314e-08, -1.5214882476900954e-09, 2.0523115610681066e-11, -1.6012937509370233e-13, 5.488829795459728e-16]
 ```
 
-In this form, the target polynomial is evaluated as $p(x) = p_{\text{even}}(x^2) + c_1x$. Let $c_{11}$ denote the leading coefficient of $p_{\text{even}}$, i.e., the coefficient of $x^{11}$ in $p_{\text{even}}(x)$ (equivalently, the coefficient of $x^{22}$ in $p(x)$). We normalize this coefficient to unity by rewriting
-$$
-p_{\text{even}}(x^2) = \tilde{p}_{\text{even}}\!\left(\left(\tfrac{x}{c_{11}^{1/22}}\right)^2\right),
-$$
-where the coefficients of the normalized polynomial $\tilde{p}_{\text{even}}$ are given by
-$$
-\tilde{c}_i = \frac{c_i}{c_{11}^{i/11}}, \quad i=0,1,\dots,11.
-$$
+In this form, the target polynomial is evaluated as $p(x) = p_{even}(x^2) + c_1x$. Let $c_{11}$ denote the leading coefficient of $p_{even}$, i.e., the coefficient of $x^{11}$ in $p_{even}(x)$ (equivalently, the coefficient of $x^{22}$ in $p(x)$). We normalize this coefficient to unity by rewriting
+$p_{even}(x^2) = \tilde{p}_{even}\!\left(\left(\tfrac{x}{c_{11}^{1/22}}\right)^2\right)$,
+where the coefficients of the normalized polynomial $\tilde{p}_{even}$ are given by
+$\tilde{c}_i = \frac{c_i}{c_{11}^{i/11}}, \quad i=0,1,\dots,11$.
 
 The resulting coefficients are:
 ```
 p_tilde_even = [0.00044269650031170116, 9.654584128641837, -37.479772490316186, 121.44541723640373, -277.1991560769019, 441.23412948943434, -488.2635908159109, 372.12258290089426, -190.91004230296397, 62.82369627660221, -11.95834898654424, 1.0000000000000009]
 ```
 
-This transformation ensures that the leading coefficient is normalized to one. Next, $\tilde{p}_{\text{even}}$ is factored into five quadratic polynomials and one linear polynomial:
+This transformation ensures that the leading coefficient is normalized to one. Next, $\tilde{p}_{even}$ is factored into five quadratic polynomials and one linear polynomial:
 $$
-\tilde{p}_{\text{even}}(x) = (x^2+b_1x+a_1)\dots(x^2+b_5x+a_5)(x+a_6).
+\tilde{p}_{even}(x) = (x^2+b_1x+a_1)\dots(x^2+b_5x+a_5)(x+a_6)
 $$
 Each of these six factor polynomials is computed concurrently using OpenMP. The corresponding C++ implementation is shown below:
 ```cpp
@@ -75,9 +71,10 @@ for (int i = 0; i < 6; i++) {
 Notably, $x^2$ is computed only once and reused across factors, requiring only a single CC multiplication for all six factor polynomials.
 
 The factors are then combined using binary-tree multiplication in a depth-optimal manner:
-$\tilde{p}_{\text{even}}^{1,2}(x) = (cx^2+b_1x+a_1)(cx^2+b_2x+a_2)$,
-$\tilde{p}_{\text{even}}^{3,4}(x) = (cx^2+b_3x+a_3)(cx^2+b_4x+a_4)$,
-$\tilde{p}_{\text{even}}^{5,6}(x) = (cx^2+b_5x+a_5)(x+a_6)$,
-$\tilde{p}_{\text{even}}^{3,4,5,6}(x) = \tilde{p}_{\text{even}}^{3,4}(x)\tilde{p}_{\text{even}}^{5,6}(x)$,
-$\tilde{p}_{\text{even}}(x) = \tilde{p}_{\text{even}}^{1,2}(x)\tilde{p}_{\text{even}}^{3,4,5,6}(x)$.
-This procedure requires 5 CC multiplications for the binary-tree stage, resulting in a total of 6 multiplications for the entire polynomial, which is identical to the PS algorithm. Notably, the evaluation of $\tilde{p}_{\text{even}}^{1,2}$, $\tilde{p}_{\text{even}}^{3,4}$, and $\tilde{p}_{\text{even}}^{5,6}$ can also be performed in parallel. This enhanced concurrency results in an approximate 30% performance improvement over the PS approach.
+$\tilde{p}_{even}^{1,2}(x) = (cx^2+b_1x+a_1)(cx^2+b_2x+a_2)$,
+$\tilde{p}_{even}^{3,4}(x) = (cx^2+b_3x+a_3)(cx^2+b_4x+a_4)$,
+$\tilde{p}_{even}^{5,6}(x) = (cx^2+b_5x+a_5)(x+a_6)$,
+$\tilde{p}_{even}^{3,4,5,6}(x) = \tilde{p}_{even}^{3,4}(x)\tilde{p}_{even}^{5,6}(x)$,
+$\tilde{p}_{even}(x) = \tilde{p}_{even}^{1,2}(x)\tilde{p}_{even}^{3,4,5,6}(x)$.
+
+This procedure requires 5 CC multiplications for the binary-tree stage, resulting in a total of 6 multiplications for the entire polynomial, which is identical to the PS algorithm. Notably, the evaluation of $\tilde{p}_{even}^{1,2}$, $\tilde{p}_{even}^{3,4}$, and $\tilde{p}_{even}^{5,6}$ can also be performed in parallel. This enhanced concurrency results in an approximate 30% performance improvement over the PS approach.
