@@ -28,10 +28,19 @@ To evaluate $p_{even}$, one can use the default Paterson–Stockmeyer (PS) algor
 p_even = [0.00044269650031170116, 0.39574328076312115, -0.0629733653564327, 0.008364135635608984, -0.0007825494992434453, 5.1058610337019434e-05, -2.315976838992098e-06, 7.235122296125314e-08, -1.5214882476900954e-09, 2.0523115610681066e-11, -1.6012937509370233e-13, 5.488829795459728e-16]
 ```
 
-In this form, the target polynomial is evaluated as $p(x) = p_{even}(x^2) + c_1x$. Let $c_{11}$ denote the leading coefficient of $p_{even}$, i.e., the coefficient of $x^{11}$ in $p_{even}(x)$ (equivalently, the coefficient of $x^{22}$ in $p(x)$). We normalize this coefficient to unity by rewriting
-$p_{even}(x^2) = \tilde{p}_{even}((\tfrac{x}{c_{11}^{1/22}})^2)$,
-where the coefficients of the normalized polynomial $\tilde{p}_{even}$ are given by
-$\tilde{c}_i = \frac{c_i}{c_{11}^{i/11}}, \quad i=0,1,\dots,11$.
+In this form, the target polynomial is evaluated as $p(x) = p_{even}(x^2) + c_1x$. Let $c_{11}$ denote the leading coefficient of $p_{even}$, i.e., the coefficient of $x^{11}$ in $p_{even}(x)$ (equivalently, the coefficient of $x^{22}$ in $p(x)$). We normalize this coefficient to unity by rewriting  
+
+\[
+p_{\text{even}}(x^2) = \tilde{p}_{\text{even}}\!\left(\left(\tfrac{x}{c_{11}^{1/22}}\right)^2\right),
+\]
+
+where the coefficients of the normalized polynomial  
+\(\tilde{p}_{\text{even}}\) are given by  
+
+\[
+\tilde{c}_i = \frac{c_i}{c_{11}^{i/11}}, 
+\quad i = 0, 1, \dots, 11.
+\]
 
 The resulting coefficients are:
 ```
