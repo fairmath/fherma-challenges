@@ -39,7 +39,7 @@ We normalize this coefficient to unity by rewriting
 
 $$
 p_{\text{even}}(x^2)
-= \tilde{p}_{\text{even}}\!\left(\left(\frac{x}{c_{11}^{1/22}}\right)^2\right),
+= \tilde{p}_{\text{even}}\left(\left(\frac{x}{c_{11}^{1/22}}\right)^2\right),
 $$
 
 where the coefficients of the normalized polynomial $\tilde{p}_{\text{even}}$ are given by  
@@ -55,9 +55,11 @@ p_tilde_even = [0.00044269650031170116, 9.654584128641837, -37.479772490316186, 
 ```
 
 This transformation ensures that the leading coefficient is normalized to one. Next, $\tilde{p}_{even}$ is factored into five quadratic polynomials and one linear polynomial:
-$$
+
+$
 \tilde{p}_{even}(x) = (x^2+b_1x+a_1)\dots(x^2+b_5x+a_5)(x+a_6)
-$$
+$
+
 Each of these six factor polynomials is computed concurrently using OpenMP. The corresponding C++ implementation is shown below:
 ```cpp
 // Scale input x by c_{11}^(1/22) = (5.488829795459728e-16)^(1/22)
@@ -94,8 +96,10 @@ $\tilde{p}_{even}^{3,4}(x) = (cx^2+b_3x+a_3)(cx^2+b_4x+a_4)$,
 
 $\tilde{p}_{even}^{5,6}(x) = (cx^2+b_5x+a_5)(x+a_6)$,
 
-$\tilde{p}_{even}^{3,4,5,6}(x) = \tilde{p}_{even}^{3,4}(x)\tilde{p}_{even}^{5,6}(x)$,
+$\tilde{p}_{even}^{3,4,5,6}(x) = \tilde{p}_{even}^{3,4}(x) \cdot \tilde{p}_{even}^{5,6}(x)
+$,
 
-$\tilde{p}_{even}(x) = \tilde{p}_{even}^{1,2}(x)\tilde{p}_{even}^{3,4,5,6}(x)$.
+$\tilde{p}_{even}(x) = \tilde{p}_{even}^{1,2}(x) \tilde{p}_{even}^{3,4,5,6}(x)
+$.
 
 This procedure requires 5 CC multiplications for the binary-tree stage, resulting in a total of 6 multiplications for the entire polynomial, which is identical to the PS algorithm. Notably, the evaluation of $\tilde{p}_{even}^{1,2}$, $\tilde{p}_{even}^{3,4}$, and $\tilde{p}_{even}^{5,6}$ can also be performed in parallel. This enhanced concurrency results in an approximate 30% performance improvement over the PS approach.
