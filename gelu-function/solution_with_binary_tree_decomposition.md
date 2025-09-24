@@ -35,17 +35,30 @@ p(x) = p_{\text{even}}(x^2) + c_1 x .
 $$
 
 Let $c_{11}$ denote the leading coefficient of $p_{\text{even}}$, i.e., the coefficient of $x^{11}$ in $p_{\text{even}}(x)$ (equivalently, the coefficient of $x^{22}$ in $p(x)$).  
-We normalize this coefficient to unity by rewriting  
+We normalize this coefficient to unity by rewriting 
 
 $$
+\begin{align}
+p_{\text{even}}(x^2) 
+&= \tilde{p}_{\text{even}}\left(\left(\frac{x}{c_{11}^{1/22}}\right)^2\right)
+\end{align}
+$$
+
+<!-- $$
 p_{\text{even}}(x^2)
 = \tilde{p}_{\text{even}}\left(\left(\frac{x}{c_{11}^{1/22}}\right)^2\right),
-$$
+$$ -->
 
 where the coefficients of the normalized polynomial $\tilde{p}_{\text{even}}$ are given by  
 
-$$
+<!-- $$
 \tilde{c}_i = \frac{c_i}{c_{11}^{i/11}}, \quad i=0,1,\dots,11 .
+$$ -->
+
+$$
+\begin{align}
+\tilde{c}_i &= \frac{c_i}{c_{11}^{i/11}}, \quad i = 0,1,\dots,11
+\end{align}
 $$
 
 
