@@ -1,4 +1,4 @@
-# GELU Approximation under Fully Homomorphic Encryption
+# GELU Approximation in FHE with a Binary-Tree Product Decomposition Strategy
 
 *The article details the solution provided by the winner of the [GELU Function challenge](https://fherma.io/challenges/683eaf48eed44a699f640a92).*
 
@@ -87,10 +87,15 @@ for (int i = 0; i < 6; i++) {
 Notably, $x^2$ is computed only once and reused across factors, requiring only a single CC multiplication for all six factor polynomials.
 
 The factors are then combined using binary-tree multiplication in a depth-optimal manner:
+
 $\tilde{p}_{even}^{1,2}(x) = (cx^2+b_1x+a_1)(cx^2+b_2x+a_2)$,
+
 $\tilde{p}_{even}^{3,4}(x) = (cx^2+b_3x+a_3)(cx^2+b_4x+a_4)$,
+
 $\tilde{p}_{even}^{5,6}(x) = (cx^2+b_5x+a_5)(x+a_6)$,
+
 $\tilde{p}_{even}^{3,4,5,6}(x) = \tilde{p}_{even}^{3,4}(x)\tilde{p}_{even}^{5,6}(x)$,
+
 $\tilde{p}_{even}(x) = \tilde{p}_{even}^{1,2}(x)\tilde{p}_{even}^{3,4,5,6}(x)$.
 
 This procedure requires 5 CC multiplications for the binary-tree stage, resulting in a total of 6 multiplications for the entire polynomial, which is identical to the PS algorithm. Notably, the evaluation of $\tilde{p}_{even}^{1,2}$, $\tilde{p}_{even}^{3,4}$, and $\tilde{p}_{even}^{5,6}$ can also be performed in parallel. This enhanced concurrency results in an approximate 30% performance improvement over the PS approach.
