@@ -35,30 +35,17 @@ p(x) = p_{\text{even}}(x^2) + c_1 x .
 $$
 
 Let $c_{11}$ denote the leading coefficient of $p_{\text{even}}$, i.e., the coefficient of $x^{11}$ in $p_{\text{even}}(x)$ (equivalently, the coefficient of $x^{22}$ in $p(x)$).  
-We normalize this coefficient to unity by rewriting 
+We normalize this coefficient to unity by rewriting  
 
 $$
-\begin{align}
-p_{\text{even}}(x^2) 
-&= \tilde{p}_{\text{even}}\left(\left(\frac{x}{c_{11}^{1/22}}\right)^2\right)
-\end{align}
-$$
-
-<!-- $$
 p_{\text{even}}(x^2)
 = \tilde{p}_{\text{even}}\left(\left(\frac{x}{c_{11}^{1/22}}\right)^2\right),
-$$ -->
+$$
 
 where the coefficients of the normalized polynomial $\tilde{p}_{\text{even}}$ are given by  
 
-<!-- $$
-\tilde{c}_i = \frac{c_i}{c_{11}^{i/11}}, \quad i=0,1,\dots,11 .
-$$ -->
-
 $$
-\begin{align}
-\tilde{c}_i &= \frac{c_i}{c_{11}^{i/11}}, \quad i = 0,1,\dots,11
-\end{align}
+\tilde{c}_i = \frac{c_i}{c_{11}^{i/11}}, \quad i=0,1,\dots,11 .
 $$
 
 
@@ -103,14 +90,14 @@ Notably, $x^2$ is computed only once and reused across factors, requiring only a
 
 The factors are then combined using binary-tree multiplication in a depth-optimal manner:
 
-$$
-\begin{align}
-\tilde{p}_{even}^{1,2}(x) &= (cx^2+b_1x+a_1)(cx^2+b_2x+a_2), \\
-\tilde{p}_{even}^{3,4}(x) &= (cx^2+b_3x+a_3)(cx^2+b_4x+a_4), \\
-\tilde{p}_{even}^{5,6}(x) &= (cx^2+b_5x+a_5)(x+a_6), \\
-\tilde{p}_{even}^{3,4,5,6}(x) &= \tilde{p}_{even}^{3,4}(x) \tilde{p}_{even}^{5,6}(x), \\
-\tilde{p}_{even}(x) &= \tilde{p}_{even}^{1,2}(x) \tilde{p}_{even}^{3,4,5,6}(x)
-\end{align}
-$$
+$\tilde{p}_{even}^{1,2}(x) = (cx^2+b_1x+a_1)(cx^2+b_2x+a_2)$,
+
+$\tilde{p}_{even}^{3,4}(x) = (cx^2+b_3x+a_3)(cx^2+b_4x+a_4)$,
+
+$\tilde{p}_{even}^{5,6}(x) = (cx^2+b_5x+a_5)(x+a_6)$,
+
+$\tilde{p}_{even}^{3,4,5,6}(x) = \tilde{p}_{even}^{3,4}(x) \cdot \tilde{p}_{even}^{5,6}(x)$,
+
+$\tilde{p}_{even}(x) = \tilde{p}_{even}^{1,2}(x) \tilde{p}_{even}^{3,4,5,6}(x)$.
 
 This procedure requires 5 CC multiplications for the binary-tree stage, resulting in a total of 6 multiplications for the entire polynomial, which is identical to the PS algorithm. Notably, the evaluation of $\tilde{p}_{even}^{1,2}$, $\tilde{p}_{even}^{3,4}$, and $\tilde{p}_{even}^{5,6}$ can also be performed in parallel. This enhanced concurrency results in an approximate 30% performance improvement over the PS approach.
