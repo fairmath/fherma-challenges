@@ -96,10 +96,8 @@ $\tilde{p}_{even}^{3,4}(x) = (cx^2+b_3x+a_3)(cx^2+b_4x+a_4)$,
 
 $\tilde{p}_{even}^{5,6}(x) = (cx^2+b_5x+a_5)(x+a_6)$,
 
-$\tilde{p}_{even}^{3,4,5,6}(x) = \tilde{p}_{even}^{3,4}(x) \cdot \tilde{p}_{even}^{5,6}(x)
-$,
+$\tilde{p}_{even}^{3,4,5,6}(x) = \tilde{p}_{even}^{3,4}(x) \cdot \tilde{p}_{even}^{5,6}(x)$,
 
-$\tilde{p}_{even}(x) = \tilde{p}_{even}^{1,2}(x) \tilde{p}_{even}^{3,4,5,6}(x)
-$.
+$\tilde{p}_{even}(x) = \tilde{p}_{even}^{1,2}(x) \tilde{p}_{even}^{3,4,5,6}(x)$.
 
 This procedure requires 5 CC multiplications for the binary-tree stage, resulting in a total of 6 multiplications for the entire polynomial, which is identical to the PS algorithm. Notably, the evaluation of $\tilde{p}_{even}^{1,2}$, $\tilde{p}_{even}^{3,4}$, and $\tilde{p}_{even}^{5,6}$ can also be performed in parallel. This enhanced concurrency results in an approximate 30% performance improvement over the PS approach.
