@@ -1,6 +1,8 @@
 # GELU Approximation in FHE with the Paterson–Stockmeyer Algorithm
-Seunghun Paik (Hanyang University, South Korea), Nirajan Koirala (University of Notre Dame, USA)
 
+> The article details the solution provided by the winner of the GELU Function challenge.
+
+**Authors:** Seunghun Paik (Hanyang University, South Korea), Nirajan Koirala (University of Notre Dame, USA)
 
 ## 1) Problem & Target 
 
