@@ -71,9 +71,8 @@ the lowest to the highest degree as follows:
 0.007610728279999343, 0.0, -0.004196815886808643, 0.0,
 0.00215229898578225, 0.0, -0.0012773772058335409]`
 
-<p align="center">
-  <img src="https://d2lkyury6zu01n.cloudfront.net/images/approxGELU.png" alt="Figure 1: Approximation error for GELU using our approach (blue lines)" width="400"/>
-</p>
+![Figure 1: Approximation error for GELU using our approach (blue lines)](https://d2lkyury6zu01n.cloudfront.net/images/approxGELU.png)
+Figure 1: Approximation error for GELU using our approach (blue lines)
 
 
 These coefficients feed directly into the low-depth Chebyshev evaluation
