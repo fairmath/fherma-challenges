@@ -1,6 +1,6 @@
 # GELU Approximation in FHE with the Paterson–Stockmeyer Algorithm
 
-*The article provides a detailed description of the solution submitted by the third-place winners of the [GELU Function challenge](https://fherma.io/challenges/683eaf48eed44a699f640a92).*
+*The article provides a detailed description of the solution submitted by the second-place winners of the [GELU Function challenge](https://fherma.io/challenges/683eaf48eed44a699f640a92).*
 
 **Authors:** Seunghun Paik (Hanyang University, South Korea), Nirajan Koirala (University of Notre Dame, USA)
 
