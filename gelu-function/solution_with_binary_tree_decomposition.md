@@ -111,6 +111,5 @@ $\tilde{p}_{even}^{3,4,5,6}(x) = \tilde{p}_{even}^{3,4}(x) \tilde{p}_{even}^{5,6
 $\tilde{p}_{even}(x) = \tilde{p}_{even}^{1,2}(x) \tilde{p}_{even}^{3,4,5,6}(x)$.
 </p>
 
-<p>
-This procedure requires 5 CC multiplications for the binary-tree stage, resulting in a total of 6 multiplications for the entire polynomial, which is identical to the PS algorithm. Notably, the evaluation of $\tilde{p}_{even}^{1,2}$, $\tilde{p}_{even}^{3,4}$, and $\tilde{p}_{even}^{5,6}$ can also be performed in parallel. This enhanced concurrency results in an approximate 30% performance improvement over the PS approach.
-</p>
+
+This procedure requires 5 CC multiplications for the binary-tree stage, resulting in a total of 6 multiplications for the entire polynomial, which is identical to the PS algorithm. Notably, the evaluation of $\tilde{p}_{\mathrm{even}}^{1,2}$, $\tilde{p}_{\mathrm{even}}^{3,4}$, and $\tilde{p}_{\mathrm{even}}^{5,6}$ can also be performed in parallel. This enhanced concurrency results in an approximate 30% performance improvement over the PS approach.
