@@ -1,6 +1,6 @@
 # GELU Approximation in FHE with the Paterson–Stockmeyer Algorithm
 
-*The article details the solution provided by the winner of the GELU Function challenge.*
+*The article provides a detailed description of the solution submitted by the third-place winners of the [GELU Function challenge](https://fherma.io/challenges/683eaf48eed44a699f640a92).*
 
 **Authors:** Seunghun Paik (Hanyang University, South Korea), Nirajan Koirala (University of Notre Dame, USA)
 
@@ -112,7 +112,7 @@ When starting polynomial evaluation with a Chebyshev basis, we first need to nor
 
 ### 5.2) Note on Computing c<sub>24</sub>T<sub>24</sub>(X)  
 
-If we compute T<sub>24</sub>(X) from scratch, then it requires depth `5` computation from computing T<sub>16</sub>(X) and doing a degree-1 computation with T<sub>8</sub>(X).  Hence, if we further multiply c<sub>24</sub> at the end, since c<sub>24</sub> is a real-valued number, the final required depth becomes `6`.  To reduce the depth from this last step, we first multiply c<sub>24</sub> by T<sub>8</sub>(X) and then run a degree-1 computation with T<sub>16</sub>(X) in accordance with the definition of the Chebyshev basis.  Note that computing T<sub>8</sub>(X) consumes `3` depths, so both of c<sub>24</sub>T<sub>8</sub>(X) and T<sub>16</sub>(X) take depth `4`.  Hence, we can obtain c<sub>24</sub>T<sub>16</sub>(X) via depth `5` computation.
+If we compute T<sub>24</sub>(X) from scratch, then it requires depth `5` computation from computing T<sub>16</sub>(X) and doing a degree-1 computation with T<sub>8</sub>(X).  Hence, if we further multiply c<sub>24</sub> at the end, since c<sub>24</sub> is a real-valued number, the final required depth becomes `6`.  To reduce the depth from this last step, we first multiply c<sub>24</sub> by T<sub>8</sub>(X) and then run a degree-1 computation with T<sub>16</sub>(X) in accordance with the definition of the Chebyshev basis. Note that computing T<sub>8</sub>(X) consumes `3` depths, so both of c<sub>24</sub>T<sub>8</sub>(X) and T<sub>16</sub>(X) take depth `4`.  Hence, we can obtain c<sub>24</sub>T<sub>16</sub>(X) via depth `5` computation.
 
 
 ### 5.3) Managing Levels during the PS Algorithm 
