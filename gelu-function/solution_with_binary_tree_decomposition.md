@@ -105,7 +105,7 @@ $\tilde{p}_{even}^{5,6}(x) = (cx^2+b_5x+a_5)(x+a_6)$,
 
 <p>
 $\tilde{p}_{even}^{3,4,5,6}(x) = \tilde{p}_{even}^{3,4}(x) \tilde{p}_{even}^{5,6}(x)$,
-<\p>
+</p>
 
 <p>
 $\tilde{p}_{even}(x) = \tilde{p}_{even}^{1,2}(x) \tilde{p}_{even}^{3,4,5,6}(x)$.
