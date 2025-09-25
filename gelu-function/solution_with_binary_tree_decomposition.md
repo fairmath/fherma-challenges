@@ -43,6 +43,23 @@ p_{\text{even}}(x^2)
 $$ -->
 
 $$
+p_{\mathrm{even}}(x^2)
+= \tilde{p}_{\mathrm{even}}\Biggl(
+    \Bigl(\frac{x}{c_{11}^{1/22}}\Bigr)^2
+\Biggr)
+$$
+
+<p>
+$$
+p_{\mathrm{even}}(x^2)
+= \tilde{p}_{\mathrm{even}}\Biggl(
+    \Bigl(\frac{x}{c_{11}^{1/22}}\Bigr)^2
+\Biggr)
+$$
+</p>
+
+
+$$
 p_{\mathrm{even}}(x^2) = \tilde{p}_{\mathrm{even}}\Biggl(\Bigl(\frac{x}{c_{11}^{1/22}}\Bigr)^2\Biggr)
 $$
 
