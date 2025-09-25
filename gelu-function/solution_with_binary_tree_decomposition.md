@@ -15,8 +15,11 @@ We adopt a minimax approximation, e.g., using Remez algorithm, to approximate th
 p = [2.205108264359930015e+00, 3.499999999999999556e+00, 1.528721347815146681e+00, -1.647976405698982102e-15, -3.325936224062873703e-01, 1.437489594390790025e-15, 1.521190036383314459e-01, -8.453684227375073390e-16, -8.430346518496759090e-02, -1.673523292483670998e-15, 4.886015896854042917e-02, 2.863693178149025070e-15, -2.791811221502403864e-02, -1.859411993163826857e-15, 1.532346888698131633e-02, -5.949712581611852003e-16, -7.993026213095437427e-03, -1.551375849918958677e-15, 3.952491617355435687e-03, -1.336721660511636056e-16, -1.857562051847814338e-03, 3.326019639171002269e-15, 1.023308862034017419e-03]
 ```
 
-![gelu](https://hackmd.io/_uploads/r1dadCS5gx.png)
-***Figure 1**: (Top) Degree-22 polynomial approximation of the GeLU function. (Bottom) Absolute approximation error across the domain.*
+<p align="center">
+  <img src="https://d2lkyury6zu01n.cloudfront.net/images/gelu_hita.png" width="400"/>
+  <br>
+  <em>Figure 1: (Top) Degree-22 polynomial approximation of the GeLU function. (Bottom) Absolute approximation error across the domain.</em>
+</p>
 
 
 ## Polynomial Evaluation

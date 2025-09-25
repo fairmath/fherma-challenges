@@ -14,24 +14,14 @@ We need an FHE-friendly approximation of the tanh-form GELU
   </span>
 </p>
 
-with uniform error &le; 10<sup>-3</sup> over `[-7, 7]` (we use `[-8, 8]` in
-practice for an integer scaling trick; see §5.1). Input data is a
-4096-dimensional vector, randomly generated within the range `[-7, 7]`
-and normally distributed.
+with uniform error &le; 10<sup>-3</sup> over `[-7, 7]` (we use `[-8, 8]` in practice for an integer scaling trick; see §5.1). Input data is a 4096-dimensional vector, randomly generated within the range `[-7, 7]` and normally distributed.
 
-We target a small multiplicative depth so that no bootstrapping is
-required. We minimize the number of ciphertext multiplications,
-preferring squarings and constant multiplications instead. To ensure
-stable numerics, we work in the Chebyshev basis on the interval `[-1,1]`
-and carefully align CKKS levels and scales throughout the evaluation.
-The implementation is fully batchable, supporting slot-wise CKKS
-evaluation for `4096`-dimensional vectors.
+We target a small multiplicative depth so that no bootstrapping is required. We minimize the number of ciphertext multiplications, preferring squarings and constant multiplications instead. To ensure stable numerics, we work in the Chebyshev basis on the interval `[-1,1]` and carefully align CKKS levels and scales throughout the evaluation.
+The implementation is fully batchable, supporting slot-wise CKKS evaluation for `4096`-dimensional vectors.
 
 ## 2) Key Observation & Approximation Strategy 
 
-First, we observe that the GELU function can be written as a summation
-of `(1/2)x` and the remaining even function. From this, we attempted to
-approximate the even part only; namely, we can approximate
+First, we observe that the GELU function can be written as a summation of `(1/2)x` and the remaining even function. From this, we attempted to approximate the even part only; namely, we can approximate:
 
 <p align="center">
   <span style="font-size: 1.3em; border: 1px solid #000; padding: 4px;">
@@ -43,41 +33,24 @@ approximate the even part only; namely, we can approximate
 - Using `x/8` puts the domain into `[-1, 1]`, where Chebyshev expansions are numerically stable.
 - Adding `(1/2)x` finally recovers the GELU without additional errors.
 
-This is efficient in FHE because even Chebyshev terms are built from
-squarings only plus a few products. We approximate the tanh-form GELU on
-a bounded range by exploiting its symmetry.
-P<sub>even</sub> is an even polynomial. The `x → x/8` rescaling puts the input in `[-1, 1]` so Chebyshev polynomials are the natural basis.  Next, we can construct Chebyshev basis functions T<sub>0</sub>, …, T<sub>24</sub> and enforce evenness by zeroing all odd coefficients.
+This is efficient in FHE because even Chebyshev terms are built from squarings only plus a few products. We approximate the tanh-form GELU on a bounded range by exploiting its symmetry. P<sub>even</sub> is an even polynomial. The `x → x/8` rescaling puts the input in `[-1, 1]` so Chebyshev polynomials are the natural basis.  Next, we can construct Chebyshev basis functions T<sub>0</sub>, …, T<sub>24</sub> and enforce evenness by zeroing all odd coefficients.
 
 
-Our next key idea is to use a two-step coefficient estimation using the
-following:
+Our next key idea is to use a two-step coefficient estimation using the following:
 
-- (Step 1) Usual Chebyshev fit (initializer): Start from a standard
-  Chebyshev approximation on `[-1, 1]` to get a good initial
-  coefficient vector.
+- (Step 1) Usual Chebyshev fit (initializer): Start from a standard Chebyshev approximation on `[-1, 1]` to get a good initial coefficient vector.
 
 - (Step 2) L<sub>∞</sub> fine-tuning with gradient descent: Treat the coefficients as learnable parameters and refine them by minimizing the max absolute error (an L<sub>∞</sub> objective) between (1/2)x + P<sub>even</sub>(x/8) and the PyTorch reference GELU approximation (`gelu(., approximate="tanh")`) on a dense grid of x ∈ `[-8, 8]`. We apply early stopping triggers once the uniform error drops below the target (i.e., 10<sup>-3</sup>).
 
 
-Using the above procedure, we found that the following degree-24 even
-polynomial is suitable for obtaining the desired accuracy level required
-for the task. We provide the exact coefficients of the polynomial from
-the lowest to the highest degree as follows:
+Using the above procedure, we found that the following degree-24 even polynomial is suitable for obtaining the desired accuracy level required for the task. We provide the exact coefficients of the polynomial from the lowest to the highest degree as follows:
 
 ```cpp
-[5.052839140598564, 0.0, 1.7359793098548242, 0.0, -0.3726023812500432,
-0.0, 0.17095326369135477, 0.0, -0.09757261019185769, 0.0,
-0.060092112307910166, 0.0, -0.03731996858905697, 0.0,
-0.022792097220090873, 0.0, -0.013309648347659766, 0.0,
-0.007610728279999343, 0.0, -0.004196815886808643, 0.0,
-0.00215229898578225, 0.0, -0.0012773772058335409]
+[5.052839140598564, 0.0, 1.7359793098548242, 0.0, -0.3726023812500432, 0.0, 0.17095326369135477, 0.0, -0.09757261019185769, 0.0, 0.060092112307910166, 0.0, -0.03731996858905697, 0.0, 0.022792097220090873, 0.0, -0.013309648347659766, 0.0, 0.007610728279999343, 0.0, -0.004196815886808643, 0.0, 0.00215229898578225, 0.0, -0.0012773772058335409]
 ```
 
 
-These coefficients feed directly into the low-depth Chebyshev evaluation
-schedule used in the FHE implementation, where the final approximant is
-(1/2)x + P<sub>even</sub>(x/8). We also visualize the
-approximation error using the above coefficients in Figure 1.
+These coefficients feed directly into the low-depth Chebyshev evaluation schedule used in the FHE implementation, where the final approximant is (1/2)x + P<sub>even</sub>(x/8). We also visualize the approximation error using the above coefficients in Figure 1.
 
 <p align="center">
   <img src="https://d2lkyury6zu01n.cloudfront.net/images/approxGELU.png" width="400"/>
@@ -87,13 +60,7 @@ approximation error using the above coefficients in Figure 1.
 
 ## 3) Evaluating the Polynomial in FHE 
 
-After finding an approximation polynomial, we evaluate it via the
-Paterson-Stockmeyer (PS) algorithm. Note that for even polynomials, we
-can reduce the number of operations by considering coefficients with
-even degree only. In the PS algorithm, we need to schedule how to
-recursively divide the polynomial in the form of
-`f(X) = q(X)g(X) + r(X)` and evaluate the resulting polynomials using
-pre-computed powers at the end.
+After finding an approximation polynomial, we evaluate it via the Paterson-Stockmeyer (PS) algorithm. Note that for even polynomials, we can reduce the number of operations by considering coefficients with even degree only. In the PS algorithm, we need to schedule how to recursively divide the polynomial in the form of `f(X) = q(X)g(X) + r(X)` and evaluate the resulting polynomials using pre-computed powers at the end.
 
 We first factor the degree-24 even series into a block form that is inexpensive under FHE. We can write:
 
@@ -133,11 +100,9 @@ This is the final solution in FHE (using OpenFHE) after incorporating all the ab
 
 For node construction, we require one ciphertext multiplication to form T<sub>6</sub> and one to obtain T<sub>24</sub> via 2T<sub>16</sub>T<sub>8</sub> − T<sub>8</sub>.  For composition, two additional products are needed when combining blocks with T<sub>8</sub> and T<sub>16</sub>.  In total, the circuit uses approximately **four ciphertext multiplications**, plus 4–5 squarings.  The effective multiplicative depth is about **5 (at most 6)**, depending on the rescaling values used in CKKS within OpenFHE.  Constant multiplications and additions are inexpensive in CKKS and have minimal impact on the overall cost.  No slot rotations are required.
 
-
 ## 5) Some Optimization Tricks 
 
-We also provide some optimization tricks to reduce the required depth
-for FHE.
+We also provide some optimization tricks to reduce the required depth for FHE.
 
 ### 5.1) Dealing with Range `[-8,8]` instead of `[-7,7]`
 
