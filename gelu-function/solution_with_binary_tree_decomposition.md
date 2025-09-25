@@ -37,9 +37,13 @@ $$
 Let $c_{11}$ denote the leading coefficient of $p_{\text{even}}$, i.e., the coefficient of $x^{11}$ in $p_{\text{even}}(x)$ (equivalently, the coefficient of $x^{22}$ in $p(x)$).  
 We normalize this coefficient to unity by rewriting  
 
-$$
+<!-- $$
 p_{\text{even}}(x^2)
 = \tilde{p}_{\text{even}}\left(\left(\frac{x}{c_{11}^{1/22}}\right)^2\right),
+$$ -->
+
+$$
+p_{\mathrm{even}}(x^2) = \tilde{p}_{\mathrm{even}}\Biggl(\Bigl(\frac{x}{c_{11}^{1/22}}\Bigr)^2\Biggr)
 $$
 
 where the coefficients of the normalized polynomial $\tilde{p}_{\text{even}}$ are given by  

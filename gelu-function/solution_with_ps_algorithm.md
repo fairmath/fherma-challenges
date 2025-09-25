@@ -64,24 +64,26 @@ polynomial is suitable for obtaining the desired accuracy level required
 for the task. We provide the exact coefficients of the polynomial from
 the lowest to the highest degree as follows:
 
-`[5.052839140598564, 0.0, 1.7359793098548242, 0.0, -0.3726023812500432,
+```cpp
+[5.052839140598564, 0.0, 1.7359793098548242, 0.0, -0.3726023812500432,
 0.0, 0.17095326369135477, 0.0, -0.09757261019185769, 0.0,
 0.060092112307910166, 0.0, -0.03731996858905697, 0.0,
 0.022792097220090873, 0.0, -0.013309648347659766, 0.0,
 0.007610728279999343, 0.0, -0.004196815886808643, 0.0,
-0.00215229898578225, 0.0, -0.0012773772058335409]`
-
-<p align="center">
-  <img src="https://d2lkyury6zu01n.cloudfront.net/images/approxGELU.png" width="400"/>
-  <br>
-  <em>Figure 1: Approximation error for GELU using our approach (blue lines)</em>
-</p>
+0.00215229898578225, 0.0, -0.0012773772058335409]
+```
 
 
 These coefficients feed directly into the low-depth Chebyshev evaluation
 schedule used in the FHE implementation, where the final approximant is
 (1/2)x + P<sub>even</sub>(x/8). We also visualize the
 approximation error using the above coefficients in Figure 1.
+
+<p align="center">
+  <img src="https://d2lkyury6zu01n.cloudfront.net/images/approxGELU.png" width="400"/>
+  <br>
+  <em>Figure 1: Approximation error for GELU using our approach (blue lines)</em>
+</p>
 
 ## 3) Evaluating the Polynomial in FHE 
 
