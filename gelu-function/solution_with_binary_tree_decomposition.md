@@ -112,6 +112,28 @@ $\tilde{p}_{even}(x) = \tilde{p}_{even}^{1,2}(x) \tilde{p}_{even}^{3,4,5,6}(x)$.
 </p>
 
 
+$$
+\begin{align}
+\tilde{p}_{\mathrm{even}}^{\{1,2\}}(x) &= (c x^2 + b_1 x + a_1)(c x^2 + b_2 x + a_2),\\
+\tilde{p}_{\mathrm{even}}^{\{3,4\}}(x) &= (c x^2 + b_3 x + a_3)(c x^2 + b_4 x + a_4),\\
+\tilde{p}_{\mathrm{even}}^{\{5,6\}}(x) &= (c x^2 + b_5 x + a_5)(x + a_6),\\
+\tilde{p}_{\mathrm{even}}^{\{3,4,5,6\}}(x) &= \tilde{p}_{\mathrm{even}}^{\{3,4\}}(x) \cdot \tilde{p}_{\mathrm{even}}^{\{5,6\}}(x),\\
+\tilde{p}_{\mathrm{even}}(x) &= \tilde{p}_{\mathrm{even}}^{\{1,2\}}(x) \cdot \tilde{p}_{\mathrm{even}}^{\{3,4,5,6\}}(x).
+\end{align}
+$$
+
+<p>
+$$
+\begin{align}
+\tilde{p}_{\mathrm{even}}^{\{1,2\}}(x) &= (c x^2 + b_1 x + a_1)(c x^2 + b_2 x + a_2),\\
+\tilde{p}_{\mathrm{even}}^{\{3,4\}}(x) &= (c x^2 + b_3 x + a_3)(c x^2 + b_4 x + a_4),\\
+\tilde{p}_{\mathrm{even}}^{\{5,6\}}(x) &= (c x^2 + b_5 x + a_5)(x + a_6),\\
+\tilde{p}_{\mathrm{even}}^{\{3,4,5,6\}}(x) &= \tilde{p}_{\mathrm{even}}^{\{3,4\}}(x) \cdot \tilde{p}_{\mathrm{even}}^{\{5,6\}}(x),\\
+\tilde{p}_{\mathrm{even}}(x) &= \tilde{p}_{\mathrm{even}}^{\{1,2\}}(x) \cdot \tilde{p}_{\mathrm{even}}^{\{3,4,5,6\}}(x).
+\end{align}
+$$
+</p>
+
 This procedure requires 5 CC multiplications for the binary-tree stage, resulting in a total of 6 multiplications for the entire polynomial, which is identical to the PS algorithm. Notably, the evaluation of 
 $\tilde{p}_{\mathrm{even}}^{1,2},\tilde{p}_{\mathrm{even}}^{3,4},$ 
 and 
