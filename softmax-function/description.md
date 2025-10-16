@@ -18,6 +18,11 @@ Where:
 - $z = [z_1, z_2, ..., z_n]$ is the input vector,
 - $n$ represents the size of the input vector (e.g., the number of class logits in classification, vocabulary size in language models, or the number of input sequence tokens in transformers).
 
+Consider shifting the input vector by subtracting its maximum element for numerical stability:
+$$
+\text{Softmax}(z_i) = \frac{e^{z_i-max(z)}}{\sum_{j=1}^{K} e^{z_j-max(z)}}
+$$
+
 The goal of this challenge is to implement an algorithm that evaluates the Softmax function on encrypted data.
 
 
@@ -36,19 +41,19 @@ The goal of this challenge is to implement an algorithm that evaluates the Softm
 ## Timeline
 
 - Start date: **August 11, 2025**
-- Submission deadline: **October 12, 2025, at 23:59 UTC**
-- Winner announcement: **October 21, 2025**
+- Submission deadline: ~~October 12, 2025~~ **November 2, 2025 at 23:59 UTC**
+- Winner announcement: ~~October 21, 2025~~ **November 10, 2025**
 
 ## Dataset
 
-- **Input data** is a 4096-dimensional vector, randomly generated within the range [-20, 30]; however outliers may occur. You can find an example [here](https://github.com/fairmath/fherma-challenges/blob/main/softmax-function/tests/test_case.json)
+- **Input data** is a 128-dimensional vector, randomly generated within the range [-7, 30]; however outliers may occur. You can find an example [here](https://github.com/fairmath/fherma-challenges/blob/main/softmax-function/tests/test_case.json)
 - **Submissions** will be validated on a non-provided testing dataset.
 
 ## Encoding technique
 
 During testing, the application will receive an encrypted vector packed within a ciphertext structured as follows:
 
-| $x_0$ | $x_1$ | $x_2$ | $x_3$ | … | $x_{4095}$ |
+| $x_0$ | $x_1$ | $x_2$ | $x_3$ | … | $x_{128}$ |
 | --- | --- | --- | --- | --- | --- |
 
 The resulting vector should have the same structure, representing `Softmax(X)` evaluated on the input vector.
@@ -147,7 +152,9 @@ $$
 
 where $\hat y$ is your result and $y$ is the expected value.
 
-Execution time will also be considered, and faster solutions will be favored when accuracy levels are similar.
+To ensure the top values are correct, the same metric with a threshold of 0.01 will also be applied to the top five elements. The overall accuracy will be calculated as their average.
+
+Execution time will also be factored into the score, and faster solutions will be favored when accuracy levels are similar.
 
 ## Awards
 
