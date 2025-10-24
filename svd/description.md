@@ -4,80 +4,67 @@
 
 Singular Value Decomposition (SVD) is a cornerstone of data analysis, with applications ranging from dimensionality reduction and recommender systems to image compression and latent semantic analysis. However, performing SVD directly on encrypted data expands the possible use cases when the data privacy is crucial. 
 
-This challenge invites participants to tackle key obstacles (such as high computational cost, noise growth, and limited support for certain operations) and to implement an efficient, privacy-preserving SVD algorithm on encrypted data.
+This challenge invites participants to implement an efficient, privacy-preserving SVD algorithm on encrypted data in the context of image compression.
 
 ## Objectives
 
 Develop and implement an algorithm that performs **Singular Value Decomposition (SVD)** on an **encrypted matrix** using **Fully Homomorphic Encryption**.
 
-Given a matrix $A_{mxn}$, encrypted element-wise under an FHE scheme, participants must compute (or approximate) the matrices $U_{mxm}$,$\Sigma_{mxn}$, and $V_{nxn}$ such that:
+Given a matrix $A_{mxn}$, encrypted element-wise under an FHE scheme, participants must compute (or approximate) the matrices $U_{m\times m}$,$\Sigma_{m\times n}$, and $V_{n\times n}$ such that:
 
 $$
 A \approx U \Sigma V^T
 $$
 
-## Use Cases
-
-**Privacy-preserving recommendation systems**
-
-Many recommendation algorithms rely on SVD to reconstruct user-item rating matrices and predict preferences. Performing SVD on encrypted data allows these systems to generate personalized recommendations without exposing individual user ratings, preserving privacy while maintaining functionality.
-
-**Encrypted image processing**
-
-SVD is widely used in image compression and recognition tasks. By applying SVD to encrypted images, it is possible to compress, analyze, or perform face recognition on sensitive images without ever revealing the underlying visual data.
+For a more compact output, the resulting ciphertext should contain the top 30 components, specifically the matrices $U_{m\times 30}$, $V_{30\times n}$, and the 30 largest singular values.
 
 
-**Dimensionality reduction via PCA**
+## Challenge info
 
-PCA often uses SVD to compute the principal components of a dataset. In many cases, the first few components capture a large portion of the total variance, allowing a substantial reduction in the number of features while still revealing patterns, simplifying the data, or supporting clustering. Performing PCA on encrypted data—for instance, in genomic analysis—enables researchers to extract meaningful insights without exposing individuals’ sensitive information.
+1. **Challenge type:** this challenge is a White Box challenge. Participants are required to submit the project with their source code, including the training script. You can learn more about this and other types of challenges in our [Participation guide](https://fherma.io/how_it_works).
+2. **Encryption scheme:** CKKS.
+3. **Supported libraries:** [OpenFHE](https://github.com/openfheorg/openfhe-development) — C++, Python, or Rust.
+4. **Input**:
+    - **Testing data:** a dataset of FHE-encrypted samples
+    - **Cryptocontext** provided for FHE operations.
+    - **Keys:** public key, multiplication key, Galois keys.
+5. **Output**: the output should be an encrypted vector representing the truncated SVD components of the input image:
+    - the right singular vectors matrix $U_{m\times 30}$, 
+    - the top 30 singular values $s[:30]$, 
+    - the left singular vectors matrix $V^T_{30\times n}$.
+    
+    Together, these components correspond to the truncated reconstruction:
+    $$
+    A_{approx} = U_{m\times 30} \mathrm{diag}(s[:30]) V^T_{30\times n}
+    $$
 
-## **SVD Algorithm**
 
-**Input:** Matrix $ \mathrm{A}_{m \times n} ​$ 
+## Timeline
 
-**Output:** Matrices `$\mathrm{U}_{m \times m}​$` , `$\mathrm{\Sigma}_{m \times n}​$`, `$\mathrm{V}^T_{n \times n}​$`  such that `$\mathrm{A} = ​\mathrm{U} \Sigma \mathrm{V}^\mathrm{T}$`
+- Start date: **October 27, 2025**
+- Submission deadline: **December 22, 2025 at 23:59 UTC**
+- Winner announcement: **December 29, 2025**
 
-**Steps:**
+## Dataset
 
-1. **Compute** `$\mathrm{A}^\mathrm{T}\mathrm{A}$` (size ${n \times n}$) 
-2. **Compute eigenvalues  of** `$\mathrm{A}^\mathrm{T}\mathrm{A}$` **and sort these in descending order**
-    - Solve characteristic equations to find eigenvalues
-    - Arrange `$\lambda_i$` in descending order
-3. **Compute singular values**
-    - Square roots eigenvalues to obtain the singular values of A: `$\sigma_i = \sqrt{\lambda_i}$`
-4. **Construct diagonal matrix** `$\Sigma$`
-    - Place singular values `$\sigma_i$` on the diagonal of `$\Sigma_{m \times n}$`
-5. Compute eigenvectors of `$\mathrm{A}^\mathrm{T}\mathrm{A}$:`
-    - Use  `$\det(\mathrm{A}^\mathrm{T}\mathrm{A} - \lambda \mathrm{I}) = 0$`
-6. **Compute right singular vectors** `$\mathrm{V}$`
-    1. Collect  $v_i$ as columns of `$\mathrm{V}$`
-7. **Compute left singular vectors** `$\mathrm{U}$`
-    - For each non-zero `$\sigma_i$`: `$u_i = \frac{1}{\sigma_i}\mathrm{A}v_i$`
-    - Collect  $u_i$ as columns of `$\mathrm{U}$`
-8. **Verify decomposition**
-    - Check that `$\mathrm{A} \approx ​\mathrm{U} \Sigma \mathrm{V}^\mathrm{T}$`
+- **Input data**: each input sample is a 10,880-dimensional vector representing a grayscale image of size 128×85. The dataset is composed of downsampled images from the [Berkeley Segmentation Dataset 500 (BSDS500)](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/). 
 
-<aside>
-Consider implementing an approximate SVD using iterative methods (e.g., [power iteration](https://en.wikipedia.org/wiki/Power_iteration) or randomized SVD), which may be better suited for fully homomorphic encryption.
-</aside>
+    You can find an example [here](https://github.com/fairmath/fherma-challenges/blob/main/svd/tests/test_case.json)
+- **Submissions** will be validated on a non-provided testing dataset.
 
-## Evaluation criteria
+## Encoding technique
 
-Submissions will be evaluated on the non-provided dataset and scored based on the following criteria:
+During testing, the application will receive an encrypted vector packed within a ciphertext structured as follows:
 
-1. **Accuracy:** Frobenius norm
+| $x_0$ | $x_1$ | $x_2$ | $x_3$ | … | $x_{10879}$ |
+| --- | --- | --- | --- | --- | --- |
 
-The decrypted output should reconstruct the matrix `A` with acceptable approximation error:
+The resulting output vector should concatenate all truncated SVD components into a single ciphertext:
 
-$$
-\frac{\| A - U \Sigma V^T \|_F}{    \| A \|_F} < \epsilon
-$$
+| $U_{0,0}$ | $U_{0,1}$ | $...$ | $U_{128,30}$ | $s_{0}$ |... $s_{30}$ | $V^T_{0,0}$ |$V^T_{0,1}$ | $...$ |$V^T_{30,85}$ |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
-where $\epsilon$ < 0.02 and `F` denotes the Frobenius norm of a matrix, i.e., the square root of the sum of the squares of all its entries.
-
-1. **Execution time:** the average time taken to process a test case.
-
-The score prioritizes accuracy (measured by the F1 score) but rewards faster solutions when accuracy levels are similar.
+If you need the data to be packaged in a different format, please open an issue on GitHub and we will prepare a new cipher.
 
 ## Test environment
 ### Hardware
@@ -160,6 +147,33 @@ The executable will be run as follows:
 ```
 
 You can validate your solution locally using the [fherma-validator](https://hub.docker.com/r/yashalabinc/fherma-validator) docker image for white box challenges validation. 
+
+## Evaluation criteria
+
+Submissions will be evaluated on the non-provided dataset and scored based on the following criteria:
+
+1. **Frobenius Similarity**
+    
+    $$
+    FS = 1 - \max(\frac{\| A - U \Sigma V^T \|_F}{    \| A \|_F},1)
+    $$
+    
+    where $\|.\|_F$ denotes the Frobenius norm of a matrix. 
+    This metric measures the relative reconstruction quality of the submitted solution, with 1 indicating perfect reconstruction and 0 indicating poor reconstruction.
+    
+2. **Explained Variance**
+    
+    $$
+    EV = \frac{\sum_{i=1}^{30} s_i^2}{\sum_{i=1}^k s_i^2}
+    $$
+    
+    where $s_i$ are the singular values of $A_{m\times n}$ and $k=\min(n,m)$. This metric quantifies the fraction of total variance captured by the first 30 singular values. The number 30 was chosen as an optimal value that explains approximately 99% of the variance in the testing dataset.
+    
+
+The overall accuracy score is computed as the average of Frobenius similarity and explained variance
+
+The  score prioritizes accuracy but rewards faster solutions when accuracy levels are similar.
+
 ## Useful links
 
 - [FHERMA participation guide](https://fherma.io/how_it_works) for more information about FHERMA challenges.
