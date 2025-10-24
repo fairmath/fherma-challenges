@@ -28,14 +28,14 @@ For a more compact output, the resulting ciphertext should contain the top 30 co
     - **Testing data:** a dataset of FHE-encrypted samples
     - **Cryptocontext** provided for FHE operations.
     - **Keys:** public key, multiplication key, Galois keys.
-5. **Output**: the output should be an encrypted vector representing the truncated SVD components of the input 85x128 image:
-    - the right singular vectors matrix $U_{85\times 30}$, 
+5. **Output**: the output should be an encrypted vector representing the truncated SVD components of the input 170х256 image:
+    - the right singular vectors matrix $U_{170\times 30}$, 
     - the top 30 singular values $s[:30]$, 
-    - the left singular vectors matrix $V^T_{30\times 128}$.
+    - the left singular vectors matrix $V^T_{30\times 256}$.
     
     Together, these components correspond to the truncated reconstruction:
     $$
-    A_{approx} = U_{85\times 30} \mathrm{diag}(s[:30]) V^T_{30\times 128}
+    A_{approx} = U_{170\times 30} \mathrm{diag}(s[:30]) V^T_{30\times 256}
     $$
 
 
@@ -47,7 +47,7 @@ For a more compact output, the resulting ciphertext should contain the top 30 co
 
 ## Dataset
 
-- **Input data**: each input sample is a 10,880-dimensional vector representing a grayscale image of size 85x128. The dataset is composed of downsampled images from the [Berkeley Segmentation Dataset 500 (BSDS500)](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/). 
+- **Input data**: each input sample is a 43520-dimensional vector representing a grayscale image of size 170х256. The dataset is composed of downsampled images from the [Berkeley Segmentation Dataset 500 (BSDS500)](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/). 
 
     You can find an example [here](https://github.com/fairmath/fherma-challenges/blob/main/svd/tests/test_case.json)
 - **Submissions** will be validated on a non-provided testing dataset.
@@ -56,12 +56,12 @@ For a more compact output, the resulting ciphertext should contain the top 30 co
 
 During testing, the application will receive an encrypted vector packed within a ciphertext structured as follows:
 
-| $x_0$ | $x_1$ | $x_2$ | $x_3$ | … | $x_{10879}$ |
+| $x_0$ | $x_1$ | $x_2$ | $x_3$ | … | $x_{43519}$ |
 | --- | --- | --- | --- | --- | --- |
 
 The resulting output vector should concatenate all truncated SVD components into a single ciphertext:
 
-| $U_{0,0}$ | $U_{0,1}$ | $...$ | $U_{85,30}$ | $s_{0}$ |... | $s_{30}$ | $V^T_{0,0}$ |$V^T_{0,1}$ | $...$ |$V^T_{30,128}$ |
+| $U_{0,0}$ | $U_{0,1}$ | $...$ | $U_{170,30}$ | $s_{0}$ |... | $s_{30}$ | $V^T_{0,0}$ |$V^T_{0,1}$ | $...$ |$V^T_{30,256}$ |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 If you need the data to be packaged in a different format, please open an issue on GitHub and we will prepare a new cipher.
