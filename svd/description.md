@@ -1,22 +1,22 @@
-# Privacy-Preserving Singular Value Decomposition (SVD) under FHE
+# Singular Value Decomposition (SVD) under FHE
 
 ## Introduction
 
-Singular Value Decomposition (SVD) is a cornerstone of data analysis, with applications ranging from dimensionality reduction and recommender systems to image compression and latent semantic analysis. However, performing SVD directly on encrypted data expands the possible use cases when the data privacy is crucial. 
+**Singular Value Decomposition (SVD)** is a cornerstone of data analysis, with applications ranging from dimensionality reduction and recommender systems to image compression and latent semantic analysis. However, performing SVD directly on encrypted data expands the possible use cases when the data privacy is crucial. 
 
 This challenge invites participants to implement an efficient, privacy-preserving SVD algorithm on encrypted data in the context of image compression.
 
 ## Objectives
 
-Develop and implement an algorithm that performs **Singular Value Decomposition (SVD)** on an **encrypted matrix** using **Fully Homomorphic Encryption**.
+Develop and implement an algorithm that performs SVD on an encrypted matrix using Fully Homomorphic Encryption.
 
-Given a matrix $A_{mxn}$, encrypted element-wise under an FHE scheme, participants must compute (or approximate) the matrices $U_{m\times m}$,$\Sigma_{m\times n}$, and $V_{n\times n}$ such that:
+Given a matrix $A_{mxn}$, encrypted element-wise under an FHE, participants must compute (or approximate) the matrices $U_{m\times m}$,$\Sigma_{m\times n}$, and $V_{n\times n}$ such that:
 
 $$
 A \approx U \Sigma V^T
 $$
 
-For a more compact output, the resulting ciphertext should contain the top 30 components, specifically the matrices $U_{m\times 30}$, $V_{30\times n}$, and the 30 largest singular values.
+For a more compact output, the resulting ciphertext should contain the top 30 components, specifically the matrices $U_{m\times 30}$, $V_{30\times n}$, and the 30 largest singular values. The value of 30 was selected as the optimal number of singular values, capturing approximately 99% of the total variance in the testing dataset.
 
 
 ## Challenge info
@@ -61,8 +61,8 @@ During testing, the application will receive an encrypted vector packed within a
 
 The resulting output vector should concatenate all truncated SVD components into a single ciphertext:
 
-| $U_{0,0}$ | $U_{0,1}$ | $...$ | $U_{128,30}$ | $s_{0}$ |... $s_{30}$ | $V^T_{0,0}$ |$V^T_{0,1}$ | $...$ |$V^T_{30,85}$ |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| $U_{0,0}$ | $U_{0,1}$ | $...$ | $U_{128,30}$ | $s_{0}$ |... | $s_{30}$ | $V^T_{0,0}$ |$V^T_{0,1}$ | $...$ |$V^T_{30,85}$ |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 If you need the data to be packaged in a different format, please open an issue on GitHub and we will prepare a new cipher.
 
@@ -167,7 +167,7 @@ Submissions will be evaluated on the non-provided dataset and scored based on th
     EV = \frac{\sum_{i=1}^{30} s_i^2}{\sum_{i=1}^k s_i^2}
     $$
     
-    where $s_i$ are the singular values of $A_{m\times n}$ and $k=\min(n,m)$. This metric quantifies the fraction of total variance captured by the first 30 singular values. The number 30 was chosen as an optimal value that explains approximately 99% of the variance in the testing dataset.
+    where $s_i$ are the singular values of $A_{m\times n}$ and $k=\min(n,m)$. This metric quantifies the fraction of total variance captured by the first 30 singular values. 
     
 
 The overall accuracy score is computed as the average of Frobenius similarity and explained variance
