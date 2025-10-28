@@ -1,4 +1,4 @@
-> The winner will step into the role of Guest Challenge Author on the FHERMA Organizing Committee, partnering with the core team to design the next challenge.
+*The winner will have the opportunity to co-create the next challenge alongside the FHERMA Organizing Committee, joining the core team as a Guest Challenge Designer for the next edition.*
 
 # Singular Value Decomposition (SVD) under FHE
 
