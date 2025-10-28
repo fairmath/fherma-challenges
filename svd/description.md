@@ -1,5 +1,7 @@
 # Singular Value Decomposition (SVD) under FHE
 
+> The winner will step into the role of Guest Challenge Author on the FHERMA Organizing Committee, partnering with the core team to design the next challenge.
+
 ## Introduction
 
 **Singular Value Decomposition (SVD)** is a cornerstone of data analysis, with applications ranging from dimensionality reduction and recommender systems to image compression and latent semantic analysis. However, performing SVD directly on encrypted data expands the possible use cases when the data privacy is crucial. 
