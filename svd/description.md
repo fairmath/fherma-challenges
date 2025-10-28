@@ -1,6 +1,6 @@
-# Singular Value Decomposition (SVD) under FHE
-
 > The winner will step into the role of Guest Challenge Author on the FHERMA Organizing Committee, partnering with the core team to design the next challenge.
+
+# Singular Value Decomposition (SVD) under FHE
 
 ## Introduction
 
