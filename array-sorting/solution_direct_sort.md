@@ -17,23 +17,23 @@ In this phase, we evaluate the rank ciphertext, where each slot denotes the numb
 
 $$\text{Rank} = \sum_{i=1}^{N} \text{Comp}(\mathbf{A}, \text{Rot}(\mathbf{A}, i))$$
 
-To compare real numbers, we employ a composite approximation of the sign function presented in [4]. Specifically, we used a degree-15 polynomial $f$ and a degree-27 polynomial $g$. Additionally, we set both $df$ and $dg$ to 3, meaning that $g$ is composed 3 times, followed by 3 evaluations of $f$. As a result, the total circuit depth for the sign evaluation, meeting the challenge requirement of a 0.01 difference within the range of real numbers [0, 255], was 27. Figure~\ref{fig:rank-construction} describes an example of rank construction.
+To compare real numbers, we employ a composite approximation of the sign function presented in [4]. Specifically, we used a degree-15 polynomial $f$ and a degree-27 polynomial $g$. Additionally, we set both $df$ and $dg$ to 3, meaning that $g$ is composed 3 times, followed by 3 evaluations of $f$. As a result, the total circuit depth for the sign evaluation, meeting the challenge requirement of a 0.01 difference within the range of real numbers [0, 255], was 27. Figure 1 describes an example of rank construction.
     
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.7\textwidth]{images/Rank Construction.png}
-        \caption{Example of rank construction}
-    \end{figure}
+<p align="center">
+  <img src="https://corrida-public.s3.us-west-2.amazonaws.com/static/rank_construction+(1).png" width="400"/>
+  <br>
+  <em>Figure 1: Example of rank construction</em>
+</p>
 
 ## Rotation index checking
 
-In this phase, we complete the sorting based on the rank. Our main idea is that $\textsf{Index} - \textsf{Rank}$ denotes the rotation indices for each entry to be sorted, where $\textsf{Index}$ is a packed plaintext of indices.
+In this phase, we complete the sorting based on the rank. Our main idea is that Index-Rank denotes the rotation indices for each entry to be sorted, where $\textsf{Index}$ is a packed plaintext of indices.
 
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.7\textwidth]{images/Rotation Checking.png}
-        \caption{Example of $\textsf{Index} - \textsf{Rank}$}
-    \end{figure}
+<p align="center">
+  <img src="https://corrida-public.s3.us-west-2.amazonaws.com/static/rotation_checking.png" width="400"/>
+  <br>
+  <em>Figure 2: Example of Index - Rank</em>
+</p>
 
 
 To handle symmetric rotations within the array bound, we define $\textsf{DoubledSinc}(x) = \textsf{Sinc}(x) + \textsf{Sinc}(x+N)$ function, where $N$ is a length of array and $\textsf{Sinc}$ is defined as follows:
