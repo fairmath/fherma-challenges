@@ -157,8 +157,10 @@ Submissions will be evaluated on the non-provided dataset and scored based on **
 $$
 FS = 1 - \min(\frac{\| A - U \Sigma V^T \|_F}{    \| A \|_F},1)
 $$
+where
+- $\|\cdot\|_F$ denotes the Frobenius norm of a matrix,
+- $A_{m \times n}$ is the input matrix.
 
-where $ \|.\|_F $ denotes the Frobenius norm of a matrix,  $ A_{m\times n} $ is the input matrix.
 This metric measures the relative reconstruction accuracy of the submitted solution, with 1 indicating perfect reconstruction and 0 indicating poor reconstruction.
 
 The  score prioritizes accuracy but rewards faster solutions when accuracy levels are similar.
