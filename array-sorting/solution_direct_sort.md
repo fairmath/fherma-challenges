@@ -60,6 +60,13 @@ We make the input array $\mathbf{A}$ $N$-fold. Since it has the same internal st
 $$
 \begin{aligned}
 \textsf{Dup}(\mathbf{A}) &= [A \;|\; A \;|\; \dots \;|\; A] \\
+\textsf{Rots}(\mathbf{A}) &= [\,\textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \dots \;|\; \textsf{Rot}(A,N-1) \;|\; \varnothing\,]
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\textsf{Dup}(\mathbf{A}) &= [A \;|\; A \;|\; \dots \;|\; A] \\
 
 \textsf{Rots}(\mathbf{A}) &= [\,\textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \dots \;|\; \textsf{Rot}(A,N-1) \;|\; \varnothing\,]
 \end{aligned}
