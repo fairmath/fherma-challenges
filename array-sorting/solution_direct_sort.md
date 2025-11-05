@@ -71,7 +71,7 @@ $$
 $$
 \textsf{Rots}(\mathbf{A}) = [\,\textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \dots \;|\; \textsf{Rot}(A,N-1) \;|\; \varnothing\,]
 $$
-
+-----
 
 $$
 \begin{array}{rcl}
