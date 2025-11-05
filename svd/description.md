@@ -157,7 +157,7 @@ Submissions will be evaluated on the non-provided dataset and scored based on th
 1. **Frobenius Similarity**
     
     $$
-    FS = 1 - \max(\frac{\| A - U \Sigma V^T \|_F}{    \| A \|_F},1)
+    FS = 1 - \min(\frac{\| A - U \Sigma V^T \|_F}{    \| A \|_F},1)
     $$
     
     where $\|.\|_F$ denotes the Frobenius norm of a matrix. 
