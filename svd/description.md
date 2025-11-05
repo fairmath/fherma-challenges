@@ -152,27 +152,14 @@ You can validate your solution locally using the [fherma-validator](https://hub.
 
 ## Evaluation criteria
 
-Submissions will be evaluated on the non-provided dataset and scored based on the following criteria:
+Submissions will be evaluated on the non-provided dataset and scored based on **Frobenius Similarity**:
+    
+$$
+FS = 1 - \min(\frac{\| A - U \Sigma V^T \|_F}{    \| A \|_F},1)
+$$
 
-1. **Frobenius Similarity**
-    
-    $$
-    FS = 1 - \min(\frac{\| A - U \Sigma V^T \|_F}{    \| A \|_F},1)
-    $$
-    
-    where $\|.\|_F$ denotes the Frobenius norm of a matrix,  $A_{m\times n}$ is the input matrix.
-    This metric measures the relative reconstruction quality of the submitted solution, with 1 indicating perfect reconstruction and 0 indicating poor reconstruction.
-    
-2. **Explained Variance**
-    
-    $$
-    EV = \frac{\sum_{i=1}^{30} s_i^2}{\sum_{i=1}^k s_i^2}
-    $$
-    
-    where $s_i$ are the singular values of $A_{m\times n}$ and $k=\min(n,m)$. This metric quantifies the fraction of total variance captured by the first 30 singular values. 
-    
-
-The overall accuracy score is computed as the average of Frobenius similarity and explained variance
+where $\|.\|_F$ denotes the Frobenius norm of a matrix,  $A_{m\times n}$ is the input matrix.
+This metric measures the relative reconstruction accuracy of the submitted solution, with 1 indicating perfect reconstruction and 0 indicating poor reconstruction.
 
 The  score prioritizes accuracy but rewards faster solutions when accuracy levels are similar.
 
