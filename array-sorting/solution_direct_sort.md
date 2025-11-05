@@ -65,11 +65,19 @@ $$
 $$
 
 $$
-\begin{aligned}
-\textsf{Dup}(\mathbf{A}) &= [A \;|\; A \;|\; \dots \;|\; A] \\
+\textsf{Dup}(\mathbf{A}) = [A \;|\; A \;|\; \dots \;|\; A]
+$$
 
-\textsf{Rots}(\mathbf{A}) &= [\,\textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \dots \;|\; \textsf{Rot}(A,N-1) \;|\; \varnothing\,]
-\end{aligned}
+$$
+\textsf{Rots}(\mathbf{A}) = [\,\textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \dots \;|\; \textsf{Rot}(A,N-1) \;|\; \varnothing\,]
+$$
+
+
+$$
+\begin{array}{rcl}
+\textsf{Dup}(\mathbf{A}) & = & [A \;|\; A \;|\; \dots \;|\; A] \\
+\textsf{Rots}(\mathbf{A}) & = & [\,\textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \dots \;|\; \textsf{Rot}(A,N-1) \;|\; \varnothing\,]
+\end{array}
 $$
 
 
@@ -86,6 +94,15 @@ $$
     \textsf{Comp}(\textsf{Dup}, \textsf{Rots}) &= [ \textsf{Comp}(A,A_1) \;|\; \textsf{Comp}(A,A_1) \;|\; \textsf{Comp}(A,A_2) \;|\; \textsf{Comp}(A,A_2) \;|\; \dots ] \\
     \textsf{HalfComp}(\textsf{Dup}, \textsf{Rots}) &= [ \textsf{Comp}(A,A_1) \;|\; 0 \;|\; \textsf{Comp}(A,A_2) \;|\; 0 \;|\; \dots ]           
 \end{aligned}
+$$
+
+$$
+\begin{array}{rcl}
+\textsf{Dup}(\mathbf{A}) & = & [A \;|\; A \;|\; \dots \;|\; A] \\
+\textsf{Rots}(\mathbf{A}) & = & [ \textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \textsf{Rot}(A,2) \;|\; \dots ] \\
+\textsf{Comp}(\textsf{Dup}, \textsf{Rots}) & = & [ \textsf{Comp}(A,A_1) \;|\; \textsf{Comp}(A,A_1) \;|\; \textsf{Comp}(A,A_2) \;|\; \textsf{Comp}(A,A_2) \;|\; \dots ] \\
+\textsf{HalfComp}(\textsf{Dup}, \textsf{Rots}) & = & [ \textsf{Comp}(A,A_1) \;|\; 0 \;|\; \textsf{Comp}(A,A_2) \;|\; 0 \;|\; \dots ] 
+\end{array}
 $$
 
 After post-processing the comparison result, we will get a rank identical to before the optimization, only with the rotations smaller than $N/2$ being in odd batch indices and rotations larger than $N/2$ being in the even batches. The difference is we did not do the rotations larger than $N/2$ and skipped half of rotations.
