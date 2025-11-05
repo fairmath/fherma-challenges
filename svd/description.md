@@ -43,7 +43,7 @@ For a more compact output, the resulting ciphertext should contain the top 30 co
 
 ## Timeline
 
-- Start date: **October 27, 2025**
+- Start date: **November 5, 2025**
 - Submission deadline: **December 22, 2025 at 23:59 UTC**
 - Winner announcement: **December 29, 2025**
 
