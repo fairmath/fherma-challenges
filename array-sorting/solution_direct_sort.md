@@ -50,11 +50,11 @@ $$\text{Sorted} = \sum_{i=0}^{N-1} \text{Rot}(\mathbf{A}, i) \odot \text{Doubled
 
 
 # Optimizations
-Our approach is efficient in the sense of requiring a single comparison stage regardless of array size $N$, which keeps the entire circuit shallow. However, it requires $O(N)$ comparisons and $\textsf{DoubledSinc}$ evaluations, which are computationally intensive. Thus, we transform the loop into a SIMD operation by batching the polynomial evaluations.
+Our approach is efficient in the sense of requiring a single comparison stage regardless of array size N, which keeps the entire circuit shallow. However, it requires O(N) comparisons and $\textsf{DoubledSinc}$ evaluations, which are computationally intensive. Thus, we transform the loop into a SIMD operation by batching the polynomial evaluations.
 
 ## Optimized rank construction
 
-We make the input array $\mathbf{A}$ $N$-fold. Since it has the same internal structure as the sparse packed $\mathbf{A}$, we can treat it as an $N^2$ array without additional cost. Additionally, we pack $N-1$ rotations of $\mathbf{A}$ into a single ciphertext. We denote the $N$-fold $\mathbf{A}$ as $\textsf{Dup}(\mathbf{A})$ and the packed rotations as $\textsf{Rots}(\mathbf{A})$ as follows:
+We make the input array $\mathbf{A}$ N-fold. Since it has the same internal structure as the sparse packed $\mathbf{A}$, we can treat it as an $N^2$ array without additional cost. Additionally, we pack $N-1$ rotations of $\mathbf{A}$ into a single ciphertext. We denote the N-fold $\mathbf{A}$ as $\textsf{Dup}(\mathbf{A})$ and the packed rotations as $\textsf{Rots}(\mathbf{A})$ as follows:
 
 $$
 \textsf{Dup}(\mathbf{A}) = [A \;|\; A \;|\; \dots \;|\; A]
@@ -64,32 +64,11 @@ $$
 \textsf{Rots}(\mathbf{A}) = [\,\textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \dots \;|\; \textsf{Rot}(A,N-1) \;|\; \varnothing\,]
 $$
 
-One more example 
-
-$$
-\begin{array}{rcl}
-\textsf{Dup}(\mathbf{A}) & = & [A \;|\; A \;|\; \dots \;|\; A] \\
-
-\textsf{Rots}(\mathbf{A}) & = & [\,\textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \dots \;|\; \textsf{Rot}(A,N-1) \;|\; \varnothing\,]
-\end{array}
-$$
-
-
 In this way, we need to perform only one comparison, $\textsf{Comp}(\textsf{Dup}(\mathbf{A}), \textsf{Rots}(\mathbf{A}))$. After that, we column-sum the comparison result to get rank ciphertext.
 
 ## Rank Folding Optimization
 
-We have optimized the rank construction further by using the knowledge of $\textsf{Comp}(a,b) = 1 - \textsf{Comp}(b,a)$ since the underlying Sign is an odd function. In terms of batching we have the $\textsf{Comp}(\mathbf{A},\textsf{Rot}(\mathbf{A},k)) = 1 - \textsf{Rot}(\textsf{Comp}(\mathbf{A},\textsf{Rot}(\mathbf{A}, N - k)), k)$ relation.  We can "fold" the rank by only calculating the half of comparisons for rotations smaller than $N/2$ and then inferring the rest of the comparison by using the information available. We have placed the rotations $i$ up to $N/2$ in batch pairs and we have used the pair $i$ to obtain the comparison result of $N - i$. Since a column-sum will be done the placement of the rotated values is not affecting the result.
-
-$$
-\begin{array}{rcl}
-\textsf{Dup}(\mathbf{A}) & = & [A \;|\; A \;|\; \dots \;|\; A] \\
-\textsf{Rots}(\mathbf{A}) & = & [ \textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \textsf{Rot}(A,2) \;|\; \dots ] \\
-\textsf{Comp}(\textsf{Dup}, \textsf{Rots}) & = & [ \textsf{Comp}(A,A_1) \;|\; \textsf{Comp}(A,A_1) \;|\; \textsf{Comp}(A,A_2) \;|\; \textsf{Comp}(A,A_2) \;|\; \dots ] \\
-\textsf{HalfComp}(\textsf{Dup}, \textsf{Rots}) & = & [ \textsf{Comp}(A,A_1) \;|\; 0 \;|\; \textsf{Comp}(A,A_2) \;|\; 0 \;|\; \dots ] 
-\end{array}
-$$
-another example
+We have optimized the rank construction further by using the knowledge of $\textsf{Comp}(a,b) = 1 - \textsf{Comp}(b,a)$ since the underlying Sign is an odd function. In terms of batching we have the $\textsf{Comp}(\mathbf{A},\textsf{Rot}(\mathbf{A},k)) = 1 - \textsf{Rot}(\textsf{Comp}(\mathbf{A},\textsf{Rot}(\mathbf{A}, N - k)), k)$ relation.  We can "fold" the rank by only calculating the half of comparisons for rotations smaller than N/2 and then inferring the rest of the comparison by using the information available. We have placed the rotations $i$ up to N/2 in batch pairs and we have used the pair $i$ to obtain the comparison result of $N - i$. Since a column-sum will be done the placement of the rotated values is not affecting the result.
 
 $$
 \textsf{Dup}(\mathbf{A}) = [A \;|\; A \;|\; \dots \;|\; A]
@@ -108,20 +87,19 @@ $$
 $$
 
 
+After post-processing the comparison result, we will get a rank identical to before the optimization, only with the rotations smaller than N/2 being in odd batch indices and rotations larger than N/2 being in the even batches. The difference is we did not do the rotations larger than N/2 and skipped half of rotations.
 
-After post-processing the comparison result, we will get a rank identical to before the optimization, only with the rotations smaller than $N/2$ being in odd batch indices and rotations larger than $N/2$ being in the even batches. The difference is we did not do the rotations larger than $N/2$ and skipped half of rotations.
+The comparison result should be divided into half by zeroing even batches, the second batch of batch pairs, to get the direct result of the rotations smaller than N/2.
 
-The comparison result should be divided into half by zeroing even batches, the second batch of batch pairs, to get the direct result of the rotations smaller than $N/2$.
-
-For rotations larger than $N/2$ (i.e., $N - i$), we can derive the comparison result by inverting the result of rotation $i$.
+For rotations larger than N/2 (i.e., N - i), we can derive the comparison result by inverting the result of rotation $i$.
 This process works by rotating the full comparison result by $i$ and then inverting the bits by subtracting from 1. 
 
 
-This optimization moved $N/2$ rotations from the higher levels which are very expensive to the lower level after the comparison which run faster.
+This optimization moved N/2 rotations from the higher levels which are very expensive to the lower level after the comparison which run faster.
 
 ## Optimized rotation index checking
 
-Rotation index checking can be optimized in a similar manner. First, we make a $2N$-fold $\textsf{Index} - \textsf{Rank}$ ciphertext. Additionally, we use a stretched checking vector which has $N$ entries for all possible rotation indices, thus having a length of $2N^2$. The following is an example:
+Rotation index checking can be optimized in a similar manner. First, we make a 2N-fold $\textsf{Index} - \textsf{Rank}$ ciphertext. Additionally, we use a stretched checking vector which has N entries for all possible rotation indices, thus having a length of $2N^2$. The following is an example:
 $$
 [0, \dots, 0, 1, \dots, 1, \dots, N, \dots, N, -1, \dots, -1, \dots, -N+1, \dots, -N+1]
 $$
