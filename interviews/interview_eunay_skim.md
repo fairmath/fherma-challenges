@@ -1,6 +1,6 @@
 # Interview with Seunghu Kim and Eymen Ünay
 
-As we continue series of conversations with FHERMA winners, today we talk with a team of Eymen Ünay (University of Edinburgh) and Seunghu Kim (Chung-Ang Universitiy, Republic of Korea), winners of Array Sorting challenge.
+As we continue series of conversations with FHERMA winners, today we talk with a team of Seunghu Kim (Chung-Ang Universitiy, Republic of Korea) and Eymen Ünay (University of Edinburgh), winners of Array Sorting challenge.
 
 **Elvira:** *Thank you both for taking the time to speak with me today about your work on the *Fherma* platform. Before we discuss your solution, could you tell me what initially drew you to cryptography and fully homomorphic encryption (FHE)? Was there a particular moment, person, or course that inspired you to pursue this field?*
 
