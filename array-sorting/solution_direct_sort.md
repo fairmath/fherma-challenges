@@ -2,7 +2,7 @@
 
 *The article details the solution provided by the winners of the [Array Sorting challenge](https://fherma.io/challenges/66582c7551eafe1a4e6c451b).*
 
-**Authors:** Eymen Ünay (University of Edinburgh) and Seunghu Kim (Chung-Ang Universitiy, Republic of Korea)
+**Authors:** [Eymen Ünay](https://www.linkedin.com/in/eymen-unay/) (University of Edinburgh) and [Seunghu Kim](https://www.linkedin.com/in/seunghu-kim-11a556314/) (Chung-Ang Universitiy, Republic of Korea)
 
 # Overview of the approach
 Sorting an encrypted array is challenging because we do not have access to comparison results. This makes efficient sorting algorithms like Merge Sort and Quick Sort hard to adopt in blind sorting because their work depends on comparison results. 
@@ -56,14 +56,6 @@ Our approach is efficient in the sense of requiring a single comparison stage re
 
 We make the input array $\mathbf{A}$ $N$-fold. Since it has the same internal structure as the sparse packed $\mathbf{A}$, we can treat it as an $N^2$ array without additional cost. Additionally, we pack $N-1$ rotations of $\mathbf{A}$ into a single ciphertext. We denote the $N$-fold $\mathbf{A}$ as $\textsf{Dup}(\mathbf{A})$ and the packed rotations as $\textsf{Rots}(\mathbf{A})$ as follows:
 
-
-$$
-\begin{aligned}
-\textsf{Dup}(\mathbf{A}) &= [A \;|\; A \;|\; \dots \;|\; A] \\
-\textsf{Rots}(\mathbf{A}) &= [\,\textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \dots \;|\; \textsf{Rot}(A,N-1) \;|\; \varnothing\,]
-\end{aligned}
-$$
-
 $$
 \textsf{Dup}(\mathbf{A}) = [A \;|\; A \;|\; \dots \;|\; A]
 $$
@@ -71,11 +63,13 @@ $$
 $$
 \textsf{Rots}(\mathbf{A}) = [\,\textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \dots \;|\; \textsf{Rot}(A,N-1) \;|\; \varnothing\,]
 $$
------
+
+One more example 
 
 $$
 \begin{array}{rcl}
 \textsf{Dup}(\mathbf{A}) & = & [A \;|\; A \;|\; \dots \;|\; A] \\
+
 \textsf{Rots}(\mathbf{A}) & = & [\,\textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \dots \;|\; \textsf{Rot}(A,N-1) \;|\; \varnothing\,]
 \end{array}
 $$
@@ -88,15 +82,6 @@ In this way, we need to perform only one comparison, $\textsf{Comp}(\textsf{Dup}
 We have optimized the rank construction further by using the knowledge of $\textsf{Comp}(a,b) = 1 - \textsf{Comp}(b,a)$ since the underlying Sign is an odd function. In terms of batching we have the $\textsf{Comp}(\mathbf{A},\textsf{Rot}(\mathbf{A},k)) = 1 - \textsf{Rot}(\textsf{Comp}(\mathbf{A},\textsf{Rot}(\mathbf{A}, N - k)), k)$ relation.  We can "fold" the rank by only calculating the half of comparisons for rotations smaller than $N/2$ and then inferring the rest of the comparison by using the information available. We have placed the rotations $i$ up to $N/2$ in batch pairs and we have used the pair $i$ to obtain the comparison result of $N - i$. Since a column-sum will be done the placement of the rotated values is not affecting the result.
 
 $$
-\begin{aligned}
-    \textsf{Dup}(\mathbf{A}) &= [A \;|\; A \;|\; \dots \;|\; A] \\
-    \textsf{Rots}(\mathbf{A}) &= [ \textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \textsf{Rot}(A,2) \;|\; \dots ] \\
-    \textsf{Comp}(\textsf{Dup}, \textsf{Rots}) &= [ \textsf{Comp}(A,A_1) \;|\; \textsf{Comp}(A,A_1) \;|\; \textsf{Comp}(A,A_2) \;|\; \textsf{Comp}(A,A_2) \;|\; \dots ] \\
-    \textsf{HalfComp}(\textsf{Dup}, \textsf{Rots}) &= [ \textsf{Comp}(A,A_1) \;|\; 0 \;|\; \textsf{Comp}(A,A_2) \;|\; 0 \;|\; \dots ]           
-\end{aligned}
-$$
-
-$$
 \begin{array}{rcl}
 \textsf{Dup}(\mathbf{A}) & = & [A \;|\; A \;|\; \dots \;|\; A] \\
 \textsf{Rots}(\mathbf{A}) & = & [ \textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \textsf{Rot}(A,2) \;|\; \dots ] \\
@@ -104,6 +89,25 @@ $$
 \textsf{HalfComp}(\textsf{Dup}, \textsf{Rots}) & = & [ \textsf{Comp}(A,A_1) \;|\; 0 \;|\; \textsf{Comp}(A,A_2) \;|\; 0 \;|\; \dots ] 
 \end{array}
 $$
+another example
+
+$$
+\textsf{Dup}(\mathbf{A}) = [A \;|\; A \;|\; \dots \;|\; A]
+$$
+
+$$
+\textsf{Rots}(\mathbf{A}) = [ \textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,1) \;|\; \textsf{Rot}(A,2) \;|\; \textsf{Rot}(A,2) \;|\; \dots ]
+$$
+
+$$
+\textsf{Comp}(\textsf{Dup}, \textsf{Rots}) = [ \textsf{Comp}(A,A_1) \;|\; \textsf{Comp}(A,A_1) \;|\; \textsf{Comp}(A,A_2) \;|\; \textsf{Comp}(A,A_2) \;|\; \dots ]
+$$
+
+$$
+\textsf{HalfComp}(\textsf{Dup}, \textsf{Rots}) = [ \textsf{Comp}(A,A_1) \;|\; 0 \;|\; \textsf{Comp}(A,A_2) \;|\; 0 \;|\; \dots ]
+$$
+
+
 
 After post-processing the comparison result, we will get a rank identical to before the optimization, only with the rotations smaller than $N/2$ being in odd batch indices and rotations larger than $N/2$ being in the even batches. The difference is we did not do the rotations larger than $N/2$ and skipped half of rotations.
 
