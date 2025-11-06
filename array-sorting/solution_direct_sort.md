@@ -2,7 +2,7 @@
 
 *The article details the solution provided by the winners of the [Array Sorting challenge](https://fherma.io/challenges/66582c7551eafe1a4e6c451b).*
 
-**Authors:** [Eymen Ünay](https://www.linkedin.com/in/eymen-unay/) (University of Edinburgh) and [Seunghu Kim](https://www.linkedin.com/in/seunghu-kim-11a556314/) (Chung-Ang Universitiy, Republic of Korea)
+**Authors:** [Seunghu Kim](https://www.linkedin.com/in/seunghu-kim-11a556314/) (Chung-Ang Universitiy, Republic of Korea) and [Eymen Ünay](https://www.linkedin.com/in/eymen-unay/) (University of Edinburgh)
 
 # Overview of the approach
 Sorting an encrypted array is challenging because we do not have access to comparison results. This makes efficient sorting algorithms like Merge Sort and Quick Sort hard to adopt in blind sorting because their work depends on comparison results. 
