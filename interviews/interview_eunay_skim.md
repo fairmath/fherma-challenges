@@ -2,16 +2,18 @@
 
 As we continue series of conversations with FHERMA winners, today we talk with a team of Seunghu Kim (Chung-Ang Universitiy, Republic of Korea) and Eymen Ünay (University of Edinburgh), winners of Array Sorting challenge.
 
-<div align="center">
-  <div style="display:inline-block; text-align:center; margin: 10px;">
-    <img src="https://d2lkyury6zu01n.cloudfront.net/images/kim.png" width="200"/><br>
-    <em>Seunghu Kim</em>
-  </div>
-  <div style="display:inline-block; text-align:center; margin: 10px;">
-    <img src="https://d2lkyury6zu01n.cloudfront.net/images/unay.png" width="200"/><br>
-    <em>Eymen Ünay</em>
-  </div>
-</div>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="https://d2lkyury6zu01n.cloudfront.net/images/kim.png" width="200"/><br>
+      <em>Seunghu Kim</em>
+    </td>
+    <td align="center">
+      <img src="https://d2lkyury6zu01n.cloudfront.net/images/unay.png" width="200"/><br>
+      <em>Eymen Ünay</em>
+    </td>
+  </tr>
+</table>
 
 **Elvira:** *Thank you both for taking the time to speak with me today about your work on the *Fherma* platform. Before we discuss your solution, could you tell me what initially drew you to cryptography and fully homomorphic encryption (FHE)? Was there a particular moment, person, or course that inspired you to pursue this field?*
 
