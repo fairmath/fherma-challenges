@@ -2,16 +2,13 @@
 
 As we continue series of conversations with FHERMA winners, today we talk with a team of Seunghu Kim (Chung-Ang Universitiy, Republic of Korea) and Eymen Ünay (University of Edinburgh), winners of Array Sorting challenge.
 
-<div style="display: flex; justify-content: center; align-items: flex-end; gap: 20px;">
-  <div style="text-align: center;">
-    <img src="https://d2lkyury6zu01n.cloudfront.net/images/kim.png" alt="photo" width="200"/>
-    <br>
+<div align="center">
+  <div style="display:inline-block; text-align:center; margin: 10px;">
+    <img src="https://d2lkyury6zu01n.cloudfront.net/images/kim.png" width="200"/><br>
     <em>Seunghu Kim</em>
   </div>
-
-  <div style="text-align: center;">
-    <img src="https://d2lkyury6zu01n.cloudfront.net/images/unay.png" alt="photo" width="200"/>
-    <br>
+  <div style="display:inline-block; text-align:center; margin: 10px;">
+    <img src="https://d2lkyury6zu01n.cloudfront.net/images/unay.png" width="200"/><br>
     <em>Eymen Ünay</em>
   </div>
 </div>
