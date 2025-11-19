@@ -27,7 +27,7 @@ Our computation consists three steps:
 
 Now we dive into the details.
 
-**1. Computes the exponential function.**
+## 1. Computes the exponential function.
 
 - Input: an encrypted vector $Z = [z_0, z_1, \cdots, z_{n-1}]$ (here $n = 128 = 2^7$ in the challenge).
 - Output: an encrypted vector $E = [e^{z_0}, e^{z_1}, \cdots, e^{z_{n-1}}]$.
@@ -47,23 +47,26 @@ e^x - 1 &\approx& \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!
 $$
 
 Let $t_i = z/(i+1), i = 0,\ldots, K-1$, i.e.,
-$$
-\begin{array}{rcl}
-t_0 &=& [\frac{z_0}{1}, \frac{z_1}{1}, \ldots, \frac{z_{n-1}}{1}]\\
-t_1 &=& [\frac{z_0}{2}, \frac{z_1}{2}, \ldots, \frac{z_{n-1}}{2}]\\
-&\cdots&\\
-t_{K-1} &=& [\frac{z_0}{K}, \frac{z_1}{K}, \ldots, \frac{z_{n-1}}{K}]\\
-\end{array}
-$$
+
+    $$
+    \begin{array}{rcl}
+    t_0 &=& [\frac{z_0}{1}, \frac{z_1}{1}, \ldots, \frac{z_{n-1}}{1}]\\
+    t_1 &=& [\frac{z_0}{2}, \frac{z_1}{2}, \ldots, \frac{z_{n-1}}{2}]\\
+    &\cdots&\\
+    t_{K-1} &=& [\frac{z_0}{K}, \frac{z_1}{K}, \ldots, \frac{z_{n-1}}{K}]\\
+    \end{array}
+    $$
+
 Then (note that $K=2^N$)
-$$
-\begin{array}{rcl}
-e^z - 1 &\approx& t_0 + t_0t_1 + \ldots + t_0t_1\cdots t_{2^N-1}\\
-&=& (t_0 + t_0t_1 + t_0\cdots t_{2^{N-1}-1}) \\
-& & + t_0\cdots t_{2^{N-1}-1}(t_{2^{N-1}} + t_{2^{N-1}}t_{2^{N-1}+1} + \ldots + t_{2^{N-1}}\cdots t_{2^N-1})
-\end{array}
-$$
+    $$
+        \begin{array}{rcl}
+        e^z - 1 &\approx& t_0 + t_0t_1 + \ldots + t_0t_1\cdots t_{2^N-1}\\
+        &=& (t_0 + t_0t_1 + t_0\cdots t_{2^{N-1}-1}) \\
+        & & + t_0\cdots t_{2^{N-1}-1}(t_{2^{N-1}} + t_{2^{N-1}}t_{2^{N-1}+1} + \ldots + t_{2^{N-1}}\cdots t_{2^N-1})
+        \end{array}
+    $$
 which can be computed efficiently by a "divide-and-conquer" algorithm. We use a non-recursive algorithm (Algorithm 1), an example for $K=8$ follows:
+
 $$
 \begin{array}{rcl}
 &&t_0 + t_0t_1 + \ldots + t_0t_1\cdots t_{7}  \\
@@ -85,7 +88,7 @@ $$
 8: **RETURN** $T[0]$
 
 Note that the loops in lines 1 and 5 can be executed in parallel. The following figure shows the case when $T$ has 8 items.
-![ExpMinus1](./pic1.svg)
+![ExpMinus1](https://d2lkyury6zu01n.cloudfront.net/images/pic1.svg)
 
 Finally, we add 1 to $T[0]$ to obtain the approximate (encrypted) values $E = [e^{z_0}, e^{z_1}, ..., e^{z_{n-1}}]$.
 
@@ -107,7 +110,7 @@ e^x = (e^{x/q})^q
 $$
 We divide $z_i$ by, for example, $q = 8$ or $16$, compute the approximate values $E' = [e^{z_0/q}, e^{z_1/q}, \ldots, e^{z_{n-1}/q}]$, and then repeatedly square $E'$ three or four times to obtain the full $E = [e^{z_0}, e^{z_1}, \ldots, e^{z_{n-1}}]$.
 
-**2. Compute the sum.**
+## 2. Compute the sum
 
 - Input: $E = [e_0, e_1, ..., e_{2^N-1}]$.  
 - Output: $S = [s_0, s_1, ..., s_{2^N-1}]$ where $s_0 = s_1 = \ldots = s_{2^N-1} = \sum_{i=0}^{2^N-1} e_i$.
@@ -123,9 +126,9 @@ To sum all items in $E$, we repeatedly perform the "rotate-and-add" operation, a
 4: **RETURN** $S$
 
 An example is shown below.
-![Sum](./pic2.svg)
+![Sum](https://d2lkyury6zu01n.cloudfront.net/images/pic2.svg)
 
-**3. Invert the sum and multiply.**
+## 3. Invert the sum and multiply
 
 - Input: $Z = [z_0, z_1, ..., z_{n-1}]$, $S = [s, s, ..., s]$ where $s =\sum_{i=0}^{2^N-1} z_i$.  
 - Output: $\text{Softmax}(Z) = Z\cdot S^{-1} = [z_0/s, z_1/s, ..., z_{n-1}/s]$.
