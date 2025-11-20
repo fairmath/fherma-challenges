@@ -4,6 +4,8 @@
 
 **Author:** Weiduan Feng, cryptography researcher
 
+## Introduction
+
 The softmax function is often used as the last activation function of a neural network to normalize its output to a probability distribution over predicted output classes. It is also used in the attention mechanism of [transformers](https://arxiv.org/pdf/1706.03762) to convert attention scores into probabilities, guiding how much focus the model places on each input token.
 
 Softmax is defined as follows:
@@ -19,6 +21,8 @@ Where:
 
 The goal of this challenge is to implement an algorithm that evaluates the Softmax function on encrypted data.
 
+## Approximation approach
+
 Our computation consists three steps:
 
 1. Compute the exponential function $e^{z_i}$ on encrypted $z_i$.
@@ -27,7 +31,7 @@ Our computation consists three steps:
 
 Now we dive into the details.
 
-## 1. Computes the exponential function.
+## 1. Compute the exponential function.
 
 - Input: an encrypted vector $Z = [z_0, z_1, \cdots, z_{n-1}]$ (here $n = 128 = 2^7$ in the challenge).
 - Output: an encrypted vector $E = [e^{z_0}, e^{z_1}, \cdots, e^{z_{n-1}}]$.
@@ -72,7 +76,7 @@ $$
 **Algorithm 1**: ExpMinus1  
 **In:** $T = [t_0, t_1, \ldots, t_{2^N-1}]$.  
 **Out:** $s = \sum_{i=0}^{2^N-1}\prod_{j=0}^i t_j$. 
-``` 
+```text
 1: FOR i = 0; i < 2^N; i += 2 DO:  
 2:   T[i+1] = T[i] * T[i+1]  
 3:   T[i] = T[i] + T[i+1]  
@@ -84,7 +88,13 @@ $$
 ```
 
 Note that the loops in lines 1 and 5 can be executed in parallel. The following figure shows the case when $T$ has 8 items.
-![ExpMinus1](https://d2lkyury6zu01n.cloudfront.net/images/pic1.svg)
+
+<p align="center">
+  <img src="https://d2lkyury6zu01n.cloudfront.net/images/pic1.svg" width="400"/>
+  <br>
+  <em>Figure 1: Parallel evaluation of the ExpMinus1 algorithm for 8 items</em>
+</p>
+
 
 Finally, we add 1 to $T[0]$ to obtain the approximate (encrypted) values $E = [e^{z_0}, e^{z_1}, ..., e^{z_{n-1}}]$.
 
@@ -124,7 +134,13 @@ To sum all items in $E$, we repeatedly perform the "rotate-and-add" operation, a
 ```
 
 An example is shown below.
-![Sum](https://d2lkyury6zu01n.cloudfront.net/images/pic2.svg)
+
+<p align="center">
+  <img src="https://d2lkyury6zu01n.cloudfront.net/images/pic2.svg" width="400"/>
+  <br>
+  <em>Figure 1: Stepwise execution of the sum algorithm for 8 items</em>
+</p>
+
 
 ## 3. Invert the sum and multiply
 
