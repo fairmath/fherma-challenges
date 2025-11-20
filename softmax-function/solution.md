@@ -44,10 +44,13 @@ which is absolutely convergent for every real value of $x$.
 
 We use the first $K+1$ terms to approximate $e^x$ where $K = 2^N$ for convenience. Let us leave the first term 1 for now,
 
-$$
-e^x - 1 \approx \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!} = \frac{x}{1} + \frac{x}{1}\frac{x}{2} + \ldots + \frac{x}{1}\frac{x}{2}\frac{x}{k}
-$$
 
+$$
+\begin{array}{rcl}
+e^x - 1 &\approx& \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!}\cr
+ &=& \frac{x}{1} +\frac{x}{1} \frac{x}{2} + \ldots + \frac{x}{1} \frac{x}{2} \frac{x}{k}\cr
+\end{array}
+$$
 Let $t_i = z/(i+1), i = 0,\ldots, K-1$, i.e.,
 
 $$ \begin{array}{rcl} t_0 &=& [\frac{z_0}{1}, \frac{z_1}{1}, \ldots, \frac{z_{n-1}}{1}]\cr 
