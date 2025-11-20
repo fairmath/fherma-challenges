@@ -46,6 +46,23 @@ e^x - 1 &\approx& \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!
 \end{array}
 $$
 
+$$
+e^x - 1 \approx \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!} = \frac{x}{1} + \frac{x}{1}\frac{x}{2} + \ldots + \frac{x}{1}\frac{x}{2}\frac{x}{K}
+$$
+
+$$
+\begin{aligned}
+e^x - 1 &\approx \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!} \\
+&= \frac{x}{1} + \frac{x}{1}\frac{x}{2} + \ldots + \frac{x}{1}\frac{x}{2}\frac{x}{K}
+\end{aligned}
+$$
+
+
+
+
+
+
+
 Let $t_i = z/(i+1), i = 0,\ldots, K-1$, i.e.,
 
     $$
