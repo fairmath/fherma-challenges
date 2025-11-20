@@ -138,7 +138,7 @@ An example is shown below.
 <p align="center">
   <img src="https://d2lkyury6zu01n.cloudfront.net/images/pic2.svg" width="800"/>
   <br>
-  <em>Figure 1: Stepwise execution of the sum algorithm for 8 items</em>
+  <em>Figure 2: Stepwise execution of the sum algorithm for 8 items</em>
 </p>
 
 
