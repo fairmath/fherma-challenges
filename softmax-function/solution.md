@@ -46,21 +46,10 @@ $$
 
 Let $t_i = z/(i+1), i = 0,\ldots, K-1$, i.e.,
 
-$$
-t_0 = [\frac{z_0}{1}, \frac{z_1}{1}, \ldots, \frac{z_{n-1}}{1}]
-$$
-
-$$
-t_1 = [\frac{z_0}{2}, \frac{z_1}{2}, \ldots, \frac{z_{n-1}}{2}]
-$$
-
-$$
-\vdots
-$$
-
-$$
-[\frac{z_0}{K}, \frac{z_1}{K}, \ldots, \frac{z_{n-1}}{K}]
-$$
+$$ \begin{array}{rcl} t_0 &=& [\frac{z_0}{1}, \frac{z_1}{1}, \ldots, \frac{z_{n-1}}{1}]\cr 
+t_1 &=& [\frac{z_0}{2}, \frac{z_1}{2}, \ldots, \frac{z_{n-1}}{2}]\cr 
+&\cdots&\cr 
+t_{K-1} &=& [\frac{z_0}{K}, \frac{z_1}{K}, \ldots, \frac{z_{n-1}}{K}]\cr \end{array} $$
 
 Then (note that $K=2^N$)
 $$
@@ -74,23 +63,25 @@ which can be computed efficiently by a "divide-and-conquer" algorithm. We use a 
 
 $$
 \begin{array}{rcl}
-&&t_0 + t_0t_1 + \ldots + t_0t_1\cdots t_{7}  \\
-&=& (t_0 + t_0t_1 + t_0t_1t_2 + t_0t_1t_2t_3) + t_0t_1t_2t_3(t_4+t_4t_5 + t_4t_5t_6+t_4t_5t_6t_7)\\
+&&t_0 + t_0t_1 + \ldots + t_0t_1\cdots t_{7}  \cr
+&=& (t_0 + t_0t_1 + t_0t_1t_2 + t_0t_1t_2t_3) + t_0t_1t_2t_3(t_4+t_4t_5 + t_4t_5t_6+t_4t_5t_6t_7)\cr
 &=& ((t_0 + t_0t_1) + t_0t_1(t_2 + t_2t_3)) + t_0t_1t_2t_3((t_4+t_4t_5) + t_4t_5(t_6+t_6t_7))
 \end{array}
 $$
 
-**Algorithm 1** ExpMinus1  
+**Algorithm 1**: ExpMinus1  
 **In:** $T = [t_0, t_1, \ldots, t_{2^N-1}]$.  
-**Out:** $s = \sum_{i=0}^{2^N-1}\prod_{j=0}^i t_j$.  
-1: **FOR** $i = 0$; $i < 2^N$; $i$ += 2 **DO:**  
-2: &nbsp;&nbsp;&nbsp;&nbsp;$T[i+1] = T[i] \times T[i+1]$  
-3: &nbsp;&nbsp;&nbsp;&nbsp;$T[i] = T[i] + T[i+1]$  
-4: **FOR** $m = 4$; $m \le 2^N$; $m$ *= 2 **DO**  
-5: &nbsp;&nbsp;&nbsp;&nbsp;**FOR** $i = 0$; $i < 2^N$; $i$ += $m$:  
-6: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$T[i+m-1] = T[i+m-1] \times T[i+m/2-1]$  
-7: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$T[i]$ += $T[i+m/2] \times T[i+m/2-1]$  
-8: **RETURN** $T[0]$
+**Out:** $s = \sum_{i=0}^{2^N-1}\prod_{j=0}^i t_j$. 
+``` 
+1: FOR i = 0; i < 2^N; i += 2 DO:  
+2:   T[i+1] = T[i] * T[i+1]  
+3:   T[i] = T[i] + T[i+1]  
+4: FOR m = 4; m <= 2^N; m *= 2 DO  
+5:   FOR i = 0; i < 2^N; i += m:  
+6:     T[i+m-1] = T[i+m-1] * T[i+m/2-1]  
+7:     T[i] += T[i+m/2] * T[i+m/2-1]  
+8: RETURN T[0]
+```
 
 Note that the loops in lines 1 and 5 can be executed in parallel. The following figure shows the case when $T$ has 8 items.
 ![ExpMinus1](https://d2lkyury6zu01n.cloudfront.net/images/pic1.svg)
@@ -100,7 +91,7 @@ Finally, we add 1 to $T[0]$ to obtain the approximate (encrypted) values $E = [e
 The error term in our approximation of $e^x$ is
 $$
 \begin{array}{rcl}
-&&\frac{x^{K+1}}{(K+1)!} + \frac{x^{K+2}}{(K+2)!} + \ldots\\
+&&\frac{x^{K+1}}{(K+1)!} + \frac{x^{K+2}}{(K+2)!} + \ldots\cr
 &<& \frac{x^{K+1}}{(K+1)!}(1 + \frac{x}{(K+2)} + \frac{x^2}{(K+2)^2} + \frac{x^3}{(K+2)^3} + \ldots).
 \end{array}
 $$
@@ -122,13 +113,15 @@ We divide $z_i$ by, for example, $q = 8$ or $16$, compute the approximate values
 
 To sum all items in $E$, we repeatedly perform the "rotate-and-add" operation, as described in Algorithm 2.
 
-**Algorithm 2** Sum  
+**Algorithm 2**: Sum  
 **In:** $E = [e_0, e_1, \ldots, e_{2^N-1}]$.  
-**Out:** $S = [\sum_{i=0}^{2^N-1} e_i, \ldots, \sum_{i=0}^{2^N-1} e_i]$.  
-1: $S = E$  
-2: **FOR** $i = 1$; $i < 2^N$; $i$ *= 2 **DO:**  
-3: &nbsp;&nbsp;&nbsp;&nbsp;$S$ += $\text{Rotate}(S, i)$  
-4: **RETURN** $S$
+**Out:** $S = [\sum_{i=0}^{2^N-1} e_i, \ldots, \sum_{i=0}^{2^N-1} e_i]$.
+```
+1: S = E  
+2: FOR i = 1; i < 2^N; i *= 2 DO:  
+3:   S += Rotate(S, i)  
+4: RETURN S
+```
 
 An example is shown below.
 ![Sum](https://d2lkyury6zu01n.cloudfront.net/images/pic2.svg)
