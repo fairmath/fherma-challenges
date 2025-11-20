@@ -39,49 +39,37 @@ $$
 which is absolutely convergent for every real value of $x$.
 
 We use the first $K+1$ terms to approximate $e^x$ where $K = 2^N$ for convenience. Let us leave the first term 1 for now,
-$$
-\begin{array}{rcl}
-e^x - 1 &\approx& \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!}\\
- &=& \frac{x}{1} +\frac{x}{1} \frac{x}{2} + \ldots + \frac{x}{1} \frac{x}{2} \frac{x}{k}\\
-\end{array}
-$$
 
 $$
-e^x - 1 \approx \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!} = \frac{x}{1} + \frac{x}{1}\frac{x}{2} + \ldots + \frac{x}{1}\frac{x}{2}\frac{x}{K}
+e^x - 1 \approx \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!} = \frac{x}{1} + \frac{x}{1}\frac{x}{2} + \ldots + \frac{x}{1}\frac{x}{2}\frac{x}{k}
 $$
-
-$$
-\begin{aligned}
-e^x - 1 &\approx \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!} \\\\
-&= \frac{x}{1} + \frac{x}{1}\frac{x}{2} + \ldots + \frac{x}{1}\frac{x}{2}\frac{x}{K}
-\end{aligned}
-$$
-
-
-
-
-
-
 
 Let $t_i = z/(i+1), i = 0,\ldots, K-1$, i.e.,
 
-    $$
-    \begin{array}{rcl}
-    t_0 &=& [\frac{z_0}{1}, \frac{z_1}{1}, \ldots, \frac{z_{n-1}}{1}]\\
-    t_1 &=& [\frac{z_0}{2}, \frac{z_1}{2}, \ldots, \frac{z_{n-1}}{2}]\\
-    &\cdots&\\
-    t_{K-1} &=& [\frac{z_0}{K}, \frac{z_1}{K}, \ldots, \frac{z_{n-1}}{K}]\\
-    \end{array}
-    $$
+$$
+t_0 = [\frac{z_0}{1}, \frac{z_1}{1}, \ldots, \frac{z_{n-1}}{1}]
+$$
+
+$$
+t_1 = [\frac{z_0}{2}, \frac{z_1}{2}, \ldots, \frac{z_{n-1}}{2}]
+$$
+
+$$
+\vdots
+$$
+
+$$
+[\frac{z_0}{K}, \frac{z_1}{K}, \ldots, \frac{z_{n-1}}{K}]
+$$
 
 Then (note that $K=2^N$)
-    $$
-        \begin{array}{rcl}
-        e^z - 1 &\approx& t_0 + t_0t_1 + \ldots + t_0t_1\cdots t_{2^N-1}\\
-        &=& (t_0 + t_0t_1 + t_0\cdots t_{2^{N-1}-1}) \\
-        & & + t_0\cdots t_{2^{N-1}-1}(t_{2^{N-1}} + t_{2^{N-1}}t_{2^{N-1}+1} + \ldots + t_{2^{N-1}}\cdots t_{2^N-1})
-        \end{array}
-    $$
+$$
+\begin{array}{rcl}
+e^z - 1 &\approx& t_0 + t_0t_1 + \ldots + t_0t_1\cdots t_{2^N-1}\cr
+&=& (t_0 + t_0t_1 + t_0\cdots t_{2^{N-1}-1}) \cr
+& & + t_0\cdots t_{2^{N-1}-1}(t_{2^{N-1}} + t_{2^{N-1}}t_{2^{N-1}+1} + \ldots + t_{2^{N-1}}\cdots t_{2^N-1})
+\end{array}
+$$
 which can be computed efficiently by a "divide-and-conquer" algorithm. We use a non-recursive algorithm (Algorithm 1), an example for $K=8$ follows:
 
 $$
