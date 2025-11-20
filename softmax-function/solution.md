@@ -77,20 +77,20 @@ $$
 **In:** $T = [t_0, t_1, \ldots, t_{2^N-1}]$.  
 **Out:** $s = \sum_{i=0}^{2^N-1}\prod_{j=0}^i t_j$. 
 ```text
-1: FOR i = 0; i < 2^N; i += 2 DO:  
-2:   T[i+1] = T[i] * T[i+1]  
-3:   T[i] = T[i] + T[i+1]  
-4: FOR m = 4; m <= 2^N; m *= 2 DO  
-5:   FOR i = 0; i < 2^N; i += m:  
-6:     T[i+m-1] = T[i+m-1] * T[i+m/2-1]  
-7:     T[i] += T[i+m/2] * T[i+m/2-1]  
-8: RETURN T[0]
+FOR i = 0; i < 2^N; i += 2 DO:  
+    T[i+1] = T[i] * T[i+1]  
+    T[i] = T[i] + T[i+1]  
+FOR m = 4; m <= 2^N; m *= 2 DO  
+    FOR i = 0; i < 2^N; i += m:  
+        T[i+m-1] = T[i+m-1] * T[i+m/2-1]  
+        T[i] += T[i+m/2] * T[i+m/2-1]  
+RETURN T[0]
 ```
 
 Note that the loops in lines 1 and 5 can be executed in parallel. The following figure shows the case when $T$ has 8 items.
 
 <p align="center">
-  <img src="https://d2lkyury6zu01n.cloudfront.net/images/pic1.svg" width="400"/>
+  <img src="https://d2lkyury6zu01n.cloudfront.net/images/pic1.svg" width="700"/>
   <br>
   <em>Figure 1: Parallel evaluation of the ExpMinus1 algorithm for 8 items</em>
 </p>
@@ -127,16 +127,16 @@ To sum all items in $E$, we repeatedly perform the "rotate-and-add" operation, a
 **In:** $E = [e_0, e_1, \ldots, e_{2^N-1}]$.  
 **Out:** $S = [\sum_{i=0}^{2^N-1} e_i, \ldots, \sum_{i=0}^{2^N-1} e_i]$.
 ```
-1: S = E  
-2: FOR i = 1; i < 2^N; i *= 2 DO:  
-3:   S += Rotate(S, i)  
-4: RETURN S
+S = E  
+FOR i = 1; i < 2^N; i *= 2 D 
+  S += Rotate(S, i)  
+RETURN S
 ```
 
 An example is shown below.
 
 <p align="center">
-  <img src="https://d2lkyury6zu01n.cloudfront.net/images/pic2.svg" width="400"/>
+  <img src="https://d2lkyury6zu01n.cloudfront.net/images/pic2.svg" width="800"/>
   <br>
   <em>Figure 1: Stepwise execution of the sum algorithm for 8 items</em>
 </p>
