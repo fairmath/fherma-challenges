@@ -1,4 +1,4 @@
-# Softmax Function
+# Computing the Softmax Function over Encrypted Data
 
 *The article details the solution provided by the winner of the [Softmax Function challenge](https://fherma.io/challenges/688b3aac8c54bd1ddd394085/overview).*
 
