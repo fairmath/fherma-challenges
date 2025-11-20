@@ -52,7 +52,7 @@ $$
 
 $$
 \begin{aligned}
-e^x - 1 &\approx \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!} \\
+e^x - 1 &\approx \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^K}{K!} \\\\
 &= \frac{x}{1} + \frac{x}{1}\frac{x}{2} + \ldots + \frac{x}{1}\frac{x}{2}\frac{x}{K}
 \end{aligned}
 $$
