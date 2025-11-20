@@ -31,7 +31,7 @@ Our computation consists three steps:
 
 Now we dive into the details.
 
-### 1. Compute the exponential function.
+## 1. Compute the exponential function.
 
 - Input: an encrypted vector $Z = [z_0, z_1, \cdots, z_{n-1}]$ (here $n = 128 = 2^7$ in the challenge).
 - Output: an encrypted vector $E = [e^{z_0}, e^{z_1}, \cdots, e^{z_{n-1}}]$.
@@ -119,7 +119,7 @@ e^x = (e^{x/q})^q
 $$
 We divide $z_i$ by, for example, $q = 8$ or $16$, compute the approximate values $E' = [e^{z_0/q}, e^{z_1/q}, \ldots, e^{z_{n-1}/q}]$, and then repeatedly square $E'$ three or four times to obtain the full $E = [e^{z_0}, e^{z_1}, \ldots, e^{z_{n-1}}]$.
 
-### 2. Compute the sum
+## 2. Compute the sum
 
 - Input: $E = [e_0, e_1, ..., e_{2^N-1}]$.  
 - Output: $S = [s_0, s_1, ..., s_{2^N-1}]$ where $s_0 = s_1 = \ldots = s_{2^N-1} = \sum_{i=0}^{2^N-1} e_i$.
@@ -129,10 +129,11 @@ To sum all items in $E$, we repeatedly perform the "rotate-and-add" operation, a
 **Algorithm 2**: Sum  
 **In:** $E = [e_0, e_1, \ldots, e_{2^N-1}]$.  
 **Out:** $S = [\sum_{i=0}^{2^N-1} e_i, \ldots, \sum_{i=0}^{2^N-1} e_i]$.
+
 ```
 S = E  
 FOR i = 1; i < 2^N; i *= 2 D 
-  S += Rotate(S, i)  
+    S += Rotate(S, i)  
 RETURN S
 ```
 
@@ -145,7 +146,7 @@ An example is shown below.
 </p>
 
 
-### 3. Invert the sum and multiply
+## 3. Invert the sum and multiply
 
 - Input: $Z = [z_0, z_1, ..., z_{n-1}]$, $S = [s, s, ..., s]$ where $s =\sum_{i=0}^{2^N-1} z_i$.  
 - Output: $\text{Softmax}(Z) = Z\cdot S^{-1} = [z_0/s, z_1/s, ..., z_{n-1}/s]$.
