@@ -4,7 +4,7 @@
 
 This challenge is part of the fundamental operations series, a collection of exercises designed to explore the core arithmetic operations in the encrypted domain. While addition and multiplication are naturally supported in most FHE schemes, nonlinear operations such as modulo present a significant challenge due to their conditional and piecewise nature.
 
-The objective is implement efficient algorithms computing the modulo operation (`c = a mod b`) homomorphically, where one or both operands are encrypted. 
+The objective is implement efficient algorithms computing the modulo operation (`c = a mod b`) homomorphically, where both operands are encrypted. 
 
 The solution will be evaluated on multiple test cases including edge case scenarios. See examples in the table below.
 
