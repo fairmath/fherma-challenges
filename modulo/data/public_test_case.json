@@ -1,0 +1,120 @@
+[
+    {
+        "scheme": "CKKS",
+        "significant_slots_number": 1,
+        "runs": [
+            {
+                "input": [
+                    {
+                        "name": "sample",
+                        "value": [
+                            0,
+                            32
+                        ]
+                    }
+                ],
+                "output": [
+                    0
+                ]
+            },
+            {
+                "input": [
+                    {
+                        "name": "sample",
+                        "value": [
+                            27,
+                            38
+                        ]
+                    }
+                ],
+                "output": [
+                    27
+                ]
+            },
+            {
+                "input": [
+                    {
+                        "name": "sample",
+                        "value": [
+                            16,
+                            16
+                        ]
+                    }
+                ],
+                "output": [
+                    0
+                ]
+            },
+            {
+                "input": [
+                    {
+                        "name": "sample",
+                        "value": [
+                            883,
+                            8
+                        ]
+                    }
+                ],
+                "output": [
+                    3
+                ]
+            },
+            {
+                "input": [
+                    {
+                        "name": "sample",
+                        "value": [
+                            12444,
+                            366
+                        ]
+                    }
+                ],
+                "output": [
+                    0
+                ]
+            },
+            {
+                "input": [
+                    {
+                        "name": "sample",
+                        "value": [
+                            -244,
+                            16
+                        ]
+                    }
+                ],
+                "output": [
+                    12
+                ]
+            },
+            {
+                "input": [
+                    {
+                        "name": "sample",
+                        "value": [
+                            311004,
+                            54
+                        ]
+                    }
+                ],
+                "output": [
+                    18
+                ]
+            },
+            {
+                "input": [
+                    {
+                        "name": "sample",
+                        "value": [
+                            -699101,
+                            32
+                        ]
+                    }
+                ],
+                "output": [
+                    3
+                ]
+            }
+        ]
+    }
+]
