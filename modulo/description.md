@@ -49,7 +49,7 @@ During testing, the application will receive an encrypted vector packed within a
 
 The resulting output vector should contain the result of the modulo operation in the first slot:
 
-| $a mod b$ | $...$ |
+| $a \bmod b$ | $...$ |
 | --- | --- |
 
 If you need the data to be packaged in a different format, please open an issue on GitHub and we will prepare a new cipher.
