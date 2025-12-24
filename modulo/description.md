@@ -1,9 +1,12 @@
+*The winning solution will be featured in the FHERMA Cookbook ([https://eprint.iacr.org/2025/1302
+]) and the winner will be credited as a co-author, recognizing their contribution to a shared library of FHE components and to the community.*
+
 # Encrypted Modulo Operation (MOD)
 ## Introduction
 
-This challenge is part of the fundamental operations series, a collection of exercises designed to explore the core operations in the encrypted domain. While addition and multiplication are naturally supported in most FHE schemes, nonlinear operations such as modulo present a significant challenge due to their conditional and piecewise nature.
+  This challenge is part of the fundamental operations series, a collection of exercises designed to explore the core operations in the encrypted domain. While addition and multiplication are naturally supported in most FHE schemes, nonlinear operations such as modulo present a significant challenge due to their conditional and piecewise nature.
 
-The objective is implement efficient algorithms computing the modulo operation (`c = a mod b`) homomorphically, where both operands are encrypted. 
+  The objective is implement efficient algorithms computing the modulo operation (`c = a mod b`) homomorphically, where both operands are encrypted. 
 
 ## Challenge info
 
@@ -19,9 +22,9 @@ The objective is implement efficient algorithms computing the modulo operation (
 
 ## Timeline
 
-- Start date: **December 22, 2025**
-- Submission deadline: **February 22, 2026 at 23:59 UTC**
-- Winner announcement: **March 2, 2026**
+- Start date: **December 24, 2025**
+- Submission deadline: **February 28, 2026 at 23:59 UTC**
+- Winner announcement: **March 10, 2026**
 
 ## Dataset
 
