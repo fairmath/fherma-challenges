@@ -1,5 +1,4 @@
-*The winning solution will be featured in the FHERMA Cookbook ([https://eprint.iacr.org/2025/1302
-]) and the winner will be credited as a co-author, recognizing their contribution to a shared library of FHE components and to the community.*
+*The winning solution will be featured in the [FHERMA Cookbook](https://eprint.iacr.org/2025/1302) and the winner will be credited as a co-author, recognizing their contribution to the library of FHE components and to the community.*
 
 # Encrypted Modulo Operation (MOD)
 ## Introduction
